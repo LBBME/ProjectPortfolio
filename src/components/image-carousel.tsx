@@ -20,6 +20,16 @@ function toRawImageList(input: unknown): unknown[] {
     const wrapped = input as { images?: unknown };
     if (wrapped.images) return toRawImageList(wrapped.images);
 
+    const maybeValue = (input as { value?: unknown }).value;
+    if (typeof maybeValue === "string") {
+      try {
+        const parsed = JSON.parse(maybeValue);
+        return toRawImageList(parsed);
+      } catch {
+        // Continue with object parsing fallback.
+      }
+    }
+
     if (Symbol.iterator in (input as Record<string, unknown>)) {
       try {
         return Array.from(input as Iterable<unknown>);
@@ -35,8 +45,40 @@ function toRawImageList(input: unknown): unknown[] {
 }
 
 export function ImageCarousel({ images }: ImageCarouselProps) {
+  const inputType = Array.isArray(images) ? "array" : typeof images;
   const rawImages = toRawImageList(images);
+  const rawCount = rawImages.length;
   const safeImages = rawImages.reduce<CarouselImage[]>((acc, raw) => {
+    if (typeof raw === "string") {
+      const trimmed = raw.trim();
+      if (!trimmed) return acc;
+      if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+        try {
+          const parsed = JSON.parse(trimmed);
+          const nested = toRawImageList(parsed);
+          for (const item of nested) {
+            if (item && typeof item === "object") {
+              const candidate = item as { src?: unknown; alt?: unknown; caption?: unknown };
+              const src = typeof candidate.src === "string" ? candidate.src.trim() : "";
+              if (!src) continue;
+              const caption =
+                typeof candidate.caption === "string" && candidate.caption.trim().length > 0
+                  ? candidate.caption.trim()
+                  : undefined;
+              const alt =
+                typeof candidate.alt === "string" && candidate.alt.trim().length > 0
+                  ? candidate.alt.trim()
+                  : caption ?? "project image";
+              acc.push({ src, alt, caption });
+            }
+          }
+          return acc;
+        } catch {
+          // Fall through to simple string handling.
+        }
+      }
+    }
+
     if (typeof raw === "string" && raw.trim().length > 0) {
       acc.push({ src: raw.trim(), alt: "project image" });
       return acc;
@@ -89,9 +131,20 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
   }, [total]);
 
   if (total === 0) {
+    // Temporary diagnostics for production troubleshooting.
+    console.warn("ImageCarousel: no valid images", {
+      inputType,
+      rawCount,
+      sample: rawImages.slice(0, 2)
+    });
     return (
       <section className="my-6 w-full max-w-full min-w-0 overflow-hidden rounded-xl border border-slate-500/50 bg-slate-900/60 p-4">
-        <p className="text-sm text-slate-300">Carousel media unavailable for this project.</p>
+        <p className="text-sm text-slate-300">
+          Carousel media unavailable for this project.
+        </p>
+        <p className="mt-2 text-xs text-slate-400">
+          debug: input={inputType} raw={rawCount} valid={safeImages.length}
+        </p>
       </section>
     );
   }
