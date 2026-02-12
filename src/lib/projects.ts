@@ -109,7 +109,13 @@ export async function getRenderedProject(
 
   const { content } = await compileMDX({
     source: project.content,
-    options: { parseFrontmatter: false, mdxOptions: { remarkPlugins: [remarkGfm] } },
+    options: {
+      parseFrontmatter: false,
+      mdxOptions: {
+        format: "mdx",
+        remarkPlugins: [remarkGfm]
+      }
+    },
     components
   });
 
