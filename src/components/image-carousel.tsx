@@ -15,6 +15,14 @@ type ImageCarouselProps = {
 function toRawImageList(input: unknown): unknown[] {
   if (!input) return [];
   if (Array.isArray(input)) return input;
+  if (typeof input === "string") {
+    try {
+      const parsed = JSON.parse(input);
+      return toRawImageList(parsed);
+    } catch {
+      return [];
+    }
+  }
 
   if (typeof input === "object") {
     const wrapped = input as { images?: unknown };
@@ -45,9 +53,7 @@ function toRawImageList(input: unknown): unknown[] {
 }
 
 export function ImageCarousel({ images }: ImageCarouselProps) {
-  const inputType = Array.isArray(images) ? "array" : typeof images;
   const rawImages = toRawImageList(images);
-  const rawCount = rawImages.length;
   const safeImages = rawImages.reduce<CarouselImage[]>((acc, raw) => {
     if (typeof raw === "string") {
       const trimmed = raw.trim();
@@ -131,20 +137,9 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
   }, [total]);
 
   if (total === 0) {
-    // Temporary diagnostics for production troubleshooting.
-    console.warn("ImageCarousel: no valid images", {
-      inputType,
-      rawCount,
-      sample: rawImages.slice(0, 2)
-    });
     return (
       <section className="my-6 w-full max-w-full min-w-0 overflow-hidden rounded-xl border border-slate-500/50 bg-slate-900/60 p-4">
-        <p className="text-sm text-slate-300">
-          Carousel media unavailable for this project.
-        </p>
-        <p className="mt-2 text-xs text-slate-400">
-          debug: input={inputType} raw={rawCount} valid={safeImages.length}
-        </p>
+        <p className="text-sm text-slate-300">Carousel media unavailable for this project.</p>
       </section>
     );
   }

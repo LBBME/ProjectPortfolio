@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { ImageCarousel } from "@/components/image-carousel";
+import { ImageCarouselBridge } from "@/components/image-carousel-bridge";
 
 function slugify(text: string): string {
   return text
@@ -96,5 +96,5 @@ export const mdxComponents = {
   td: ({ children }: { children: ReactNode }) => (
     <td className="px-3 py-2 align-top text-slate-100 break-words">{children}</td>
   ),
-  ImageCarousel
+  ImageCarousel: ImageCarouselBridge
 };
