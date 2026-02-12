@@ -2,7 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
 
-const ASSETS_DIR =
+const ASSETS_DIR = path.join(process.cwd(), "assets");
+const LOCAL_DEV_ASSETS_DIR =
   "/Users/dennisroman/.cursor/projects/Users-dennisroman-Documents-Website/assets";
 
 const IMAGE_MAP: Record<string, string> = {
@@ -76,18 +77,35 @@ export async function GET(
     return new NextResponse("Image not found", { status: 404 });
   }
 
-  const absolutePath = path.join(ASSETS_DIR, fileName);
+  const candidates = [
+    path.join(ASSETS_DIR, fileName),
+    path.join(LOCAL_DEV_ASSETS_DIR, fileName)
+  ];
 
-  try {
-    const data = await fs.readFile(absolutePath);
-    return new NextResponse(data, {
-      status: 200,
-      headers: {
-        "Content-Type": "image/png",
-        "Cache-Control": "public, max-age=3600"
-      }
-    });
-  } catch {
-    return new NextResponse("Image file missing", { status: 404 });
+  for (const absolutePath of candidates) {
+    try {
+      const data = await fs.readFile(absolutePath);
+      const ext = path.extname(fileName).toLowerCase();
+      const contentType =
+        ext === ".jpg" || ext === ".jpeg"
+          ? "image/jpeg"
+          : ext === ".webp"
+            ? "image/webp"
+            : ext === ".gif"
+              ? "image/gif"
+              : "image/png";
+
+      return new NextResponse(data, {
+        status: 200,
+        headers: {
+          "Content-Type": contentType,
+          "Cache-Control": "public, max-age=3600"
+        }
+      });
+    } catch {
+      // Try next candidate path.
+    }
   }
+
+  return new NextResponse("Image file missing", { status: 404 });
 }
