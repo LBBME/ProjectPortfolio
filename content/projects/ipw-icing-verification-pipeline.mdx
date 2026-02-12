@@ -1,0 +1,138 @@
+---
+title: "IPW Icing Verification Pipeline"
+slug: "ipw-icing-verification-pipeline"
+summary: "End-to-end Fluent to FENSAP-ICE pipeline with Composer-style run generation, staged job control, and standardized post-processing artifacts for IPW-style verification studies."
+domain: "Aircraft Icing"
+tools:
+  - "ANSYS Fluent"
+  - "FENSAP-ICE"
+  - "Python"
+  - "SLURM"
+  - "MATLAB"
+tags:
+  - "cfd"
+  - "fpcs"
+  - "ansys"
+  - "star-ccm+"
+  - "openfoam"
+  - "aircraft-icing"
+  - "multiphase"
+  - "rans"
+  - "ansys-fluent"
+  - "fensap-ice"
+  - "drop3d"
+  - "ice3d"
+  - "slurm"
+  - "hpc"
+  - "automation"
+  - "verification"
+  - "validation"
+  - "mesh-study"
+  - "y-plus"
+  - "post-processing"
+  - "reproducibility"
+  - "tecplot"
+  - "pytecplot"
+featured: true
+status: "completed"
+updatedAt: "2026-02-12"
+readingMinutes: 6
+results:
+  - label: "Pipeline scope"
+    value: "Fluent meshing/solve -> DROP3D/ICE3D -> IPW-style post package"
+  - label: "Final comparison set"
+    value: "6 IPW-style cases with 2D scan vs CFD coordinate overlays"
+  - label: "MeanCCS shape agreement"
+    value: "Best-aligned correlation: 0.996 to 1.000 across cases"
+  - label: "Final thickness range"
+    value: "0.00971 to 0.01077 m max thickness across span stations"
+validation:
+  - check: "Convergence indicators exported from ICE3D iterations"
+    status: "pass"
+  - check: "Final 2D scan vs CFD coordinate comparison package generated"
+    status: "pass"
+reproducibility:
+  - step: "Composer/ComposerV2 templates"
+    detail: "Run folders and journals generated from templates to reduce setup drift."
+  - step: "Post wrapper layout"
+    detail: "ipw2_post_wrapper scripts produce consistent cut, thickness, mccs, and convergence artifacts."
+  - step: "Data traceability"
+    detail: "Key pipeline outputs mirrored into project media for direct review."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/ipw-setup-geometry",
+      alt: "IPW setup geometry screenshot",
+      caption: "Domain and body layout used for the IPW verification workflow setup."
+    }
+  ]}
+/>
+
+## Problem framing
+
+- IPW icing workflows often lose repeatability between solver stages.
+- Manual stage handoff increases turnaround time and hidden setup drift.
+- This project enforces deterministic run structure and reviewable outputs across every stage.
+
+## Pipeline architecture
+
+- Fluent meshing and solve are launched from templated journals/sbatch scripts.
+- Flow state is transferred into FENSAP-ICE stages:
+  - Flow
+  - DROP3D
+  - ICE3D
+- Post wrapper scripts process outputs into fixed artifact folders:
+  - `cuts_clean/`, `cuts_ice/`
+  - `thickness/`, `mccs/`
+  - `convergence/`, `logs/`
+
+![IPW journals and runner architecture](/project-media/ipw-icing-verification-pipeline/runner-journal-architecture-v2.png)
+
+![IPW post-processing artifact flow map](/project-media/ipw-icing-verification-pipeline/artifact-flow-map-v2.png)
+
+## Data view (from provided bundle)
+
+### Thickness summary
+
+| Span station y [m] | Max thickness [m] | Mean thickness [m] |
+| ---: | ---: | ---: |
+| 0.4572 | 0.0097117 | 0.0018700 |
+| 0.9144 | 0.0107711 | 0.0020506 |
+| 1.3716 | 0.0100543 | 0.0022026 |
+
+### MCCS summary
+
+| Span station y [m] | Max MCCS | Mean MCCS |
+| ---: | ---: | ---: |
+| 0.4572 | 0.14764 | 0.02588 |
+| 0.9144 | 0.16124 | 0.02516 |
+| 1.3716 | 0.18495 | 0.02956 |
+
+### Final comparison package summary
+
+| Dataset | Cases | Agreement metric |
+| --- | ---: | --- |
+| MeanCCS 2D scan vs CFD trace | 6 | Best-aligned correlation = 0.996 to 1.000 |
+| MaxCCS 2D scan vs CFD trace | 6 | Included in full grid view |
+| MinCCS 2D scan vs CFD trace | 6 | Included in full grid view |
+
+### Grid-independence evidence (journal-defined sweep)
+
+The chart below is built from `ComposerV2/Run_L1T1` through `Run_L5T1` journal defaults and shows the structured refinement schedule used in the study.
+
+![Grid-independence evidence from L1 to L5 journal parameters](/project-media/ipw-icing-verification-pipeline/grid-independence-evidence.png)
+
+## IPW reference links
+
+- Workshop overview: [2nd Workshop](https://icepredictionworkshop.wordpress.com/2nd-workshop/)
+- Case and file hub: [IPW Cases & Files](https://icepredictionworkshop.wordpress.com/2nd-workshop/cases-files/)
+- Presentation/results index: [IPW Presentations](https://icepredictionworkshop.wordpress.com/results/)
+
+## Verification and reproducibility notes
+
+- ICE3D convergence outputs are captured as structured CSV (`iceconv.dat.csv`) for auditability.
+- Thickness and MCCS extraction are performed at fixed span stations for consistent A/B comparison.
+- Wrapper README and scripts define a repeatable sequence from conversion -> cuts -> metrics -> plots.
+- This project page now points directly to generated outputs, not just narrative claims.

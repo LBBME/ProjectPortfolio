@@ -1,0 +1,139 @@
+---
+title: "CFD Lab: 2D Artery Blood Flow with Stenosis"
+slug: "blood-flow-2d-artery-stenosis-lab"
+summary: "AE 4699 artery-flow assignment comparing stenosed-flow behavior and model assumptions with emphasis on pressure field and wall shear stress trends."
+domain: "CFD Lab"
+tools:
+  - "ANSYS Fluent"
+  - "Hemodynamics CFD"
+  - "Mesh Analysis"
+tags:
+  - "cfd"
+  - "cfd-lab"
+  - "ansys"
+  - "internal-flow"
+  - "incompressible-flow"
+  - "viscous-flow"
+  - "stenosis"
+  - "pressure-drop"
+  - "wall-shear-stress"
+  - "mesh-study"
+  - "grid-independence"
+  - "verification"
+  - "post-processing"
+featured: false
+status: "completed"
+updatedAt: "2026-02-11"
+readingMinutes: 6
+results:
+  - label: "Inlet velocity"
+    value: "0.225 m/s"
+  - label: "Reference pressure"
+    value: "13,332 Pa absolute"
+  - label: "Plaque mesh size"
+    value: "2,861 elements"
+validation:
+  - check: "Residual convergence target for key cases"
+    status: "pass"
+  - check: "Case-to-case pressure/WSS comparison framework"
+    status: "pass"
+reproducibility:
+  - step: "Case matrix structure"
+    detail: "Comparison plan defined as Case 1 vs 2 and Case 2 vs 3 before solving."
+  - step: "Common post-processing outputs"
+    detail: "Pressure contours, vectors/pathlines, and WSS readouts reported consistently."
+  - step: "Boundary condition documentation"
+    detail: "Inlet/outlet/wall conditions captured in one specification slide."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/artery-extra-1",
+      alt: "Artery case dynamic-pressure contour",
+      caption: "Added figure: dynamic-pressure contour for baseline artery geometry."
+    },
+    {
+      src: "/api/robotech-image/artery-extra-2",
+      alt: "Artery stenosis dynamic-pressure contour",
+      caption: "Added figure: dynamic-pressure contour with stenosis."
+    },
+    {
+      src: "/api/robotech-image/artery-extra-3",
+      alt: "Artery velocity vector field with stenosis",
+      caption: "Added figure: velocity vectors through stenosis region."
+    },
+    {
+      src: "/api/robotech-image/artery-extra-4",
+      alt: "Artery comparison dynamic-pressure contour",
+      caption: "Added figure: comparison dynamic-pressure contour case."
+    },
+    {
+      src: "/project-media/assignment-3-cfd-lab-study/page-02.jpg",
+      alt: "Objective slide",
+      caption: "Presentation slide: analysis goals and expected outputs."
+    },
+    {
+      src: "/project-media/assignment-3-cfd-lab-study/page-03.jpg",
+      alt: "Problem specification",
+      caption: "Presentation slide: boundary-condition setup and comparison requirements."
+    },
+    {
+      src: "/project-media/assignment-3-cfd-lab-study/page-04.jpg",
+      alt: "Geometry setup",
+      caption: "Presentation slide: artery geometry and computational setup."
+    },
+    {
+      src: "/project-media/assignment-3-cfd-lab-study/page-05.jpg",
+      alt: "Plaque mesh",
+      caption: "Presentation slide: plaque-case mesh for stenosis simulation."
+    },
+    {
+      src: "/project-media/assignment-3-cfd-lab-study/page-06.jpg",
+      alt: "Result slide",
+      caption: "Presentation slide: representative comparison output from the assignment."
+    }
+  ]}
+/>
+
+## Snapshot
+
+- **Course/Lab:** AE 4699 CFD Lab
+- **Case type:** 2D internal flow with stenosis
+- **Solver:** ANSYS Fluent
+- **Primary focus:** Pressure/WSS behavior and model-comparison interpretation
+
+## Mission and setup
+
+- Evaluate how stenosis and fluid-model assumptions affect artery-flow predictions.
+- Use controlled case comparisons to separate geometric effects from constitutive-model effects.
+- Track physically meaningful outputs:
+  - Dynamic pressure contours
+  - Velocity vectors/pathlines
+  - Wall shear stress along artery walls
+
+## What I executed
+
+- Built case setup with fixed inlet velocity and pressure outlet boundaries.
+- Prepared comparison logic across multiple cases before result interpretation.
+- Generated field plots and wall-based metrics for trend-level analysis.
+- Summarized implications for low-WSS/high-gradient regions in stenosed flow.
+
+## Results and engineering takeaways
+
+- Stenosis region shows expected local acceleration and field redistribution.
+- Pressure and WSS differences between cases provide clear model-sensitivity signals.
+- Wall-gradient behavior helps identify regions tied to elevated hemodynamic risk.
+- Structured comparison makes it easier to justify model choices in future studies.
+
+## Validation and verification notes
+
+- Used convergence and residual targets as a minimum quality gate.
+- Evaluated trends by paired-case comparison rather than isolated snapshots.
+- Checked whether wall-metric trends were consistent with expected stenosis physics.
+
+## Reproducibility notes
+
+- Boundary values and expected outcomes documented before execution.
+- Post-processing outputs standardized across all compared cases.
+- Slide sequence can be reused for future artery-flow assignments and reruns.

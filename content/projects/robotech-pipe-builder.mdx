@@ -1,0 +1,141 @@
+---
+title: "RoboTech: Pipe Builder"
+slug: "robotech-pipe-builder"
+summary: "36-hour robotics hackathon build: a teleoperated robot that climbs pipe stacks, places new segments, and repeats the cycle."
+domain: "Robotics Hackathon (Non-CFD)"
+tools:
+  - "Onshape CAD"
+  - "Mechanical Design"
+  - "3D Printing"
+  - "Rapid Prototyping"
+  - "Assembly & Integration"
+tags:
+  - "non-cfd"
+  - "robotics"
+  - "mechatronics"
+  - "systems-integration"
+  - "workflow"
+  - "validation"
+  - "prototyping"
+featured: true
+status: "completed"
+updatedAt: "2026-02-11"
+readingMinutes: 6
+results:
+  - label: "Competition result"
+    value: "2nd place, teleoperated track"
+  - label: "Build duration"
+    value: "36 hours"
+  - label: "Team size"
+    value: "4 engineers"
+validation:
+  - check: "End-to-end teleop stacking cycle demonstrated"
+    status: "pass"
+  - check: "Vertical DC motor climb demonstrated in final run"
+    status: "partial"
+    note: "Blocked by a failed voltage regulator during competition."
+reproducibility:
+  - step: "Design intent documented"
+    detail: "Mechanism concept and subsystem responsibilities captured in project writeup."
+  - step: "Controls + telemetry architecture logged"
+    detail: "Controller and robot communication setup documented on Devpost."
+  - step: "Improvement plan defined"
+    detail: "Post-event next steps identified for climb reliability and curved-pipe support."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/robotech-new-1",
+      alt: "RoboTech updated build view 1",
+      caption: "Updated prototype configuration with climbing module and integrated arm."
+    },
+    {
+      src: "/api/robotech-image/robotech-new-2",
+      alt: "RoboTech updated build view 2",
+      caption: "Top-side view showing drivetrain, arm, and electronics integration."
+    },
+    {
+      src: "/api/robotech-image/robotech-new-3",
+      alt: "RoboTech updated build view 3",
+      caption: "Side view of integrated assembly and manipulator mounting."
+    },
+    {
+      src: "/api/robotech-image/rig",
+      alt: "RoboTech physical build",
+      caption: "Final physical system during integration."
+    },
+    {
+      src: "/api/robotech-image/team",
+      alt: "RoboTech team test setup",
+      caption: "Late-stage testing and software bring-up."
+    },
+    {
+      src: "/api/robotech-image/assembly",
+      alt: "RoboTech arm and segment handoff",
+      caption: "Arm geometry and segment transfer posture."
+    },
+    {
+      src: "/api/robotech-image/cad",
+      alt: "RoboTech CAD concept",
+      caption: "CAD concept used to drive fast fabrication."
+    }
+  ]}
+/>
+
+## Snapshot
+
+- **Focus:** Mechanical design, fabrication, and integration
+- **Date:** January 2026
+- **Duration:** 36 hours
+- **Team:** Dennis Roman, Noah Veron, Krish Shajpaul, Nayan Ramam
+- **Outcome:** 2nd place in teleoperated track
+
+> This page reflects my primary contribution area: mechanical architecture, rapid part design, print-ready iteration, and physical integration.
+
+## Mission and concept
+
+- Hackathon challenge: robot concept for future off-planet settlement support.
+- Proposed system: clamp to an existing pipe, grab new segments, place, then climb and repeat.
+- Why this concept: modular utility networks + repeatable teleop sequence under tight time constraints.
+
+## What I owned (mechanical)
+
+- Structural concept for the climbing/placement mechanism.
+- Fast CAD iteration to maintain manufacturable geometry under deadline pressure.
+- Print-ready part updates and assembly-fit corrections during integration.
+- Packaging decisions to keep manipulator travel, alignment, and serviceability practical.
+
+## Build execution in 36 hours
+
+- Full scratch build: no prior CAD, no reused mechanism baseline.
+- Parallelized work: mechanism, electronics, and controls progressed at the same time.
+- End-to-end teleop stacking flow demonstrated.
+- Vertical climb was blocked in the final run by a failed voltage regulator.
+
+## Results and engineering takeaways
+
+- **Competition result:** 2nd place (teleoperated category).
+- Reliable subsystems: alignment behavior, manipulator reachability, and operator flow.
+- Main blocker in finals: power-stage reliability under full-load demo conditions.
+- Key lesson: robust power hardware is a hard requirement for validating mechanical capability.
+
+## Next mechanical iteration
+
+- Replace regulator stage with protected power distribution and redundancy.
+- Add curved-pipe traversal.
+- Add a pipe-locking feature to secure assembled segments.
+
+<details>
+<summary>Reusable project format I will use going forward</summary>
+
+- Objective and hard constraints
+- Architecture (mechanical, electrical, controls)
+- Demo status (worked / partial / failed)
+- Next iteration roadmap
+
+</details>
+
+## Link
+
+- Devpost: [Orbitron Overloads](https://devpost.com/software/orbitron-overloads)

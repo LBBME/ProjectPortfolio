@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  @apply bg-slate-800 text-slate-100 antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply leading-relaxed;
+  background-image:
+    radial-gradient(circle at 8% 0%, rgba(125, 211, 252, 0.2), transparent 34%),
+    radial-gradient(circle at 88% 0%, rgba(167, 139, 250, 0.16), transparent 32%);
+}
+
+a {
+  @apply text-cyan-100 transition-colors duration-200 hover:text-white;
+}
+
+.container-shell {
+  @apply mx-auto w-full max-w-6xl px-4 md:px-6;
+}
+
+.panel {
+  @apply rounded-xl border border-slate-400/45 bg-slate-700/65 shadow-sm backdrop-blur-sm;
+}
+
+.surface-card {
+  @apply rounded-xl border border-slate-400/40 bg-slate-700/55 shadow-sm;
+}
+
+.lift {
+  @apply transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:border-slate-500 motion-safe:hover:shadow-md;
+}
+
+.metric-badge {
+  @apply inline-flex items-center rounded-md border border-slate-300/50 bg-slate-700/55 px-2 py-1 text-xs text-slate-50;
+}
+
+.btn-primary {
+  @apply inline-flex rounded-md border border-cyan-200/80 bg-cyan-300/20 px-4 py-2 text-sm font-semibold text-cyan-50 transition-all duration-200 hover:border-cyan-100 hover:bg-cyan-200/30;
+}
+
+.btn-secondary {
+  @apply inline-flex rounded-md border border-slate-300/50 bg-slate-700/60 px-4 py-2 text-sm font-semibold text-slate-50 transition-all duration-200 hover:border-slate-200/70 hover:bg-slate-600/65;
+}
+
+.nav-link {
+  @apply rounded px-2 py-1 text-sm text-slate-100 transition-all duration-200 hover:bg-slate-600/60 hover:text-white;
+}
+
+.h1 {
+  @apply text-3xl font-semibold tracking-tight md:text-4xl;
+}
+
+.h2 {
+  @apply text-2xl font-semibold tracking-tight md:text-3xl;
+}
+
+.muted {
+  @apply text-sm text-slate-300;
+}
+
+.prose-cfd {
+  @apply max-w-none space-y-5 text-slate-100;
+}
+
+.prose-cfd h2 {
+  @apply scroll-mt-24 border-b border-slate-500/50 pb-2 text-2xl font-semibold text-slate-50;
+}
+
+.prose-cfd h3 {
+  @apply scroll-mt-24 text-xl font-semibold text-cyan-50;
+}
+
+.prose-cfd p {
+  @apply text-[1.06rem] leading-8 text-slate-50;
+}
+
+.prose-cfd ul {
+  @apply ml-6 list-disc space-y-2;
+}
+
+.prose-cfd li {
+  @apply text-[1.01rem] leading-7 text-slate-100 marker:text-cyan-200;
+}
+
+.prose-cfd blockquote {
+  @apply rounded-r-md border-l-4 border-cyan-300/80 bg-slate-700/35 px-4 py-3 text-slate-100;
+}

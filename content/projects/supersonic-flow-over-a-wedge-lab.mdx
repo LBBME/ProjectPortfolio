@@ -1,0 +1,136 @@
+---
+title: "CFD Lab: Supersonic Flow Over a Wedge"
+slug: "supersonic-flow-over-a-wedge-lab"
+summary: "Supersonic wedge study following the Ansys Innovation lesson workflow, with wedge/cone contour comparisons for shock-driven density, pressure, and Mach behavior."
+domain: "CFD Lab"
+tools:
+  - "ANSYS Fluent"
+  - "Compressible Flow"
+  - "Oblique Shock Analysis"
+  - "Post-Processing"
+tags:
+  - "cfd"
+  - "cfd-lab"
+  - "ansys"
+  - "external-flow"
+  - "compressible-flow"
+  - "supersonic"
+  - "oblique-shocks"
+  - "shock-relations"
+  - "verification"
+  - "mesh-study"
+  - "grid-independence"
+  - "post-processing"
+featured: false
+status: "completed"
+updatedAt: "2026-02-11"
+readingMinutes: 6
+results:
+  - label: "Core geometry condition"
+    value: "Wedge half-angle = 15 deg"
+  - label: "Flow regime"
+    value: "Uniform supersonic inflow"
+  - label: "Primary outputs"
+    value: "Mach, static/total pressure, shock angle, Cp, Cd"
+validation:
+  - check: "Wedge post-shock contour behavior aligns with oblique-shock expectations"
+    status: "pass"
+  - check: "Compared CFD outputs against analytical target quantities from lesson scope"
+    status: "pass"
+reproducibility:
+  - step: "Lesson-based workflow"
+    detail: "Followed problem spec -> mesh -> setup -> solve -> numerical results structure."
+  - step: "Consistent visual exports"
+    detail: "Density, pressure, Mach, and pathline figures exported with fixed view framing."
+  - step: "Wedge/cone comparison package"
+    detail: "Parallel visual set used to compare compressible-field response between geometries."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/wedge-1",
+      alt: "Density contour for wedge",
+      caption: "Density contours for wedge configuration."
+    },
+    {
+      src: "/api/robotech-image/wedge-2",
+      alt: "Density contour for cone",
+      caption: "Density contours for cone comparison."
+    },
+    {
+      src: "/api/robotech-image/wedge-3",
+      alt: "Static pressure contour for wedge",
+      caption: "Static-pressure field for wedge case."
+    },
+    {
+      src: "/api/robotech-image/wedge-4",
+      alt: "Static pressure contour for cone",
+      caption: "Static-pressure field for cone comparison."
+    },
+    {
+      src: "/api/robotech-image/wedge-5",
+      alt: "Mach contour for wedge",
+      caption: "Mach-number field showing post-shock behavior near wedge surface."
+    },
+    {
+      src: "/api/robotech-image/wedge-6",
+      alt: "Mach contour for cone",
+      caption: "Mach-number field for cone comparison."
+    },
+    {
+      src: "/api/robotech-image/wedge-7",
+      alt: "Pathlines by density for wedge",
+      caption: "Pathlines colored by density in wedge case."
+    },
+    {
+      src: "/api/robotech-image/wedge-8",
+      alt: "Pathlines by density for cone",
+      caption: "Pathlines colored by density in cone comparison."
+    }
+  ]}
+/>
+
+## Snapshot
+
+- **Case type:** Supersonic external compressible flow
+- **Primary objective:** Resolve oblique-shock-driven changes behind a wedge
+- **Lesson basis:** Ansys Innovation "Supersonic Flow Over a Wedge"
+- **Secondary view:** Wedge vs cone contour comparison
+
+## Problem specification
+
+- Uniform supersonic stream impinges on a wedge with a **15 degree half-angle**.
+- Targeted outputs from the lesson scope:
+  - Mach number downstream of shock
+  - Static and total pressure behind shock
+  - Shock angle
+  - Pressure coefficient along wedge
+  - Drag coefficient
+
+## Setup and method
+
+- Followed the structured workflow from lesson sequence (problem setup through numerical results).
+- Used compressible-flow post-processing to inspect shock signatures in:
+  - Density field
+  - Static pressure field
+  - Mach contours
+  - Pathline patterns
+- Organized wedge and cone figures in paired sequence for direct visual comparison.
+
+## Results and interpretation
+
+- Wedge case shows clear post-shock field shifts consistent with oblique shock behavior.
+- Mach and pressure plots show distinct compressed regions near wedge surfaces.
+- Density pathlines capture compression-driven flow reorganization downstream.
+- Cone comparison provides an additional geometric reference for interpreting shock/field distribution.
+
+## Validation and reproducibility notes
+
+- Validation is tied to the lesson objective: compare CFD outputs with analytical shock-based targets.
+- Fixed export framing allows quick rerun comparisons without presentation drift.
+- Image package is organized by variable and geometry for consistent review.
+
+## Reference links
+
+- Ansys Innovation lesson: [Problem Specification — Supersonic Flow Over a Wedge](https://innovationspace.ansys.com/courses/courses/supersonic-flow-over-a-wedge-using-ansys-workbench/lessons/problem-specification-lesson-1-40/)

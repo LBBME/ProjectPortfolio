@@ -1,0 +1,129 @@
+---
+title: "CFD Lab: Transonic NACA 0012 Airfoil Analysis"
+slug: "transonic-naca0012-airfoil-lab"
+summary: "AE 4699 transonic airfoil assignment using ANSYS Fluent to study Mach and pressure-field behavior with validation-oriented coefficient reporting."
+domain: "CFD Lab"
+tools:
+  - "ANSYS Fluent"
+  - "Airfoil CFD"
+  - "Compressible Aerodynamics"
+tags:
+  - "cfd"
+  - "cfd-lab"
+  - "ansys"
+  - "external-flow"
+  - "compressible-flow"
+  - "transonic"
+  - "airfoil"
+  - "shock-boundary-layer"
+  - "rans"
+  - "validation"
+  - "mesh-study"
+  - "y-plus"
+  - "post-processing"
+featured: false
+status: "completed"
+updatedAt: "2026-02-11"
+readingMinutes: 6
+results:
+  - label: "Flow regime"
+    value: "Transonic at M = 0.70"
+  - label: "Fine mesh size"
+    value: "40,000 elements"
+  - label: "Mesh divisions"
+    value: "100 linear x 100 curved"
+validation:
+  - check: "CL vs alpha and CL vs CD comparison plan"
+    status: "pass"
+  - check: "Coefficient table consistency across alpha cases"
+    status: "pass"
+reproducibility:
+  - step: "Model specification captured upfront"
+    detail: "Solver, gas model, viscosity model, and schemes documented in setup."
+  - step: "Consistent alpha-based reporting"
+    detail: "Same plot/metric package produced for each angle-of-attack case."
+  - step: "Tutorial-aligned mesh baseline"
+    detail: "Mesh definition recorded with element count and division settings."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/transonic-extra-1",
+      alt: "NACA0012 velocity vector contour",
+      caption: "Added figure: velocity vectors colored by velocity magnitude around NACA 0012."
+    },
+    {
+      src: "/api/robotech-image/transonic-extra-2",
+      alt: "NACA0012 static pressure contour",
+      caption: "Added figure: static pressure contour around NACA 0012."
+    },
+    {
+      src: "/project-media/assignment-2-cfd-lab-study/page-02.jpg",
+      alt: "Objective slide",
+      caption: "Presentation slide: goal and angle-of-attack case coverage."
+    },
+    {
+      src: "/project-media/assignment-2-cfd-lab-study/page-03.jpg",
+      alt: "Problem specification",
+      caption: "Presentation slide: numerics setup and expected validation outputs."
+    },
+    {
+      src: "/project-media/assignment-2-cfd-lab-study/page-04.jpg",
+      alt: "Setup slide",
+      caption: "Presentation slide: domain and case-setup workflow."
+    },
+    {
+      src: "/project-media/assignment-2-cfd-lab-study/page-05.jpg",
+      alt: "Fine mesh",
+      caption: "Presentation slide: fine-mesh configuration for run quality."
+    },
+    {
+      src: "/project-media/assignment-2-cfd-lab-study/page-06.jpg",
+      alt: "Result slide",
+      caption: "Presentation slide: representative field/metric output from the study."
+    }
+  ]}
+/>
+
+## Snapshot
+
+- **Course/Lab:** AE 4699 CFD Lab
+- **Case type:** Transonic external aerodynamics (NACA 0012)
+- **Solver:** ANSYS Fluent (density-based setup)
+- **Primary focus:** Mach/pressure field behavior and coefficient validation structure
+
+## Mission and setup
+
+- Build a transonic airfoil case with consistent numerical settings across alpha values.
+- Capture core outputs for interpretation and comparison:
+  - Mach-number contours
+  - Static-pressure contours
+  - CL and CD trends vs angle of attack
+- Keep assignment reporting aligned to validation expectations.
+
+## What I executed
+
+- Configured density-based transonic setup with compressible gas modeling.
+- Built and validated fine mesh baseline around NACA 0012 geometry.
+- Ran angle-of-attack cases and extracted coefficient tables.
+- Organized outputs into comparison plots for fast trend reading.
+
+## Results and engineering takeaways
+
+- Transonic field behavior is captured with clear regime-sensitive contour changes.
+- Fine mesh setup provides a stable baseline for coefficient trend comparison.
+- CL/CD reporting structure supports direct validation against reference data.
+- Assignment reinforced coefficient-first communication for aerodynamic decisions.
+
+## Validation and verification notes
+
+- Used planned validation plots (CL-alpha and CL-CD) as acceptance criteria.
+- Checked output consistency across all alpha cases in one standardized table.
+- Maintained one numerical setup template to reduce case-to-case drift.
+
+## Reproducibility notes
+
+- Mesh parameters and solver model choices documented in report slides.
+- Post-processing sequence repeated identically for each angle-of-attack run.
+- Slide deck structure reused for setup, convergence, and final metric reporting.

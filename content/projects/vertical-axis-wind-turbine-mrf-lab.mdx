@@ -1,0 +1,120 @@
+---
+title: "CFD Lab: Vertical Axis Wind Turbine (MRF Study)"
+slug: "vertical-axis-wind-turbine-mrf-lab"
+summary: "Steady-state Moving Reference Frame CFD study of a 3-blade Darrieus VAWT, focused on mesh-interface setup, rotating-zone modeling, and wake behavior."
+domain: "CFD Lab"
+tools:
+  - "ANSYS Fluent"
+  - "MRF"
+  - "Mesh Interfaces"
+  - "Post-Processing"
+tags:
+  - "cfd"
+  - "cfd-lab"
+  - "ansys"
+  - "external-flow"
+  - "rotating-machinery"
+  - "mrf"
+  - "vawt"
+  - "performance-metrics"
+  - "validation"
+  - "mesh-study"
+  - "post-processing"
+featured: true
+status: "completed"
+updatedAt: "2026-02-11"
+readingMinutes: 7
+results:
+  - label: "Freestream velocity"
+    value: "10 m/s"
+  - label: "Rotor speed"
+    value: "40 RPM"
+  - label: "Rotor diameter"
+    value: "12 cm"
+  - label: "Blade count / chord"
+    value: "3 blades / 2 cm chord"
+validation:
+  - check: "Wake structure captured downstream of rotating blades"
+    status: "pass"
+  - check: "MRF setup uses fixed rotating-zone angular velocity"
+    status: "pass"
+reproducibility:
+  - step: "Parameter-first problem definition"
+    detail: "Geometry and operating values documented before setup (V, RPM, D, chord, blade radius)."
+  - step: "Interface and zone checklist"
+    detail: "Non-conformal interfaces and rotating/stationary zones explicitly defined."
+  - step: "Standard result package"
+    detail: "Velocity, wake, and turbulence fields captured in a repeatable post workflow."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/vawt-1",
+      alt: "VAWT problem setup schematic",
+      caption: "Problem setup: 3-blade Darrieus VAWT in uniform inflow."
+    },
+    {
+      src: "/api/robotech-image/vawt-2",
+      alt: "VAWT mesh around turbine",
+      caption: "Mesh topology around the rotating turbine region."
+    },
+    {
+      src: "/api/robotech-image/vawt-3",
+      alt: "VAWT far-field mesh view",
+      caption: "Expanded domain mesh used for wake development."
+    },
+    {
+      src: "/api/robotech-image/vawt-4",
+      alt: "VAWT velocity magnitude contour",
+      caption: "Velocity-magnitude field showing rotor-induced flow structures."
+    },
+    {
+      src: "/api/robotech-image/vawt-5",
+      alt: "VAWT turbulent kinetic energy contour",
+      caption: "Turbulent kinetic energy field downstream of rotor."
+    }
+  ]}
+/>
+
+## Snapshot
+
+- **Source basis:** Cornell SimCafe VAWT Part 1 + AE 4801 lecture material
+- **Modeling style:** Steady-state MRF approximation (rotor spun at fixed RPM)
+- **Turbine type:** Lift-based Darrieus VAWT
+- **Primary objective:** Build a stable rotating-frame setup and interpret wake behavior
+
+## Problem specification
+
+| Parameter | Value |
+| --- | --- |
+| Inflow velocity | 10 m/s |
+| Angular velocity | 40 RPM |
+| Rotor diameter | 12 cm |
+| Blade count | 3 equally spaced blades |
+| Chord length | 2 cm |
+| Blade center radius | 0.04 m from hub center |
+
+## Modeling approach
+
+- Used a **Moving Reference Frame (MRF)** formulation to simplify transient rotor motion into a steady approximation.
+- Defined rotating inner zone and stationary far-field zone with explicit angular velocity assignment.
+- Used **non-conformal mesh interfaces** across zone boundaries and set Fluent interfaces for information transfer.
+- Kept blade positions and hub-centered geometry consistent with lecture setup definitions.
+
+## Results and interpretation
+
+- Velocity contours show clear rotor interaction and an organized downstream wake.
+- Wake non-uniformity across azimuthal blade position appears in post-processed flow fields.
+- Turbulent kinetic energy contours show increased eddy activity in wake-dominated regions.
+- Outputs are consistent with expected behavior for a simplified steady MRF VAWT study.
+
+## Validation and reproducibility notes
+
+- Validation focus was trend-level consistency (wake shape, velocity deficit, TKE distribution) under fixed setup.
+- Setup assumptions are explicit: fixed RPM and frozen-flowframe approximation.
+- Mesh-interface naming and zone definitions are documented to support repeat runs and peer review.
+
+## Reference links
+
+- Cornell SimCafe tutorial: [FLUENT - Vertical Axis Wind Turbine (Part 1)](https://confluence.cornell.edu/spaces/SIMULATION/pages/333371302/FLUENT+-+Vertical+Axis+Wind+Turbine+Part+1)

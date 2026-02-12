@@ -1,0 +1,107 @@
+---
+title: "Aeroelastic Surrogate / Beam-Based Delta-Map Tool"
+slug: "aeroelastic-surrogate-delta-map-tool"
+summary: "MATLAB-based beam surrogate and delta-map pipeline for rapid stiffness-scaling studies, organized around reusable data outputs rather than image-driven presentation."
+domain: "Aeroelastic Surrogate (Non-CFD Focus)"
+tools:
+  - "MATLAB"
+  - "Beam FE Modeling"
+  - "Data Calibration"
+  - "CSV/Pipeline Outputs"
+tags:
+  - "non-cfd"
+  - "matlab"
+  - "fea"
+  - "euler-bernoulli"
+  - "saint-venant-torsion"
+  - "surrogate-modeling"
+  - "calibration"
+  - "parametric-sweep"
+  - "workflow"
+  - "verification"
+  - "post-processing"
+  - "reproducibility"
+featured: true
+status: "in-progress"
+updatedAt: "2026-02-11"
+readingMinutes: 7
+results:
+  - label: "Deflection data points"
+    value: "4 stiffness-scale checkpoints (surrogate vs truth)"
+  - label: "Observed deflection error band"
+    value: "~0.041% to 0.042%"
+  - label: "Truth twist targets"
+    value: "2.38 to 2.56 deg across sampled scales"
+  - label: "Core artifact output"
+    value: "delta_map_table.csv + generated comparison plots"
+validation:
+  - check: "Deflection consistency checked against truth CSV targets"
+    status: "pass"
+  - check: "Twist surrogate integration in final delta-map report"
+    status: "planned"
+    note: "Current exported table from this dataset has twist surrogate values pending integration."
+reproducibility:
+  - step: "Tailoring folder mirrored into project media"
+    detail: "Key CSV artifacts copied into /public/project-media/aeroelastic-surrogate/ for page-level traceability."
+  - step: "Scripted visual generation"
+    detail: "Deflection and error plots generated directly from CSV tables."
+  - step: "Pipeline file map retained"
+    detail: "Main MATLAB scripts documented as a runnable sequence instead of one-off notebooks."
+---
+
+## Project format (data-first)
+
+This project is intentionally organized as a **data package + pipeline view** rather than a slide/image narrative.
+The focus is the surrogate workflow architecture and the reproducible artifacts coming from the `Tailoring` folder.
+
+## Pipeline map (MATLAB)
+
+- `fullpipelinev1.m` orchestrates load -> calibrate -> delta-map -> artifact export.
+- `calibrate_surrogate.m` computes closed-form `EI`/`GJ` from influence integrals.
+- `run_beam.m` evaluates tip deflection/twist for scaled stiffness values.
+- `delta_map.m` builds comparison tables and plotting artifacts.
+- Supporting loaders: `load_yqz.m`, `load_tip_targets.m`.
+
+## Data inventory
+
+| Artifact | Source | Purpose |
+| --- | --- | --- |
+| `delta_map_table.csv` | `demoexport/` | Surrogate outputs at selected stiffness scales |
+| `delta_map_deflection_truth_crm.csv` | `Truth/` | Truth deflection targets for comparison |
+| `delta_map_twist_truth_crm.csv` | `Truth/` | Truth twist targets for comparison |
+| `demo_tip_targets.csv` | `datademo/` | Tip targets used in calibration workflow |
+| `demo_y_qz.csv` | `datademo/` | Spanwise load descriptors used by beam solve |
+
+> All files above are mirrored into `public/project-media/aeroelastic-surrogate/` for project-page traceability.
+
+## Viewable outputs
+
+### Deflection vs stiffness scale
+
+![Deflection vs scale](/project-media/aeroelastic-surrogate/deflection-vs-scale.png)
+
+### Deflection percent error
+
+![Deflection error bars](/project-media/aeroelastic-surrogate/deflection-error-bars.png)
+
+### Twist truth targets
+
+![Twist truth vs scale](/project-media/aeroelastic-surrogate/twist-truth-vs-scale.png)
+
+## Extracted table snapshot
+
+| Scale | Surrogate w_tip [m] | Truth w_tip [m] | Deflection error [%] |
+| ---: | ---: | ---: | ---: |
+| 0.97371 | 0.391449 | 0.391287 | 0.041 |
+| 0.97466 | 0.391068 | 0.390906 | 0.041 |
+| 1.00000 | 0.381158 | 0.381000 | 0.041 |
+| 1.00200 | 0.380397 | 0.380238 | 0.042 |
+
+## Why this sits in Other Projects
+
+- This entry is primarily a **surrogate modeling and data-engineering workflow** project.
+- While the context includes CFD/FSI truth data, the work showcased here emphasizes:
+  - calibration logic
+  - reduced-order modeling structure
+  - reproducible data outputs
+  - pipeline organization

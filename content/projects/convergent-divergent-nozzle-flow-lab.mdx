@@ -1,0 +1,129 @@
+---
+title: "CFD Lab: Convergent-Divergent Nozzle Flow"
+slug: "convergent-divergent-nozzle-flow-lab"
+summary: "AE 4699 nozzle-flow assignment using ANSYS Fluent to capture choking behavior and supersonic acceleration in a convergent-divergent geometry."
+domain: "CFD Lab"
+tools:
+  - "ANSYS Fluent"
+  - "Compressible Flow"
+  - "Post-Processing"
+tags:
+  - "cfd"
+  - "cfd-lab"
+  - "ansys"
+  - "internal-flow"
+  - "compressible-flow"
+  - "nozzle-flow"
+  - "shocks"
+  - "expansion-waves"
+  - "choked-flow"
+  - "verification"
+  - "mesh-study"
+  - "grid-independence"
+  - "post-processing"
+featured: false
+status: "completed"
+updatedAt: "2026-02-11"
+readingMinutes: 5
+results:
+  - label: "Inlet total pressure"
+    value: "101,325 Pa"
+  - label: "Outlet static pressure case"
+    value: "3,738.9 Pa"
+  - label: "Flow regime transition"
+    value: "Subsonic to supersonic (choked throat)"
+validation:
+  - check: "Mach contour trend confirms accelerating flow through throat"
+    status: "pass"
+  - check: "Static pressure decreases consistently downstream"
+    status: "pass"
+reproducibility:
+  - step: "Structured case specification"
+    detail: "Boundary conditions and expected outcomes documented before solving."
+  - step: "Consistent field extraction"
+    detail: "Mach and static-pressure contours reported for direct comparison."
+  - step: "Slide-based reporting template"
+    detail: "Same section order used for setup, solution, and interpretation."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/nozzle-extra-1",
+      alt: "Nozzle Mach contour (clean render)",
+      caption: "Added figure: Mach-number contour through convergent-divergent nozzle."
+    },
+    {
+      src: "/api/robotech-image/nozzle-extra-2",
+      alt: "Nozzle static pressure contour (clean render)",
+      caption: "Added figure: static-pressure contour through convergent-divergent nozzle."
+    },
+    {
+      src: "/project-media/convergent-divergent-nozzle-flow-lab/page-02.jpg",
+      alt: "Objective slide",
+      caption: "Presentation slide: objective and modeling scope."
+    },
+    {
+      src: "/project-media/convergent-divergent-nozzle-flow-lab/page-03.jpg",
+      alt: "Problem specification",
+      caption: "Presentation slide: boundary-condition setup and expected behavior."
+    },
+    {
+      src: "/project-media/convergent-divergent-nozzle-flow-lab/page-04.jpg",
+      alt: "Mesh and setup",
+      caption: "Presentation slide: geometry/mesh setup."
+    },
+    {
+      src: "/project-media/convergent-divergent-nozzle-flow-lab/page-05.jpg",
+      alt: "Mach contour result",
+      caption: "Presentation slide: Mach contour result and interpretation."
+    },
+    {
+      src: "/project-media/convergent-divergent-nozzle-flow-lab/page-06.jpg",
+      alt: "Static pressure contour result",
+      caption: "Presentation slide: static-pressure contour result and interpretation."
+    }
+  ]}
+/>
+
+## Snapshot
+
+- **Course/Lab:** AE 4699 CFD Lab
+- **Case type:** Compressible internal flow (convergent-divergent nozzle)
+- **Solver:** ANSYS Fluent
+- **Primary focus:** Choking behavior, Mach trend, and pressure trend consistency
+
+## Mission and setup
+
+- Build a clean compressible-flow case with explicit pressure inlet/outlet conditions.
+- Confirm expected nozzle physics:
+  - Flow accelerates through the throat
+  - Throat reaches choking condition
+  - Diverging section trends to supersonic exit
+- Use contour interpretation to verify physical consistency before reporting.
+
+## What I executed
+
+- Defined stagnation-pressure inlet and static-pressure outlet target case.
+- Solved and post-processed Mach and static-pressure contours.
+- Reviewed field behavior against isentropic nozzle expectations.
+- Structured results in a lab-report format for fast review.
+
+## Results and engineering takeaways
+
+- Choked behavior observed at the throat with monotonic acceleration downstream.
+- Mach contour indicates smooth supersonic development toward the exit.
+- Static-pressure field drops from inlet to throat and continues downstream as expected.
+- Case reinforces the value of trend-level verification before deeper design claims.
+
+## Validation and verification notes
+
+- Compared contour trends to expected 1D compressible-flow behavior.
+- Checked for non-physical shocks/artifacts in the baseline outlet-pressure case.
+- Confirmed pressure and Mach trends remain internally consistent across field views.
+
+## Reproducibility notes
+
+- Reusable slide/report structure keeps setup and interpretation standardized.
+- Boundary-condition values documented with explicit units and reference conventions.
+- Output visuals captured in a fixed sequence for side-by-side rerun comparison.

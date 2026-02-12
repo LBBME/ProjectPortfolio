@@ -1,0 +1,187 @@
+---
+title: "Formula SAE Side-Aero, Diffuser, and Radiator Flow Study"
+slug: "fsae-side-aero-diffuser-radiator-study"
+summary: "HyTech Racing side-aero CFD campaign comparing baseline vs HT106-N0172 with component-level downforce/drag contribution analysis."
+domain: "Formula SAE Aerodynamics"
+tools:
+  - "ANSYS Fluent"
+  - "CFD Aerodynamics"
+  - "Racecar Aero Packaging"
+  - "Post-Processing"
+tags:
+  - "cfd"
+  - "fsae"
+  - "ansys"
+  - "motorsport-aero"
+  - "external-flow"
+  - "rans"
+  - "aerodynamics"
+  - "cooling-flow"
+  - "radiator"
+  - "diffuser"
+  - "vehicle-aero"
+  - "performance-metrics"
+  - "hpc"
+  - "workflow"
+  - "post-processing"
+  - "design-iteration"
+  - "verification"
+featured: true
+status: "completed"
+updatedAt: "2026-02-11"
+readingMinutes: 7
+results:
+  - label: "Total CL"
+    value: "4.1367 -> 4.2383 (Base -> HT106-N0172)"
+  - label: "Total CD"
+    value: "1.4749 -> 1.4964 (Base -> HT106-N0172)"
+  - label: "CL/CD"
+    value: "2.8046 -> 2.8323"
+  - label: "Aerobalance"
+    value: "50.73 -> 50.41"
+validation:
+  - check: "Residual convergence monitored for force stability"
+    status: "pass"
+  - check: "Half-car setup and BC definition held fixed between compared variants"
+    status: "pass"
+reproducibility:
+  - step: "Consistent variant naming"
+    detail: "Base and HT106-N0172 compared with matched reporting outputs."
+  - step: "Standardized metric package"
+    detail: "Total CL, total CD, CL/CD, aerobalance, and component deltas exported per run."
+  - step: "Repeatable CFD setup checklist"
+    detail: "Domain, BCs, turbulence model, meshing strategy, and convergence criteria documented."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/fsae-endurance-1",
+      alt: "HyTech Racing Formula SAE car during endurance event",
+      caption: "HyTech Racing Formula SAE-EV car track context for the side-aero development campaign."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-1",
+      alt: "FSAE side aero CAD with CFD domain",
+      caption: "CAD + CFD domain setup for side-aero study."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-2",
+      alt: "FSAE baseline CAD configuration",
+      caption: "Baseline racecar geometry used for comparison."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-3",
+      alt: "Local mesh detail around side aero region",
+      caption: "Mesh detail near critical side-aero surfaces."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-4",
+      alt: "HT106-N0172 full vehicle model",
+      caption: "HT106-N0172 full-vehicle configuration."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-5",
+      alt: "Surface scalar visualization",
+      caption: "Surface metric visualization for aero-load interpretation."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-6",
+      alt: "Pressure field around side aero",
+      caption: "Pressure-field behavior around side-aero package."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-7",
+      alt: "Side view flow field",
+      caption: "Side-view flow field and wake structure trends."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-8",
+      alt: "Near-ground pressure contour",
+      caption: "Near-ground contour behavior under body/floor region."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-9",
+      alt: "3D flow feature visualization",
+      caption: "3D flow-feature visualization over full package."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-10",
+      alt: "Pseudotransient force history",
+      caption: "Pseudotransient force histories used for stabilization checks."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-11",
+      alt: "Residual history",
+      caption: "Scaled residual histories for convergence assessment."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-12",
+      alt: "Total lift history",
+      caption: "Total lift trend over iterations."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-13",
+      alt: "Total force history",
+      caption: "Total force trend showing stabilization behavior."
+    },
+    {
+      src: "/api/robotech-image/fsae-sideaero-14",
+      alt: "Total drag history",
+      caption: "Total drag trend over iterations."
+    }
+  ]}
+/>
+
+## Snapshot
+
+- **Team/Program:** HyTech Racing FSAE-EV
+- **Focus:** Side-aero aerodynamic performance and component-level load shifts
+- **Compared configurations:** Base vs HT106-N0172
+- **Primary KPI set:** Total CL, total CD, CL/CD, aerobalance, component contributions
+
+## Motivation and objective
+
+- Improve overall aerodynamic performance from HT09 learnings into HTX side-aero direction.
+- Evaluate side-aero concept impact without depending only on track/wind-tunnel availability.
+- Support future optimization targets (yaw/pitch behavior and endplate design).
+
+## CFD setup approach
+
+- Used a deliberate CFD setup with fixed definitions between compared variants:
+  - Half-car formulation for efficient iteration
+  - Controlled domain and boundary-condition definitions
+  - Explicit turbulence/flow-physics model choices
+  - Meshing strategy and convergence criteria gates
+- Force and residual histories were tracked to confirm stable reporting windows.
+
+## Numerical data (from side-aero report)
+
+| Metric | Base Case | HT106-N0172 |
+| --- | ---: | ---: |
+| Total CL | 4.1367 | 4.2383 |
+| Total CD | 1.4749 | 1.4964 |
+| CL/CD | 2.8046 | 2.8323 |
+| Aerobalance | 50.73 | 50.41 |
+
+### Component contribution table (Base / HT106-N0172)
+
+| Component | CL (Base / N0172) | CD (Base / N0172) | % of Total CL (Base / N0172) | % of Total CD (Base / N0172) |
+| --- | --- | --- | --- | --- |
+| Aux Wing | -0.082 / 0.0202 | -0.016 / 0.0055 | -0.20% / 0.48% | -0.11% / 0.37% |
+| Floor Shoulder / Curve | 0.5080 / 0.5261 | 0.0308 / 0.0344 | 12.28% / 12.41% | 2.09% / 2.30% |
+| RearWing E1 | 0.9184 / 0.9635 | 0.1995 / 0.2031 | 22.2% / 22.7% | 13.53% / 13.57% |
+| Body Curve | 0.9445 / 0.9669 | 0.1268 / 0.1245 | 22.8% / 22.8% | 8.60% / 8.32% |
+
+## Results and engineering takeaways
+
+- HT106-N0172 improves total CL and CL/CD relative to the base case.
+- Total CD increases slightly, but efficiency trend still improves (higher CL/CD).
+- Component-level breakdown helps identify where load gains are coming from.
+- Convergence/force-history plots support confidence in the reported comparison window.
+
+## Validation and reproducibility notes
+
+- Same reporting metrics used across compared variants for clean A/B interpretation.
+- Residual and force histories are included with results to make quality checks explicit.
+- Setup choices (domain, BCs, turbulence model, meshing, convergence criteria) are documented for reruns.

@@ -1,0 +1,135 @@
+---
+title: "CFD Lab: Forced Convection Over a Flat Plate"
+slug: "forced-convection-flat-plate-lab"
+summary: "AE 4699 forced-convection assignment comparing laminar and turbulent flat-plate behavior with mesh/convergence checks in ANSYS Fluent."
+domain: "CFD Lab"
+tools:
+  - "ANSYS Fluent"
+  - "Heat Transfer CFD"
+  - "Boundary Layer Analysis"
+tags:
+  - "cfd"
+  - "cfd-lab"
+  - "ansys"
+  - "external-flow"
+  - "boundary-layer"
+  - "forced-convection"
+  - "heat-transfer"
+  - "nusselt"
+  - "reynolds"
+  - "verification"
+  - "validation"
+  - "mesh-study"
+  - "y-plus"
+  - "post-processing"
+featured: false
+status: "completed"
+updatedAt: "2026-02-11"
+readingMinutes: 6
+results:
+  - label: "Coarse grid template"
+    value: "30 x 50 (laminar and turbulent cases)"
+  - label: "Convergence evidence"
+    value: "Residual histories reported for each case"
+  - label: "Comparison focus"
+    value: "Cf and temperature-profile behavior"
+validation:
+  - check: "Laminar Cf trend compared to analytical expectation"
+    status: "pass"
+  - check: "Turbulent trend and thermal-layer interpretation"
+    status: "pass"
+reproducibility:
+  - step: "Case-family organization"
+    detail: "Laminar and turbulent runs documented with matched reporting fields."
+  - step: "Residual + metric pairing"
+    detail: "Convergence plots presented alongside physics metrics."
+  - step: "Expected-outcome checklist"
+    detail: "Validation expectations written before final interpretation."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/flat-plate-extra-1",
+      alt: "Turbulent kinetic energy contour over flat plate",
+      caption: "Added figure: turbulent kinetic energy contour over the flat plate."
+    },
+    {
+      src: "/api/robotech-image/flat-plate-extra-2",
+      alt: "Velocity vectors over flat plate",
+      caption: "Added figure: velocity vector field over the flat plate boundary layer."
+    },
+    {
+      src: "/api/robotech-image/flat-plate-extra-3",
+      alt: "Boundary-layer vector zoom",
+      caption: "Added figure: close-up view of near-wall velocity behavior."
+    },
+    {
+      src: "/project-media/assignment-1-cfd-lab-study/page-02.jpg",
+      alt: "Objective slide",
+      caption: "Presentation slide: objective and expected physical trends."
+    },
+    {
+      src: "/project-media/assignment-1-cfd-lab-study/page-03.jpg",
+      alt: "Problem specification",
+      caption: "Presentation slide: expected outcomes for mesh, flow regime, and heat transfer."
+    },
+    {
+      src: "/project-media/assignment-1-cfd-lab-study/page-04.jpg",
+      alt: "Setup slide",
+      caption: "Presentation slide: geometry and setup details."
+    },
+    {
+      src: "/project-media/assignment-1-cfd-lab-study/page-05.jpg",
+      alt: "Residual convergence results",
+      caption: "Presentation slide: residual histories for laminar and turbulent cases."
+    },
+    {
+      src: "/project-media/assignment-1-cfd-lab-study/page-06.jpg",
+      alt: "Result slide",
+      caption: "Presentation slide: representative comparison output from the flat-plate study."
+    }
+  ]}
+/>
+
+## Snapshot
+
+- **Course/Lab:** AE 4699 CFD Lab
+- **Case type:** External forced-convection over flat plate
+- **Solver:** ANSYS Fluent
+- **Primary focus:** Mesh/convergence discipline and laminar-vs-turbulent trend comparison
+
+## Mission and setup
+
+- Build baseline laminar and turbulent flat-plate CFD cases.
+- Evaluate expected behavior in:
+  - Skin-friction trend along the plate
+  - Thermal boundary-layer development
+  - Residual convergence quality
+- Use trend-based interpretation to connect numerics to physics.
+
+## What I executed
+
+- Created case setup with matched geometry and comparable boundary conditions.
+- Solved both laminar and turbulent configurations.
+- Generated residual plots for convergence tracking.
+- Interpreted Cf and thermal-profile behavior against expected flat-plate theory.
+
+## Results and engineering takeaways
+
+- Residual histories provide clear convergence evidence for compared cases.
+- Turbulent case shows expected stronger wall-shear and thermal transport behavior.
+- Laminar case captures lower-gradient behavior with thinner near-wall transport effects.
+- Assignment strengthened case-quality checks before final aerodynamic/thermal claims.
+
+## Validation and verification notes
+
+- Compared simulation trends to expected analytical/correlation behavior.
+- Used mesh and convergence interpretation as first-pass validation gates.
+- Kept laminar/turbulent comparison structure consistent across outputs.
+
+## Reproducibility notes
+
+- Setup-to-results workflow documented in a fixed assignment template.
+- Case naming and slide ordering support quick reruns and side-by-side checks.
+- Convergence and physics outputs reported together for traceable review.

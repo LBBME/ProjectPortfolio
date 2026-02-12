@@ -1,0 +1,123 @@
+---
+title: "RG-15 IPW2 Reproduction (2D-Intent Workflow)"
+slug: "rg15-ipw2-2d-reproduction-study"
+summary: "Separate RG-15 icing campaign to reproduce IPW2-style trends with a 2D-intent setup, including bin sensitivity checks and a level-based grid refinement sweep."
+domain: "Aircraft Icing"
+tools:
+  - "ANSYS FENSAP-ICE"
+  - "Fluent Meshing"
+  - "MATLAB"
+  - "Python"
+tags:
+  - "cfd"
+  - "fpcs"
+  - "ansys"
+  - "star-ccm+"
+  - "openfoam"
+  - "aircraft-icing"
+  - "rans"
+  - "verification"
+  - "mesh-study"
+  - "grid-family"
+  - "post-processing"
+  - "workflow"
+  - "reproducibility"
+featured: true
+status: "completed"
+updatedAt: "2026-02-12"
+readingMinutes: 7
+results:
+  - label: "Provided-grid 1-bin"
+    value: "Beta_max 0.825, mass peak 0.01073 kg/m^2s, max thickness 2.54 mm"
+  - label: "Provided-grid 7-bin"
+    value: "Beta_max 0.796, mass peak 0.01034 kg/m^2s, max thickness 5.61 mm"
+  - label: "Level-4 custom grid"
+    value: "Beta_max 0.5790, mass peak 0.007527 kg/m^2s, max thickness 3.72 mm"
+  - label: "Reproduction objective"
+    value: "Like-for-like MCCS overlay workflow with L1-L5 trend tracking"
+validation:
+  - check: "Common units and axis consistency for comparisons"
+    status: "pass"
+    note: "Curves compared on aligned wall s/c coordinates with thickness in mm-equivalent reporting."
+  - check: "Cross-grid trend review (L1-L4 + provided baseline)"
+    status: "pass"
+    note: "Mass-caught and Beta trends stabilize by finer levels while thickness remains most sensitive."
+reproducibility:
+  - step: "Fixed case setup and bin tables"
+    detail: "Same case BCs were used across levels and bin studies, with explicit 1/3/7-bin definitions."
+  - step: "Level-structured runs"
+    detail: "Grid family was executed as L1-L4 plus provided baseline to evaluate convergence behavior."
+  - step: "Post-processing harness"
+    detail: "MATLAB/Python post-processing regenerates overlays, deltas, and summary metrics from exports."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/rg15-1bin-plot",
+      alt: "RG-15 1-bin freezing fraction and instant ice-growth plots",
+      caption: "Provided-grid 1-bin behavior used as a baseline in the RG-15 bin-comparison check."
+    },
+    {
+      src: "/api/robotech-image/rg15-7bin-plot",
+      alt: "RG-15 7-bin freezing fraction and instant ice-growth plots",
+      caption: "Provided-grid 7-bin behavior showing broader growth shoulder and higher integrated growth tendency."
+    },
+    {
+      src: "/project-media/rg15-ipw2-2d-reproduction-study/rg15-grid-independence-evidence.png",
+      alt: "RG-15 grid-independence evidence chart",
+      caption: "Grid-refinement evidence from L1-L4 metrics with convergence-style trend checks."
+    }
+  ]}
+/>
+
+## Project scope
+
+- This is a separate IPW2-related project focused on **RG-15**.
+- Goal: reproduce IPW2-style comparison behavior with a workflow configured to be as close as possible to a 2D study.
+- Constraint: student environment did not allow native 2D meshing, so the setup was designed as a 2D-intent approximation.
+
+## Case and setup highlights
+
+- Reference context: public IPW2 RG-15 glaze case (CSV-based curve comparison workflow).
+- Runs included:
+  - Provided baseline grid with 1/3/7-bin sweeps.
+  - Custom grid family L1-L4 plus provided baseline level for trend checks.
+- Example droplet-bin definitions used:
+  - 7-bin: 81.3/5, 51.2/10, 36.8/20, 26.8/30, 18.7/20, 12.5/10, 7.3/5 (um / %)
+  - 3-bin: 61.2/15, 27.3/70, 10.8/15
+  - 1-bin: 26.7/100
+
+## Key numerical snapshots
+
+### Provided-grid bin study (same grid, 76,891 cells)
+
+| Bin setup | Beta_max | Mass-caught peak [kg/m^2s] | Max ice thickness |
+| --- | ---: | ---: | ---: |
+| 1-bin | 0.825 | 0.01073 | 0.00254 m (2.54 mm) |
+| 3-bin | 0.802 | 0.01043 | 0.00261 m (2.61 mm) |
+| 7-bin | 0.796 | 0.01034 | 0.00561 m (5.61 mm) |
+
+### Grid-family sweep (L1-L4)
+
+| Grid level | Element count | Beta_max | Mass-caught peak [kg/m^2s] | Max ice thickness |
+| --- | ---: | ---: | ---: | ---: |
+| L1 | 80,000 | 0.6400 | 0.00832 | 0.00397 m (3.97 mm) |
+| L2 | 158,000 | 0.6932 | 0.009011 | 0.00412 m (4.12 mm) |
+| L3 | 237,000 | 0.5636 | 0.007327 | 0.00323 m (3.23 mm) |
+| L4 | 380,000 | 0.5790 | 0.007527 | 0.00372 m (3.72 mm) |
+
+## Grid-independence evidence
+
+The chart in the carousel summarizes the measured L1-L4 progression and delta behavior between levels.  
+Interpretation used in this project:
+
+- Beta and mass-caught are comparatively stable by finer levels.
+- Thickness is the most sensitive output and should be tracked with tighter near-wall/time-step control.
+- The harness is suitable for continued IPW-style studies because setup parity and trend-check infrastructure are in place.
+
+## References used for this project
+
+- `Numerical Results (RG-15) (1) (1).pdf`
+- `Reproducing IPW2 Results (RG-15) (3).pdf`
+- IPW overview: [2nd Workshop](https://icepredictionworkshop.wordpress.com/2nd-workshop/)

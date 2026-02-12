@@ -1,0 +1,125 @@
+---
+title: "CFD Lab: 3D Transonic Flow Over ONERA M6 Wing"
+slug: "transonic-onera-m6-wing-study"
+summary: "3D transonic wing study using ANSYS workflow guidance from Cornell/Ansys modules, focused on ONERA M6 setup, pressure behavior, and wake interpretation."
+domain: "CFD Lab"
+tools:
+  - "ANSYS Fluent"
+  - "Transonic CFD"
+  - "ONERA M6"
+  - "Post-Processing"
+tags:
+  - "cfd"
+  - "cfd-lab"
+  - "ansys"
+  - "external-flow"
+  - "compressible-flow"
+  - "transonic"
+  - "3d-wing"
+  - "shock-capture"
+  - "rans"
+  - "validation"
+  - "mesh-study"
+  - "grid-independence"
+  - "post-processing"
+featured: false
+status: "completed"
+updatedAt: "2026-02-11"
+readingMinutes: 7
+results:
+  - label: "Freestream Mach"
+    value: "0.8395"
+  - label: "Inlet temperature"
+    value: "460 degR"
+  - label: "Wing incidence"
+    value: "3.06 deg"
+  - label: "Reynolds number"
+    value: "11.72 million"
+validation:
+  - check: "Pressure contour pattern compared against NASA WIND reference trends"
+    status: "pass"
+  - check: "Observed differences interpreted against mesh-resolution gap"
+    status: "pass"
+reproducibility:
+  - step: "Tutorial-anchored setup"
+    detail: "Problem inputs and flow regime kept aligned to Cornell/Ansys course baseline."
+  - step: "Consistent output set"
+    detail: "Pressure contours, vectors, and wake visuals exported with fixed view conventions."
+  - step: "Reference-aware validation"
+    detail: "Compared qualitative contour behavior with published ONERA M6 references."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/onera-1",
+      alt: "ONERA M6 pressure contour with isosurfaces",
+      caption: "3D pressure field and near-wing structures."
+    },
+    {
+      src: "/api/robotech-image/onera-2",
+      alt: "ONERA M6 far-field pressure view",
+      caption: "Far-field pressure signature around ONERA M6."
+    },
+    {
+      src: "/api/robotech-image/onera-3",
+      alt: "ONERA M6 surface pressure contour",
+      caption: "Surface pressure distribution on the wing."
+    },
+    {
+      src: "/api/robotech-image/onera-4",
+      alt: "ONERA M6 velocity vectors",
+      caption: "Velocity vectors and wake directionality."
+    },
+    {
+      src: "/api/robotech-image/onera-5",
+      alt: "ONERA M6 reference pressure contour figure",
+      caption: "Reference-style contour comparison for validation context."
+    },
+    {
+      src: "/api/robotech-image/onera-6",
+      alt: "ONERA M6 wake/turbulence-style visualization",
+      caption: "Wake-region behavior downstream of wing."
+    }
+  ]}
+/>
+
+## Snapshot
+
+- **Case type:** 3D transonic external aerodynamics
+- **Geometry:** ONERA M6 validation wing
+- **Objective:** Reproduce expected transonic pressure behavior and compare contour trends to reference studies
+- **Learning path basis:** Cornell-origin SimCafe tutorial pathway surfaced through Ansys Innovation content
+
+## Problem specification
+
+| Parameter | Value |
+| --- | --- |
+| Mach number | 0.8395 |
+| Inlet temperature | 460 degR |
+| Wing rotation/incidence | 3.06 deg |
+| Inlet Reynolds number | 11.72 million |
+
+## Setup approach
+
+- Followed transonic wing workflow structure: geometry/mesh -> physics setup -> solution -> results evaluation.
+- Focused on pressure and velocity-field interpretation around ONERA M6 under transonic conditions.
+- Used consistent extraction views to make contour comparisons repeatable.
+
+## Results and interpretation
+
+- Surface/near-field pressure distribution shows expected strong gradients in transonic regime.
+- Velocity vectors and wake visuals highlight flow reorganization downstream of wing.
+- Symmetry-plane style contour behavior follows known ONERA M6 trend patterns used in tutorial validation discussions.
+- Output set is suitable for quick A/B comparison after mesh or model refinements.
+
+## Validation and reproducibility notes
+
+- Reference comparison is based on published ONERA M6 benchmark context in the tutorial resources.
+- Any mismatch is interpreted with attention to mesh resolution and boundary-layer detail.
+- Reporting package is organized so reruns can be compared without changing visualization framing.
+
+## Reference links
+
+- Ansys Innovation Space knowledge post: [Discovery AIM tutorial – Transonic Flow over a Wing](https://innovationspace.ansys.com/knowledge/forums/topic/discovery-aim-tutorial-transonic-flow-over-a-wing/)
+- Ansys Innovation course page: [3D Transonic Flow Over a Wing](https://innovationspace.ansys.com/product/3d-transonic-flow-over-a-wing/)

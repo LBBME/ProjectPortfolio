@@ -1,0 +1,7 @@
+case,best_aligned_corr,rmse_normalized,alignment_used
+TH2446,1.000000,0.000000,raw
+TH2434,1.000000,0.000000,reversed
+TH2459,0.996054,0.088839,reversed
+TG2409,1.000000,0.000000,reversed
+TG2411,1.000000,0.000000,raw
+TG2415,1.000000,0.000000,reversed

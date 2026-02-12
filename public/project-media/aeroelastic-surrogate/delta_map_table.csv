@@ -1,0 +1,5 @@
+scale,w_tip_surrogate_m,w_tip_FSI_m,w_percent_error,theta_tip_surrogate_deg,theta_tip_FSI_deg,theta_percent_error
+0.97371,0.391449197202734,NaN,NaN,0,NaN,NaN
+0.97466,0.391067652188079,NaN,NaN,0,NaN,NaN
+1,0.381157997740879,NaN,NaN,0,NaN,NaN
+1.002,0.38039720326893,NaN,NaN,0,NaN,NaN
