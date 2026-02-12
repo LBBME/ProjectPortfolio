@@ -9,12 +9,28 @@ type CarouselImage = {
 };
 
 type ImageCarouselProps = {
-  images: CarouselImage[];
+  images?: CarouselImage[];
 };
 
 export function ImageCarousel({ images }: ImageCarouselProps) {
+  const safeImages = Array.isArray(images)
+    ? images.filter(
+        (image): image is CarouselImage =>
+          Boolean(image) &&
+          typeof image.src === "string" &&
+          image.src.trim().length > 0 &&
+          typeof image.alt === "string" &&
+          image.alt.trim().length > 0
+      )
+    : [];
+
   const [index, setIndex] = useState(0);
-  const total = images.length;
+  const total = safeImages.length;
+
+  useEffect(() => {
+    if (total === 0) return;
+    if (index >= total) setIndex(0);
+  }, [index, total]);
 
   useEffect(() => {
     if (total <= 1) return undefined;
@@ -25,6 +41,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
   }, [index, total]);
 
   useEffect(() => {
+    if (total <= 1) return undefined;
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight") {
         setIndex((prev) => (prev + 1) % total);
@@ -37,10 +54,10 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [total]);
 
-  const current = images[index];
-  const progress = useMemo(() => `${((index + 1) / total) * 100}%`, [index, total]);
-
   if (total === 0) return null;
+  const current = safeImages[index] ?? safeImages[0];
+  if (!current) return null;
+  const progress = useMemo(() => `${((index + 1) / total) * 100}%`, [index, total]);
 
   return (
     <section className="my-6 w-full max-w-full min-w-0 overflow-hidden rounded-xl border border-slate-500/50 bg-slate-900/60 py-3">
@@ -78,7 +95,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
       <div className="mt-3 flex flex-wrap items-center justify-between gap-4 overflow-hidden px-4 md:px-8">
         <p className="max-w-full text-sm text-slate-100 break-words">{current.caption ?? current.alt}</p>
         <div className="flex items-center gap-2">
-          {images.map((image, dotIndex) => (
+          {safeImages.map((image, dotIndex) => (
             <button
               key={image.src}
               type="button"
@@ -94,7 +111,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
 
       <div className="mt-3 overflow-x-auto px-3 pb-1 md:px-4">
         <div className="flex min-w-max items-center gap-2">
-          {images.map((image, thumbIndex) => (
+          {safeImages.map((image, thumbIndex) => (
             <button
               key={`${image.src}-thumb`}
               type="button"
