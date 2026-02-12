@@ -12,9 +12,36 @@ type ImageCarouselProps = {
   images?: unknown;
 };
 
+function toRawImageList(input: unknown): unknown[] {
+  if (!input) return [];
+  if (Array.isArray(input)) return input;
+
+  if (typeof input === "object") {
+    const wrapped = input as { images?: unknown };
+    if (wrapped.images) return toRawImageList(wrapped.images);
+
+    if (Symbol.iterator in (input as Record<string, unknown>)) {
+      try {
+        return Array.from(input as Iterable<unknown>);
+      } catch {
+        // Fall through to object values.
+      }
+    }
+
+    return Object.values(input as Record<string, unknown>);
+  }
+
+  return [];
+}
+
 export function ImageCarousel({ images }: ImageCarouselProps) {
-  const rawImages = Array.isArray(images) ? images : [];
+  const rawImages = toRawImageList(images);
   const safeImages = rawImages.reduce<CarouselImage[]>((acc, raw) => {
+    if (typeof raw === "string" && raw.trim().length > 0) {
+      acc.push({ src: raw.trim(), alt: "project image" });
+      return acc;
+    }
+
     if (!raw || typeof raw !== "object") return acc;
     const candidate = raw as { src?: unknown; alt?: unknown; caption?: unknown };
     const src = typeof candidate.src === "string" ? candidate.src.trim() : "";
