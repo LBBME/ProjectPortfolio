@@ -111,6 +111,7 @@ export async function getRenderedProject(
     source: project.content,
     options: {
       parseFrontmatter: false,
+      blockJS: false,
       mdxOptions: {
         format: "mdx",
         remarkPlugins: [remarkGfm]
