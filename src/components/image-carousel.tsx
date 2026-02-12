@@ -14,23 +14,22 @@ type ImageCarouselProps = {
 
 export function ImageCarousel({ images }: ImageCarouselProps) {
   const rawImages = Array.isArray(images) ? images : [];
-  const safeImages: CarouselImage[] = rawImages
-    .map((raw) => {
-      if (!raw || typeof raw !== "object") return null;
-      const candidate = raw as { src?: unknown; alt?: unknown; caption?: unknown };
-      const src = typeof candidate.src === "string" ? candidate.src.trim() : "";
-      if (!src) return null;
-      const caption =
-        typeof candidate.caption === "string" && candidate.caption.trim().length > 0
-          ? candidate.caption.trim()
-          : undefined;
-      const alt =
-        typeof candidate.alt === "string" && candidate.alt.trim().length > 0
-          ? candidate.alt.trim()
-          : caption ?? "project image";
-      return { src, alt, caption };
-    })
-    .filter((image): image is CarouselImage => image !== null);
+  const safeImages = rawImages.reduce<CarouselImage[]>((acc, raw) => {
+    if (!raw || typeof raw !== "object") return acc;
+    const candidate = raw as { src?: unknown; alt?: unknown; caption?: unknown };
+    const src = typeof candidate.src === "string" ? candidate.src.trim() : "";
+    if (!src) return acc;
+    const caption =
+      typeof candidate.caption === "string" && candidate.caption.trim().length > 0
+        ? candidate.caption.trim()
+        : undefined;
+    const alt =
+      typeof candidate.alt === "string" && candidate.alt.trim().length > 0
+        ? candidate.alt.trim()
+        : caption ?? "project image";
+    acc.push({ src, alt, caption });
+    return acc;
+  }, []);
 
   const [index, setIndex] = useState(0);
   const total = safeImages.length;
