@@ -9,20 +9,28 @@ type CarouselImage = {
 };
 
 type ImageCarouselProps = {
-  images?: CarouselImage[];
+  images?: unknown;
 };
 
 export function ImageCarousel({ images }: ImageCarouselProps) {
-  const safeImages = Array.isArray(images)
-    ? images.filter(
-        (image): image is CarouselImage =>
-          Boolean(image) &&
-          typeof image.src === "string" &&
-          image.src.trim().length > 0 &&
-          typeof image.alt === "string" &&
-          image.alt.trim().length > 0
-      )
-    : [];
+  const rawImages = Array.isArray(images) ? images : [];
+  const safeImages: CarouselImage[] = rawImages
+    .map((raw) => {
+      if (!raw || typeof raw !== "object") return null;
+      const candidate = raw as { src?: unknown; alt?: unknown; caption?: unknown };
+      const src = typeof candidate.src === "string" ? candidate.src.trim() : "";
+      if (!src) return null;
+      const caption =
+        typeof candidate.caption === "string" && candidate.caption.trim().length > 0
+          ? candidate.caption.trim()
+          : undefined;
+      const alt =
+        typeof candidate.alt === "string" && candidate.alt.trim().length > 0
+          ? candidate.alt.trim()
+          : caption ?? "project image";
+      return { src, alt, caption };
+    })
+    .filter((image): image is CarouselImage => image !== null);
 
   const [index, setIndex] = useState(0);
   const total = safeImages.length;
@@ -54,7 +62,13 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [total]);
 
-  if (total === 0) return null;
+  if (total === 0) {
+    return (
+      <section className="my-6 w-full max-w-full min-w-0 overflow-hidden rounded-xl border border-slate-500/50 bg-slate-900/60 p-4">
+        <p className="text-sm text-slate-300">Carousel media unavailable for this project.</p>
+      </section>
+    );
+  }
   const current = safeImages[index] ?? safeImages[0];
   if (!current) return null;
   const progress = useMemo(() => `${((index + 1) / total) * 100}%`, [index, total]);
