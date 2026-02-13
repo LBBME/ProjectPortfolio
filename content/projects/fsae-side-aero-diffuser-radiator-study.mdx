@@ -142,18 +142,9 @@ reproducibility:
 
 ## Motivation and objective
 
-- Improve overall aerodynamic performance from HT09 learnings into HTX side-aero direction.
-- Evaluate side-aero concept impact without depending only on track/wind-tunnel availability.
-- Support future optimization targets (yaw/pitch behavior and endplate design).
-
-## CFD setup approach
-
-- Used a deliberate CFD setup with fixed definitions between compared variants:
-  - Half-car formulation for efficient iteration
-  - Controlled domain and boundary-condition definitions
-  - Explicit turbulence/flow-physics model choices
-  - Meshing strategy and convergence criteria gates
-- Force and residual histories were tracked to confirm stable reporting windows.
+- Compare two side-aero package directions under matched conditions.
+- Use simulation to prioritize physical build/test effort.
+- Keep online reporting high-level while preserving competitive context.
 
 ## Numerical data (from side-aero report)
 
@@ -164,24 +155,15 @@ reproducibility:
 | CL/CD | 2.8046 | 2.8323 |
 | Aerobalance | 50.73 | 50.41 |
 
-### Component contribution table (Base / HT106-N0172)
-
-| Component | CL (Base / N0172) | CD (Base / N0172) | % of Total CL (Base / N0172) | % of Total CD (Base / N0172) |
-| --- | --- | --- | --- | --- |
-| Aux Wing | -0.082 / 0.0202 | -0.016 / 0.0055 | -0.20% / 0.48% | -0.11% / 0.37% |
-| Floor Shoulder / Curve | 0.5080 / 0.5261 | 0.0308 / 0.0344 | 12.28% / 12.41% | 2.09% / 2.30% |
-| RearWing E1 | 0.9184 / 0.9635 | 0.1995 / 0.2031 | 22.2% / 22.7% | 13.53% / 13.57% |
-| Body Curve | 0.9445 / 0.9669 | 0.1268 / 0.1245 | 22.8% / 22.8% | 8.60% / 8.32% |
-
 ## Results and engineering takeaways
 
 - HT106-N0172 improves total CL and CL/CD relative to the base case.
-- Total CD increases slightly, but efficiency trend still improves (higher CL/CD).
-- Component-level breakdown helps identify where load gains are coming from.
-- Convergence/force-history plots support confidence in the reported comparison window.
+- Drag increases slightly, but aero efficiency still trends positive.
+- The outcome supports the side-aero direction and informs future iteration priorities.
+- Detailed geometry rationale and internal trade studies are intentionally reserved for interview discussion.
 
 ## Validation and reproducibility notes
 
-- Same reporting metrics used across compared variants for clean A/B interpretation.
-- Residual and force histories are included with results to make quality checks explicit.
-- Setup choices (domain, BCs, turbulence model, meshing, convergence criteria) are documented for reruns.
+- Matched metric definitions were used across compared variants for a clean A/B read.
+- Run quality gates were applied before extracting final comparison values.
+- Full setup documents and internal decision logic are kept private to the team workflow.

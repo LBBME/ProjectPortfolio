@@ -21,6 +21,10 @@ export default async function ProjectDetailPage({
         <p className="text-xs uppercase tracking-[0.13em] text-cyan-300">{project.domain}</p>
         <h1 className="h1 mt-2">{project.title}</h1>
         <p className="mt-3 max-w-3xl text-lg text-slate-200">{project.summary}</p>
+        <p className="mt-3 max-w-3xl text-sm text-slate-300">
+          Public-facing brief: selected highlights only. Full setup decisions, trade studies, and internal
+          reasoning are reserved for interview discussion.
+        </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {project.tools.map((tool) => (
             <span key={tool} className="metric-badge">
@@ -40,7 +44,7 @@ export default async function ProjectDetailPage({
 
       <div className="grid gap-8 border-t border-slate-700/70 pt-6 md:grid-cols-2">
         <section>
-          <h2 className="text-lg font-semibold text-slate-100">Validation</h2>
+          <h2 className="text-lg font-semibold text-slate-100">Validation Signals</h2>
           <ul className="mt-3 space-y-3">
             {project.validation.map((item) => (
               <li key={item.check} className="border-l-2 border-cyan-300/60 pl-3">
@@ -52,7 +56,7 @@ export default async function ProjectDetailPage({
           </ul>
         </section>
         <section>
-          <h2 className="text-lg font-semibold text-slate-100">Reproducibility</h2>
+          <h2 className="text-lg font-semibold text-slate-100">Reproducibility Signals</h2>
           <ul className="mt-3 space-y-3">
             {project.reproducibility.map((item) => (
               <li key={item.step} className="border-l-2 border-cyan-300/60 pl-3">

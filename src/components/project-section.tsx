@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Project } from "@/lib/project-types";
 import { ProjectCard } from "@/components/project-card";
 
-const PREVIEW_COUNT = 3;
+const PREVIEW_COUNT = 6;
 
 type ProjectSectionProps = {
   title: string;
