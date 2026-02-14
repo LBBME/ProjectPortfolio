@@ -7,6 +7,15 @@ import type { ElementType } from "react";
 import type { Project, ProjectFrontmatter } from "@/lib/project-types";
 
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
+const HIDDEN_PROJECT_SLUGS = new Set([
+  "convergent-divergent-nozzle-flow-lab",
+  "blood-flow-2d-artery-stenosis-lab",
+  "transonic-naca0012-airfoil-lab",
+  "forced-convection-flat-plate-lab",
+  "vertical-axis-wind-turbine-mrf-lab",
+  "transonic-onera-m6-wing-study",
+  "supersonic-flow-over-a-wedge-lab"
+]);
 
 function toId(text: string): string {
   return text
@@ -92,7 +101,9 @@ export async function getAllProjects(): Promise<Project[]> {
     })
   );
 
-  return projects.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+  return projects
+    .filter((project) => !HIDDEN_PROJECT_SLUGS.has(project.slug))
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
