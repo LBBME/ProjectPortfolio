@@ -64,6 +64,10 @@ const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
     src: "/api/robotech-image/btzcl-reacting-2",
     alt: "BTZCL reacting counterflow temperature field"
   },
+  "mx5-amateur-motorsports-aero-development": {
+    src: "/api/robotech-image/mx5-aero-4",
+    alt: "Mazda MX-5 external aerodynamic contour visualization"
+  },
   "high-school-winglet-shape-vortex-study": {
     src: "/api/robotech-image/winglet-hs-2",
     alt: "High school winglet study vortex visualization screenshot"
