@@ -138,8 +138,8 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
 
   if (total === 0) {
     return (
-      <section className="my-6 w-full max-w-full min-w-0 overflow-hidden rounded-xl border border-slate-500/50 bg-slate-900/60 p-4">
-        <p className="text-sm text-slate-300">Carousel media unavailable for this project.</p>
+      <section className="my-6 w-full max-w-full min-w-0 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 p-4">
+        <p className="text-sm text-zinc-600">Carousel media unavailable for this project.</p>
       </section>
     );
   }
@@ -148,11 +148,11 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
   const progress = useMemo(() => `${((index + 1) / total) * 100}%`, [index, total]);
 
   return (
-    <section className="my-6 w-full max-w-full min-w-0 overflow-hidden rounded-xl border border-slate-500/50 bg-slate-900/60 py-3">
+    <section className="my-6 w-full max-w-full min-w-0 overflow-hidden rounded-xl border border-zinc-200 bg-white py-3">
       <div className="px-3 md:px-4">
-        <div className="mb-2 h-1.5 w-full rounded-full bg-slate-700/70">
+        <div className="mb-2 h-1.5 w-full rounded-full bg-zinc-200">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-cyan-300 via-blue-300 to-violet-300 transition-all duration-500"
+            className="h-full rounded-full bg-gradient-to-r from-zinc-700 via-zinc-800 to-zinc-900 transition-all duration-500"
             style={{ width: progress }}
           />
         </div>
@@ -174,14 +174,14 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
             key={current.src}
             src={current.src}
             alt={current.alt}
-            className="absolute inset-0 h-full w-full rounded-md border border-slate-500/60 object-contain object-center shadow-lg transition-all duration-500"
+            className="absolute inset-0 h-full w-full rounded-md border border-zinc-300 object-contain object-center shadow-lg transition-all duration-500"
             loading="lazy"
           />
         </div>
       </div>
 
       <div className="mt-3 flex flex-wrap items-center justify-between gap-4 overflow-hidden px-4 md:px-8">
-        <p className="max-w-full text-sm text-slate-100 break-words">{current.caption ?? current.alt}</p>
+        <p className="max-w-full text-sm text-zinc-700 break-words">{current.caption ?? current.alt}</p>
         <div className="flex items-center gap-2">
           {safeImages.map((image, dotIndex) => (
             <button
@@ -190,7 +190,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
               aria-label={`Go to image ${dotIndex + 1}`}
               onClick={() => setIndex(dotIndex)}
               className={`h-2.5 w-2.5 rounded-full transition-all ${
-                dotIndex === index ? "w-6 bg-cyan-300" : "bg-slate-400/80 hover:bg-slate-300"
+                dotIndex === index ? "w-6 bg-zinc-800" : "bg-zinc-300 hover:bg-zinc-400"
               }`}
             />
           ))}
@@ -207,8 +207,8 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
               onClick={() => setIndex(thumbIndex)}
               className={`overflow-hidden rounded border transition-all ${
                 thumbIndex === index
-                  ? "border-cyan-300 shadow-[0_0_0_1px_rgba(103,232,249,0.6)]"
-                  : "border-slate-500/70 hover:border-slate-300"
+                  ? "border-zinc-800 shadow-[0_0_0_1px_rgba(24,24,27,0.35)]"
+                  : "border-zinc-300 hover:border-zinc-500"
               }`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

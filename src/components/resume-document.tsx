@@ -34,12 +34,12 @@ export function ResumeDocument({ fileUrl }: ResumeDocumentProps) {
   }, [containerWidth]);
 
   return (
-    <div ref={containerRef} className="rounded-xl border border-slate-500/60 bg-slate-900/55 p-3">
+    <div ref={containerRef} className="rounded-xl border border-zinc-200 bg-white p-3">
       <Document
         file={fileUrl}
         onLoadSuccess={({ numPages: loadedPages }) => setNumPages(loadedPages)}
-        loading={<p className="p-6 text-center text-slate-300">Loading resume...</p>}
-        error={<p className="p-6 text-center text-rose-200">Failed to load resume.</p>}
+        loading={<p className="p-6 text-center text-zinc-600">Loading resume...</p>}
+        error={<p className="p-6 text-center text-rose-600">Failed to load resume.</p>}
       >
         <div className="flex flex-col items-center gap-4">
           {Array.from({ length: numPages }, (_, index) => (
@@ -49,7 +49,7 @@ export function ResumeDocument({ fileUrl }: ResumeDocumentProps) {
               width={pageWidth}
               renderTextLayer={false}
               renderAnnotationLayer={false}
-              className="overflow-hidden rounded-md border border-slate-600/70 shadow-md"
+              className="overflow-hidden rounded-md border border-zinc-300 shadow-md"
             />
           ))}
         </div>

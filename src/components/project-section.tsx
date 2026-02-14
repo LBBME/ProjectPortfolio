@@ -21,13 +21,13 @@ export function ProjectSection({ title, projects, emptyMessage }: ProjectSection
     <section className="space-y-3">
       <div className="flex items-end justify-between gap-3">
         <h2 className="h2">{title}</h2>
-        <p className="text-xs text-slate-300">
+        <p className="text-xs text-zinc-600">
           {projects.length} project{projects.length === 1 ? "" : "s"}
         </p>
       </div>
 
       {projects.length === 0 ? (
-        <div className="surface-card p-5 text-sm text-slate-300">{emptyMessage}</div>
+        <div className="surface-card p-5 text-sm text-zinc-600">{emptyMessage}</div>
       ) : (
         <>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">

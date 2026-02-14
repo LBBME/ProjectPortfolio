@@ -9,10 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#0a0f1a",
-        panel: "#111827",
-        edge: "#1f2937",
-        accent: "#38bdf8"
+        ink: "#f8fafc",
+        panel: "#ffffff",
+        edge: "#e4e4e7",
+        accent: "#0f172a"
       }
     }
   },
