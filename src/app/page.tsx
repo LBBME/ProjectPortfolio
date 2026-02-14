@@ -78,7 +78,7 @@ export default async function HomePage({
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div>
             <div className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
               <div className="relative h-[320px]">
                 <Image
@@ -90,24 +90,6 @@ export default async function HomePage({
                   priority
                 />
               </div>
-            </div>
-            <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Site Intent</p>
-              <p className="mt-2 text-sm leading-7 text-zinc-700">
-                This site is designed to spark interview-level interest, not reveal every internal workflow detail online.
-              </p>
-            </div>
-            <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Project Tracks</p>
-              <p className="mt-2 text-sm leading-7 text-zinc-700">
-                HyTech Racing Formula SAE-EV, Ben T. Zinn Combustion Lab, and High Powered Electric Propulsion Lab context.
-              </p>
-            </div>
-            <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">What To Expect</p>
-              <p className="mt-2 text-sm leading-7 text-zinc-700">
-                Core results, validation markers, and tools/stack visibility. Full technical deep dives available in interview.
-              </p>
             </div>
           </div>
         </div>
