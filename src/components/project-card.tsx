@@ -60,6 +60,10 @@ const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
     src: "/api/robotech-image/hytech-third-element-2",
     alt: "HyTech third-element optimization contour result"
   },
+  "btzcl-reacting-counterflow-openfoam-pipeline": {
+    src: "/api/robotech-image/btzcl-reacting-2",
+    alt: "BTZCL reacting counterflow temperature field"
+  },
   "high-school-winglet-shape-vortex-study": {
     src: "/api/robotech-image/winglet-hs-2",
     alt: "High school winglet study vortex visualization screenshot"
