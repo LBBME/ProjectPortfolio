@@ -11,7 +11,7 @@ const ABOUT_SECTIONS = [
   },
   {
     title: "Evidence-Based Engineering",
-    body: "I treat simulation as engineering evidence, not eye candy. So verification and validation are always in the loop—mesh discipline, monitor tracking, cross-checks against known behavior, and post-processing you can rerun."
+    body: "I treat simulation as engineering evidence, not eye candy. So verification and validation are always in the loop: mesh discipline, monitor tracking, cross-checks against known behavior, and post-processing you can rerun."
   },
   {
     title: "Owning the Full Loop",
@@ -59,14 +59,14 @@ export default function AboutPage() {
             </p>
             <p>
               I’m Dennis Joel Román Salinas, a Puerto Rican BSMS Aerospace Engineering student at
-              Georgia Tech. I focus on simulation workflows where the answer isn’t just pretty—it holds
+              Georgia Tech. I focus on simulation workflows where the answer isn’t just pretty; it holds
               up to checks, trends, and numbers. Aerodynamics and fluid-thermal systems are where I
               spend most of my time.
             </p>
             <p>
               Between research labs, HyTech Racing, and teaching, I’ve built a style that’s heavy on
               clear analysis and communication. My core is CFD, verification/validation, and
-              automation so we can iterate fast—with real work in aircraft icing, motorsport aero,
+              automation so we can iterate fast, with real work in aircraft icing, motorsport aero,
               and surrogate modeling.
             </p>
             <p>
