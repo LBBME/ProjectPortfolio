@@ -64,7 +64,9 @@ const IMAGE_MAP: Record<string, string> = {
   "ipw-setup-geometry": "Screenshot_2026-02-11_at_11.29.01_PM-9abf8a54-f317-437e-a8a0-555a06c0d16c.png",
   "rg15-1bin-plot": "Screenshot_2026-02-11_at_11.37.49_PM-0de6f25d-5d09-4fb1-b3aa-cb4e627ebe74.png",
   "rg15-7bin-plot": "Screenshot_2026-02-11_at_11.38.02_PM-915b044a-ffad-417c-be1d-4850c2d5b1cb.png",
-  "fsae-endurance-1": "endurance-c942a0e2-d528-4689-8d31-d0f75989da81.png"
+  "fsae-endurance-1": "endurance-c942a0e2-d528-4689-8d31-d0f75989da81.png",
+  "hytech-third-element-1": "Screenshot_2026-02-14_at_4.35.49_PM-57737c62-a063-47ef-824d-120da0f013c7.png",
+  "hytech-third-element-2": "Screenshot_2026-02-14_at_4.36.03_PM-985d68e5-d8d1-4f6a-8446-f4738adb56f1.png"
 };
 
 export async function GET(

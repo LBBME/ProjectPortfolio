@@ -14,7 +14,10 @@ const HIDDEN_PROJECT_SLUGS = new Set([
   "forced-convection-flat-plate-lab",
   "vertical-axis-wind-turbine-mrf-lab",
   "transonic-onera-m6-wing-study",
-  "supersonic-flow-over-a-wedge-lab"
+  "supersonic-flow-over-a-wedge-lab",
+  "ipw-icing-verification-pipeline",
+  "rg15-ipw2-2d-reproduction-study",
+  "fsae-side-aero-diffuser-radiator-study"
 ]);
 
 function toId(text: string): string {
