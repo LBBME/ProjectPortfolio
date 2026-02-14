@@ -70,7 +70,9 @@ const IMAGE_MAP: Record<string, string> = {
   "btzcl-reacting-1": "Screenshot_2026-02-14_at_4.54.06_PM-cda1d08b-5a4c-4a1a-85a4-e1920e209e1b.png",
   "btzcl-reacting-2": "Screenshot_2026-02-14_at_4.55.00_PM-77b313e0-7fbc-4b6e-b84f-6ce1aa6f33a3.png",
   "btzcl-reacting-3": "Screenshot_2026-02-14_at_4.55.13_PM-7d39e79d-d9ec-4abd-851f-2636d38b54e0.png",
-  "btzcl-reacting-4": "Screenshot_2026-02-14_at_4.56.26_PM-0235188d-f935-4cfe-abb0-9856ab72f963.png"
+  "btzcl-reacting-4": "Screenshot_2026-02-14_at_4.56.26_PM-0235188d-f935-4cfe-abb0-9856ab72f963.png",
+  "hytech-composites-1": "IMG_0774-cc0d191b-df8d-42e9-8596-d04c0d8e124d.png",
+  "hytech-composites-2": "IMG_0773-2871ebb8-d256-4af4-a5b1-2f55a25f2c64.png"
 };
 
 export async function GET(
