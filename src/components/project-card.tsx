@@ -52,6 +52,14 @@ const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
     src: "/api/robotech-image/transonic-extra-1",
     alt: "CFD lab multi-case benchmark visual summary"
   },
+  "fpcs-lab-icing-verification-series": {
+    src: "/api/robotech-image/ipw-setup-geometry",
+    alt: "FPCS lab icing verification workflow visual summary"
+  },
+  "hytech-aerodynamics-development-series": {
+    src: "/api/robotech-image/hytech-third-element-2",
+    alt: "HyTech third-element optimization contour result"
+  },
   "high-school-winglet-shape-vortex-study": {
     src: "/api/robotech-image/winglet-hs-2",
     alt: "High school winglet study vortex visualization screenshot"
