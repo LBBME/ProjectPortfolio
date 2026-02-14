@@ -1,6 +1,6 @@
 # Dennis CFD Portfolio
 
-CFD-only recruiter portfolio built with Next.js App Router, TypeScript, Tailwind, and MDX-driven project content.
+CFD-focused portfolio built with Next.js App Router, TypeScript, Tailwind, and MDX-driven project content.
 
 ## Run locally
 
