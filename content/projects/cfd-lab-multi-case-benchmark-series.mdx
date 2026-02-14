@@ -1,0 +1,161 @@
+---
+title: "CFD Lab Multi-Case Benchmark Series"
+slug: "cfd-lab-multi-case-benchmark-series"
+summary: "Single consolidated view of seven CFD lab/independent benchmark studies across internal flow, external aero, transonic/supersonic regimes, and verification-focused setup discipline."
+domain: "Computational Fluid Dynamics Lab"
+tools:
+  - "ANSYS Fluent"
+  - "Meshing + y+ targeting"
+  - "Post-Processing"
+  - "Verification Workflows"
+tags:
+  - "cfd"
+  - "cfd-lab"
+  - "verification"
+  - "validation"
+  - "rans"
+  - "external-flow"
+  - "internal-flow"
+  - "compressible-flow"
+  - "benchmarking"
+featured: true
+status: "completed"
+updatedAt: "2026-02-13"
+readingMinutes: 5
+results:
+  - label: "Consolidated scope"
+    value: "7 benchmark-aligned studies in one track"
+  - label: "Flow regimes covered"
+    value: "Subsonic, transonic, and supersonic"
+  - label: "Primary value"
+    value: "Consistent setup/validation discipline across varied physics"
+  - label: "Interview depth"
+    value: "Per-case setup and tradeoffs available on request"
+validation:
+  - check: "Comparable quality gates used across cases"
+    status: "pass"
+  - check: "Case-specific references/correlations used where applicable"
+    status: "pass"
+reproducibility:
+  - step: "Standard run template"
+    detail: "Consistent conventions for mesh checks, solver settings, and monitor review."
+  - step: "Repeatable report structure"
+    detail: "Each case documented with setup snapshot, result highlights, and validation notes."
+  - step: "Scoped public detail"
+    detail: "Only high-signal outputs are public; full per-case decision logs are reserved for interviews."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/nozzle-extra-1",
+      alt: "Convergent-divergent nozzle contour",
+      caption: "Convergent-divergent nozzle: compressible internal-flow behavior and shock-sensitive interpretation."
+    },
+    {
+      src: "/api/robotech-image/artery-extra-3",
+      alt: "Artery stenosis velocity vectors",
+      caption: "2D stenosed artery: non-uniform velocity and pressure-drop behavior under constrained geometry."
+    },
+    {
+      src: "/api/robotech-image/transonic-extra-1",
+      alt: "Transonic airfoil velocity vectors",
+      caption: "Transonic airfoil study: shock-related flow features and regime transition awareness."
+    },
+    {
+      src: "/api/robotech-image/flat-plate-extra-2",
+      alt: "Flat plate boundary layer",
+      caption: "Forced convection over flat plate: boundary-layer-focused setup and correlation-minded checks."
+    },
+    {
+      src: "/api/robotech-image/onera-4",
+      alt: "ONERA M6 wing velocity vectors",
+      caption: "ONERA M6 transonic wing: 3D external-aero trend interpretation."
+    },
+    {
+      src: "/api/robotech-image/wedge-5",
+      alt: "Supersonic wedge Mach contour",
+      caption: "Supersonic wedge case: compressible-flow structure capture and comparison discipline."
+    },
+    {
+      src: "/api/robotech-image/vawt-4",
+      alt: "VAWT velocity contour",
+      caption: "VAWT case: rotating-flow context and load-relevant field interpretation."
+    }
+  ]}
+/>
+
+## Why this is one project
+
+- Recruiter scan speed: one card communicates breadth faster than seven separate cards.
+- Technical signal stays strong: the page still proves range across major CFD regimes.
+- Detail control: enough evidence to build trust, without publishing every setup decision online.
+
+## What this consolidated track covers
+
+- Internal flow: convergent-divergent nozzle.
+- Bioflow-style canonical case: 2D artery stenosis.
+- External aerodynamic regimes: sub/transonic wing and airfoil contexts.
+- High-speed compressible regime: supersonic wedge.
+- Rotating-flow context: VAWT MRF workflow.
+
+## Case index (fast recruiter scan)
+
+| Case | What was tested | One key output |
+| --- | --- | --- |
+| Convergent-divergent nozzle | Compressible internal-flow trend behavior with regime transitions. | Shock-sensitive field interpretation across nozzle sections. |
+| 2D artery stenosis | Flow acceleration and pressure-drop behavior in narrowed passage. | Velocity/pressure trend consistency under constrained geometry. |
+| Transonic NACA0012 | Transonic airfoil flow with shock-related response. | Regime-aware interpretation of field transitions near the airfoil. |
+| Forced convection flat plate | Boundary-layer-focused setup and near-wall behavior trends. | Correlation-minded wall behavior checks and profile tracking. |
+| Vertical-axis wind turbine (MRF) | Rotating-flow context and wake behavior under turbine operation. | Flow-field structure useful for load/performance interpretation. |
+| ONERA M6 wing (transonic) | 3D external-aero transonic behavior. | Shock/flow-feature mapping across wing surfaces. |
+| Supersonic wedge | High-speed compressible structure capture. | Stable shock-pattern interpretation for benchmark comparison. |
+
+## Expandable case notes (optional)
+
+<details>
+  <summary>Nozzle flow case</summary>
+  Used as a compact internal-flow benchmark to validate setup discipline in compressible conditions and to compare contour/feature placement trends.
+</details>
+
+<details>
+  <summary>Artery stenosis case</summary>
+  Focused on how geometry constriction changes local acceleration and pressure losses. Useful for showing cross-domain CFD reasoning beyond external aero.
+</details>
+
+<details>
+  <summary>Transonic NACA0012 case</summary>
+  Used for transonic regime intuition and interpretation of shock-related behavior around streamlined geometry.
+</details>
+
+<details>
+  <summary>Forced-convection flat plate case</summary>
+  Boundary-layer-oriented benchmark to reinforce near-wall setup habits and consistency in comparison-style reporting.
+</details>
+
+<details>
+  <summary>VAWT MRF case</summary>
+  Rotating-flow context for interpreting wake behavior and region-specific flow structures in a turbine-like setting.
+</details>
+
+<details>
+  <summary>ONERA M6 transonic wing case</summary>
+  3D transonic case used to extend airfoil-level interpretation into a wing-level context with more complex flow organization.
+</details>
+
+<details>
+  <summary>Supersonic wedge case</summary>
+  Compact high-speed benchmark emphasizing shock-pattern interpretation and comparison confidence.
+</details>
+
+## What this demonstrates quickly
+
+- Ability to move between very different physics while keeping modeling discipline.
+- Verification mindset: checks are treated as part of the workflow, not an afterthought.
+- Reporting clarity: outputs are organized for decision-making, not just plot generation.
+
+## Public detail boundary
+
+- This page intentionally keeps the discussion concise and recruiter-facing.
+- Full per-case assumptions, mesh decisions, solver deltas, and alternative model tradeoffs are reserved for interview conversation.
+

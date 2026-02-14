@@ -48,6 +48,10 @@ const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
     src: "/api/robotech-image/wedge-5",
     alt: "Supersonic wedge Mach contour"
   },
+  "cfd-lab-multi-case-benchmark-series": {
+    src: "/api/robotech-image/transonic-extra-1",
+    alt: "CFD lab multi-case benchmark visual summary"
+  },
   "high-school-winglet-shape-vortex-study": {
     src: "/api/robotech-image/winglet-hs-2",
     alt: "High school winglet study vortex visualization screenshot"
