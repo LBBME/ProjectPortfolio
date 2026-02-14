@@ -73,7 +73,7 @@ export default function AboutPage() {
 
           <div className="relative mx-auto h-[26rem] w-full max-w-sm overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg">
             <Image
-              src="/api/robotech-image/about-profile"
+              src="/api/robotech-image/about-profile-alt"
               alt="Dennis Joel Roman Salinas"
               fill
               className="object-cover object-center"
