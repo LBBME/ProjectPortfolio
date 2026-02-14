@@ -57,8 +57,8 @@ const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
     alt: "FPCS lab icing verification workflow visual summary"
   },
   "hytech-aerodynamics-development-series": {
-    src: "/api/robotech-image/hytech-third-element-2",
-    alt: "HyTech third-element optimization contour result"
+    src: "/api/robotech-image/hytech-composites-1",
+    alt: "HyTech carbon-fiber aero component in fabrication workspace"
   },
   "btzcl-reacting-counterflow-openfoam-pipeline": {
     src: "/api/robotech-image/btzcl-reacting-2",
