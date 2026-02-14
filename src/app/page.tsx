@@ -55,19 +55,19 @@ export default async function HomePage({
       <section className="panel p-6 md:p-8">
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           <div>
-            <p className="text-xs uppercase tracking-[0.16em] text-sky-300">Project Portfolio</p>
-            <h1 className="mt-2 text-4xl font-semibold leading-tight text-white md:text-5xl">
+            <p className="text-xs uppercase tracking-[0.16em] text-zinc-600">Project Portfolio</p>
+            <h1 className="mt-2 text-4xl font-semibold leading-tight text-zinc-900 md:text-5xl">
               Dennis Joel Roman Salinas
             </h1>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-slate-100">
+            <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-700">
               CFD and aero simulation project portfolio designed for fast recruiter scanability:
               strong outcomes, clean visuals, and selective technical detail.
             </p>
 
-            <div className="mt-5 space-y-2 text-sm text-slate-100">
-              <p><span className="font-semibold text-white">Focus:</span> CFD, V&V, automation, HPC execution</p>
-              <p><span className="font-semibold text-white">Domains:</span> external aero, internal flows, and multi-physics workflows</p>
-              <p><span className="font-semibold text-white">Tools:</span> Fluent, FENSAP-ICE, STAR-CCM+, OpenFOAM, Python, MATLAB, SLURM</p>
+            <div className="mt-5 space-y-2 text-sm text-zinc-700">
+              <p><span className="font-semibold text-zinc-900">Focus:</span> CFD, V&V, automation, HPC execution</p>
+              <p><span className="font-semibold text-zinc-900">Domains:</span> external aero, internal flows, and multi-physics workflows</p>
+              <p><span className="font-semibold text-zinc-900">Tools:</span> Fluent, FENSAP-ICE, STAR-CCM+, OpenFOAM, Python, MATLAB, SLURM</p>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -79,20 +79,20 @@ export default async function HomePage({
 
           <div className="space-y-3">
             <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-slate-400">Recruiter Intent</p>
-              <p className="mt-2 text-sm leading-7 text-slate-100">
+              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Recruiter Intent</p>
+              <p className="mt-2 text-sm leading-7 text-zinc-700">
                 This site is designed to spark interview-level interest, not reveal every internal workflow detail online.
               </p>
             </div>
             <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-slate-400">Project Tracks</p>
-              <p className="mt-2 text-sm leading-7 text-slate-100">
+              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Project Tracks</p>
+              <p className="mt-2 text-sm leading-7 text-zinc-700">
                 HyTech Racing Formula SAE-EV, Ben T. Zinn Combustion Lab, and High Powered Electric Propulsion Lab context.
               </p>
             </div>
             <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-slate-400">What To Expect</p>
-              <p className="mt-2 text-sm leading-7 text-slate-100">
+              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">What To Expect</p>
+              <p className="mt-2 text-sm leading-7 text-zinc-700">
                 Core results, validation markers, and tools/stack visibility. Full technical deep dives available in interview.
               </p>
             </div>
@@ -102,7 +102,7 @@ export default async function HomePage({
 
       <section className="panel p-6">
         <h2 className="h2">Project Explorer</h2>
-        <p className="mt-2 text-sm text-slate-300">
+        <p className="mt-2 text-sm text-zinc-600">
           Direct project browsing from landing. Use search first; optional tag filters are available below.
         </p>
 
@@ -118,12 +118,12 @@ export default async function HomePage({
             name="q"
             defaultValue={q}
             placeholder="Search: icing, transonic, diffuser, surrogate, OpenFOAM..."
-            className="w-full rounded-md border border-edge bg-slate-900/70 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-400 transition-all duration-200 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/20"
+            className="w-full rounded-md border border-edge bg-white px-3 py-2 text-sm text-zinc-800 placeholder:text-zinc-500 transition-all duration-200 focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-300"
           />
         </form>
 
-        <details className="mt-4 rounded-md border border-edge/70 bg-slate-900/35 px-3 py-2">
-          <summary className="cursor-pointer text-xs font-semibold uppercase tracking-[0.12em] text-slate-300">
+        <details className="mt-4 rounded-md border border-edge/90 bg-zinc-50 px-3 py-2">
+          <summary className="cursor-pointer text-xs font-semibold uppercase tracking-[0.12em] text-zinc-600">
             Advanced Tag Filters (Optional)
           </summary>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -135,8 +135,8 @@ export default async function HomePage({
                   href={buildTagHref(tag, selectedTags, q)}
                   className={`rounded-full border px-3 py-1 text-xs transition-all duration-200 ${
                     active
-                      ? "border-sky-300 bg-sky-500/10 text-sky-200"
-                      : "border-edge bg-slate-900/50 text-slate-300 hover:border-slate-500 hover:text-white"
+                      ? "border-zinc-800 bg-zinc-900 text-white"
+                      : "border-edge bg-white text-zinc-700 hover:border-zinc-400 hover:text-zinc-900"
                   }`}
                 >
                   {tag}
@@ -147,7 +147,7 @@ export default async function HomePage({
         </details>
       </section>
 
-      <p className="text-sm text-slate-300">
+      <p className="text-sm text-zinc-600">
         Showing {filtered.length} of {projects.length} projects
       </p>
 

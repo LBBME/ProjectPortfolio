@@ -11,7 +11,7 @@ const ResumeDocument = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="rounded-xl border border-slate-500/60 bg-slate-900/55 p-6 text-center text-slate-300">
+      <div className="rounded-xl border border-zinc-200 bg-white p-6 text-center text-zinc-600">
         Loading resume...
       </div>
     )

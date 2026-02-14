@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
 body {
-  @apply bg-slate-800 text-slate-100 antialiased;
+  @apply bg-zinc-50 text-zinc-900 antialiased;
 }
 
 html {
@@ -18,12 +18,12 @@ html {
 body {
   @apply leading-relaxed;
   background-image:
-    radial-gradient(circle at 8% 0%, rgba(125, 211, 252, 0.2), transparent 34%),
-    radial-gradient(circle at 88% 0%, rgba(167, 139, 250, 0.16), transparent 32%);
+    radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.96), transparent 34%),
+    radial-gradient(circle at 90% 0%, rgba(240, 244, 250, 0.95), transparent 36%);
 }
 
 a {
-  @apply text-cyan-100 transition-colors duration-200 hover:text-white;
+  @apply text-sky-700 transition-colors duration-200 hover:text-sky-800;
 }
 
 .container-shell {
@@ -31,31 +31,31 @@ a {
 }
 
 .panel {
-  @apply rounded-xl border border-slate-400/45 bg-slate-700/65 shadow-sm backdrop-blur-sm;
+  @apply rounded-xl border border-zinc-200 bg-white/90 shadow-sm backdrop-blur-sm;
 }
 
 .surface-card {
-  @apply rounded-xl border border-slate-400/40 bg-slate-700/55 shadow-sm;
+  @apply rounded-xl border border-zinc-200 bg-zinc-50 shadow-sm;
 }
 
 .lift {
-  @apply transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:border-slate-500 motion-safe:hover:shadow-md;
+  @apply transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:border-zinc-300 motion-safe:hover:shadow-md;
 }
 
 .metric-badge {
-  @apply inline-flex items-center rounded-md border border-slate-300/50 bg-slate-700/55 px-2 py-1 text-xs text-slate-50;
+  @apply inline-flex items-center rounded-md border border-zinc-300 bg-white px-2 py-1 text-xs text-zinc-700;
 }
 
 .btn-primary {
-  @apply inline-flex rounded-md border border-cyan-200/80 bg-cyan-300/20 px-4 py-2 text-sm font-semibold text-cyan-50 transition-all duration-200 hover:border-cyan-100 hover:bg-cyan-200/30;
+  @apply inline-flex rounded-md border border-zinc-900 bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-zinc-800;
 }
 
 .btn-secondary {
-  @apply inline-flex rounded-md border border-slate-300/50 bg-slate-700/60 px-4 py-2 text-sm font-semibold text-slate-50 transition-all duration-200 hover:border-slate-200/70 hover:bg-slate-600/65;
+  @apply inline-flex rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold text-zinc-800 transition-all duration-200 hover:border-zinc-400 hover:bg-zinc-100;
 }
 
 .nav-link {
-  @apply rounded px-2 py-1 text-sm text-slate-100 transition-all duration-200 hover:bg-slate-600/60 hover:text-white;
+  @apply rounded px-2 py-1 text-sm text-zinc-700 transition-all duration-200 hover:bg-zinc-100 hover:text-zinc-900;
 }
 
 .h1 {
@@ -67,23 +67,23 @@ a {
 }
 
 .muted {
-  @apply text-sm text-slate-300;
+  @apply text-sm text-zinc-600;
 }
 
 .prose-cfd {
-  @apply max-w-none space-y-5 text-slate-100;
+  @apply max-w-none space-y-5 text-zinc-800;
 }
 
 .prose-cfd h2 {
-  @apply scroll-mt-24 border-b border-slate-500/50 pb-2 text-2xl font-semibold text-slate-50;
+  @apply scroll-mt-24 border-b border-zinc-200 pb-2 text-2xl font-semibold text-zinc-900;
 }
 
 .prose-cfd h3 {
-  @apply scroll-mt-24 text-xl font-semibold text-cyan-50;
+  @apply scroll-mt-24 text-xl font-semibold text-zinc-900;
 }
 
 .prose-cfd p {
-  @apply text-[1.06rem] leading-8 text-slate-50;
+  @apply text-[1.06rem] leading-8 text-zinc-800;
 }
 
 .prose-cfd ul {
@@ -91,9 +91,9 @@ a {
 }
 
 .prose-cfd li {
-  @apply text-[1.01rem] leading-7 text-slate-100 marker:text-cyan-200;
+  @apply text-[1.01rem] leading-7 text-zinc-800 marker:text-zinc-500;
 }
 
 .prose-cfd blockquote {
-  @apply rounded-r-md border-l-4 border-cyan-300/80 bg-slate-700/35 px-4 py-3 text-slate-100;
+  @apply rounded-r-md border-l-4 border-zinc-300 bg-zinc-100 px-4 py-3 text-zinc-800;
 }

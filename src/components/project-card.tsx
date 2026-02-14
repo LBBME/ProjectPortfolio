@@ -80,7 +80,7 @@ export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
   return (
     <article className="panel lift p-5">
       {showImage ? (
-        <div className="relative mb-4 h-44 overflow-hidden rounded-lg border border-slate-500/60 bg-slate-900/60">
+        <div className="relative mb-4 h-44 overflow-hidden rounded-lg border border-zinc-200 bg-zinc-100">
           {image ? (
             <Image
               src={image.src}
@@ -90,7 +90,7 @@ export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
               sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 100vw"
             />
           ) : (
-            <div className="flex h-full items-center justify-center bg-gradient-to-br from-slate-800/85 to-slate-700/70 text-center text-sm text-slate-300">
+            <div className="flex h-full items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 text-center text-sm text-zinc-600">
               Image placeholder
             </div>
           )}
@@ -106,15 +106,15 @@ export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
         </span>
       </div>
 
-      <h3 className="mt-3 text-xl font-semibold text-white">{project.title}</h3>
-      <p className="mt-2 text-sm text-slate-200">{project.summary}</p>
+      <h3 className="mt-3 text-xl font-semibold text-zinc-900">{project.title}</h3>
+      <p className="mt-2 text-sm text-zinc-700">{project.summary}</p>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        <p className="w-full text-xs uppercase tracking-[0.12em] text-slate-300">Tools / Stack</p>
+        <p className="w-full text-xs uppercase tracking-[0.12em] text-zinc-600">Tools / Stack</p>
         {project.tools.map((tool) => (
           <span
             key={tool}
-            className="rounded border border-slate-700 bg-slate-800/80 px-2 py-1 text-xs text-slate-200"
+            className="rounded border border-zinc-300 bg-white px-2 py-1 text-xs text-zinc-700"
           >
             {tool}
           </span>

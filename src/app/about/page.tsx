@@ -40,8 +40,8 @@ export default function AboutPage() {
         <h1 className="h1">About</h1>
 
         <div className="mt-6 grid gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-start">
-          <div className="space-y-4 text-[1.08rem] leading-8 text-slate-50">
-            <p className="text-base font-semibold uppercase tracking-[0.14em] text-cyan-100">
+          <div className="space-y-4 text-[1.08rem] leading-8 text-zinc-800">
+            <p className="text-base font-semibold uppercase tracking-[0.14em] text-zinc-600">
               CFD | V&V | Aero Simulation
             </p>
             <p>
@@ -63,7 +63,7 @@ export default function AboutPage() {
                 href="https://www.linkedin.com/in/dennis-joel-roman-salinas-201325260/"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="font-medium text-cyan-100 underline decoration-cyan-300/70 underline-offset-4 hover:text-white"
+                className="font-medium text-sky-700 underline decoration-sky-300/70 underline-offset-4 hover:text-sky-800"
               >
                 LinkedIn profile
               </a>
@@ -71,7 +71,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="relative mx-auto h-[26rem] w-full max-w-sm overflow-hidden rounded-2xl border border-slate-300/60 bg-slate-800/55 shadow-lg">
+          <div className="relative mx-auto h-[26rem] w-full max-w-sm overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg">
             <Image
               src="/api/robotech-image/about-profile"
               alt="Dennis Joel Roman Salinas"
@@ -87,15 +87,15 @@ export default function AboutPage() {
       <div className="grid gap-4 md:grid-cols-2">
         {ABOUT_SECTIONS.map((item) => (
           <article key={item.title} className="surface-card p-5">
-            <h2 className="text-2xl font-semibold text-slate-50">{item.title}</h2>
-            <p className="mt-2 text-[1.01rem] leading-8 text-slate-100">{item.body}</p>
+            <h2 className="text-2xl font-semibold text-zinc-900">{item.title}</h2>
+            <p className="mt-2 text-[1.01rem] leading-8 text-zinc-700">{item.body}</p>
           </article>
         ))}
       </div>
 
       <section className="surface-card p-5">
-        <h2 className="text-2xl font-semibold text-slate-50">Relevant Coursework</h2>
-        <p className="mt-2 text-slate-100">
+        <h2 className="text-2xl font-semibold text-zinc-900">Relevant Coursework</h2>
+        <p className="mt-2 text-zinc-700">
           Core classes most relevant to my current CFD and simulation workflow:
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
