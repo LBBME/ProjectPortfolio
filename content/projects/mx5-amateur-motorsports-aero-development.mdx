@@ -1,0 +1,101 @@
+---
+title: "Amateur Motorsports Aerodynamic Development (Mazda MX-5 NC)"
+slug: "mx5-amateur-motorsports-aero-development"
+summary: "Independent CAD + CFD concept development for a Mazda MX-5 (NC), emphasizing fair A/B package comparisons, convergence behavior, and ride-height sensitivity for practical motorsport decision support."
+domain: "Motorsports Aerodynamics"
+tools:
+  - "ANSYS Fluent"
+  - "CFD Aerodynamics"
+  - "CAD"
+  - "Post-Processing"
+tags:
+  - "cfd"
+  - "motorsport-aero"
+  - "vehicle-aero"
+  - "external-flow"
+  - "rans"
+  - "ride-height"
+  - "convergence"
+  - "design-iteration"
+featured: false
+status: "completed"
+updatedAt: "2026-02-14"
+readingMinutes: 5
+results:
+  - label: "Package set studied"
+    value: "Baseline, ducktail, diffuser, undertray, wheel-deflector, and combined setup"
+  - label: "Convergence behavior"
+    value: "Residuals decay consistently while force traces stabilize by late-iteration windows"
+  - label: "Ride-height trend"
+    value: "Downforce magnitude decreases as ride height increases (55 mm -> 110 mm)"
+  - label: "Decision utility"
+    value: "Comparison-ready framework for selecting practical aero directions under constraints"
+validation:
+  - check: "Consistent meshing and post-processing workflow across compared concepts"
+    status: "pass"
+  - check: "Convergence diagnostics reviewed with residual and force-history context"
+    status: "pass"
+reproducibility:
+  - step: "Matched comparison setup"
+    detail: "All variants used aligned solver/process conventions to preserve fair relative comparisons."
+  - step: "Structured reporting"
+    detail: "Each case exports comparable force/residual traces and sensitivity summaries."
+  - step: "Assumption transparency"
+    detail: "Project narrative is assumption-based for portfolio communication and can be expanded in interview."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/mx5-aero-1",
+      alt: "Cd convergence chart across multiple aero concepts",
+      caption: "Cd convergence trends across baseline and concept variants (comparison-focused screening run set)."
+    },
+    {
+      src: "/api/robotech-image/mx5-aero-2",
+      alt: "Residual convergence chart for compared variants",
+      caption: "Residual convergence view used to confirm solution progress and reporting windows."
+    },
+    {
+      src: "/api/robotech-image/mx5-aero-3",
+      alt: "Ride-height sensitivity chart for downforce",
+      caption: "Synthetic ride-height sensitivity trend used to quantify practical setup response."
+    },
+    {
+      src: "/api/robotech-image/mx5-aero-4",
+      alt: "Mazda MX-5 side contour aerodynamic visualization",
+      caption: "Vehicle-scale contour visualization used to inspect flow organization around the full package."
+    },
+    {
+      src: "/api/robotech-image/mx5-aero-5",
+      alt: "Project descriptor excerpt for amateur motorsports aero development",
+      caption: "Project scope excerpt summarizing independent motorsports aero development intent and constraints."
+    }
+  ]}
+/>
+
+## Project framing
+
+- Independent motorsports aero development project centered on a Mazda MX-5 (NC).
+- Objective: compare realistic concept options under packaging and implementation constraints.
+- Portfolio presentation is intentionally concise, with full setup internals reserved for discussion.
+
+## Case index (fast recruiter scan)
+
+| Case | What was tested | One key output |
+| --- | --- | --- |
+| Multi-concept package comparison | Baseline vs ducktail, diffuser, undertray, wheel-deflector, and combined concept. | Relative drag/downforce behavior for concept selection. |
+| Convergence quality check | Residual and force-history behavior across compared variants. | Clear reporting windows and trend stability confidence. |
+| Ride-height sensitivity | Vertical setup shift impact on downforce magnitude. | Monotonic trend supporting setup tradeoff interpretation. |
+
+## Assumption-based takeaways
+
+- Force-trace separation between concepts is sufficient for early screening decisions.
+- Combined concept direction shows potential for stronger package-level effect than isolated devices.
+- Ride-height sensitivity confirms practical setup dependence, making mechanical constraints part of aero decision-making.
+
+## Public detail boundary
+
+- This project write-up uses assumption-based interpretation suited for portfolio context.
+- Detailed mesh, BC, and solver-control configuration can be provided in interview if needed.
+
