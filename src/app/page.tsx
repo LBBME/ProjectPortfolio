@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Project } from "@/lib/project-types";
 import { ProjectSection } from "@/components/project-section";
 import { getAllProjects, getAllTags, filterProjects } from "@/lib/projects";
@@ -78,6 +79,18 @@ export default async function HomePage({
           </div>
 
           <div className="space-y-3">
+            <div className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
+              <div className="relative h-[320px]">
+                <Image
+                  src="/api/robotech-image/about-profile"
+                  alt="Dennis Joel Roman Salinas"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  priority
+                />
+              </div>
+            </div>
             <div className="surface-card p-4">
               <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Site Intent</p>
               <p className="mt-2 text-sm leading-7 text-zinc-700">

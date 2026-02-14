@@ -12,6 +12,7 @@ const IMAGE_MAP: Record<string, string> = {
   assembly: "IMG_2409_edited-ceed86df-2bdc-4086-bfb4-8607d4224b6c.png",
   cad: "RoboTech_Sketch_edited-4126ef63-fc88-4b9f-a1d9-e6d1e28392d4.png",
   "about-profile": "IMG_0779-2bd67db0-8d97-474b-a0d0-83a35bb105fe.png",
+  "about-profile-alt": "Screenshot_2026-02-14_at_6.27.09_PM-d74953a5-1a15-43bf-9294-662353684dd5.png",
   "flat-plate-extra-1": "Screenshot_2026-02-11_at_7.28.30_PM-b98e1891-9527-4fc1-ac13-202d42fd0fdb.png",
   "flat-plate-extra-2": "Screenshot_2026-02-11_at_7.28.51_PM-79e13e5a-e7a4-4b76-b7c3-090b0c3a69ec.png",
   "flat-plate-extra-3": "Screenshot_2026-02-11_at_7.29.48_PM-149becaa-efcc-4e06-96ca-d9d90c51e04c.png",
