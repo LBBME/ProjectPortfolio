@@ -66,7 +66,11 @@ const IMAGE_MAP: Record<string, string> = {
   "rg15-7bin-plot": "Screenshot_2026-02-11_at_11.38.02_PM-915b044a-ffad-417c-be1d-4850c2d5b1cb.png",
   "fsae-endurance-1": "endurance-c942a0e2-d528-4689-8d31-d0f75989da81.png",
   "hytech-third-element-1": "Screenshot_2026-02-14_at_4.35.49_PM-57737c62-a063-47ef-824d-120da0f013c7.png",
-  "hytech-third-element-2": "Screenshot_2026-02-14_at_4.36.03_PM-985d68e5-d8d1-4f6a-8446-f4738adb56f1.png"
+  "hytech-third-element-2": "Screenshot_2026-02-14_at_4.36.03_PM-985d68e5-d8d1-4f6a-8446-f4738adb56f1.png",
+  "btzcl-reacting-1": "Screenshot_2026-02-14_at_4.54.06_PM-cda1d08b-5a4c-4a1a-85a4-e1920e209e1b.png",
+  "btzcl-reacting-2": "Screenshot_2026-02-14_at_4.55.00_PM-77b313e0-7fbc-4b6e-b84f-6ce1aa6f33a3.png",
+  "btzcl-reacting-3": "Screenshot_2026-02-14_at_4.55.13_PM-7d39e79d-d9ec-4abd-851f-2636d38b54e0.png",
+  "btzcl-reacting-4": "Screenshot_2026-02-14_at_4.56.26_PM-0235188d-f935-4cfe-abb0-9856ab72f963.png"
 };
 
 export async function GET(

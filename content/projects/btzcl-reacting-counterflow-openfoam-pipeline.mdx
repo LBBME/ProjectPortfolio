@@ -1,0 +1,105 @@
+---
+title: "BTZCL Reacting Counterflow OpenFOAM Pipeline"
+slug: "btzcl-reacting-counterflow-openfoam-pipeline"
+summary: "Rebuild + validation pipeline for JiCF-style boundary-condition generation, executed with OpenFOAM reacting-flow chemistry while preserving canonical JSON outputs for direct Cantera/OpenFOAM comparison."
+domain: "Ben T. Zinn Combustion Lab"
+tools:
+  - "OpenFOAM"
+  - "Python"
+  - "foamRun"
+  - "Cantera"
+  - "JSON I/O"
+tags:
+  - "cfd"
+  - "btzcl"
+  - "reacting-flow"
+  - "combustion"
+  - "openfoam"
+  - "cantera"
+  - "validation"
+  - "verification"
+  - "workflow"
+featured: true
+status: "in-progress"
+updatedAt: "2026-02-14"
+readingMinutes: 5
+results:
+  - label: "Pipeline objective"
+    value: "JiCF-compatible OpenFOAM reacting workflow with canonical JSON parity"
+  - label: "Validation ladder"
+    value: "Diffusion analytic check -> passive counterflow -> reacting counterflow -> JiCF compare loop"
+  - label: "Current focus"
+    value: "OpenFOAM chemistry-backed case generation and side-by-side reference comparison"
+  - label: "Primary metric path"
+    value: "Target S/J, flame location/temperature, and achieved-condition deltas vs Cantera reference"
+validation:
+  - check: "Plumbing check against analytical erfc diffusion benchmark"
+    status: "pass"
+  - check: "Progressive stage-by-stage case validation before full reacting compare loop"
+    status: "pass"
+reproducibility:
+  - step: "Canonical JSON schema retained"
+    detail: "OpenFOAM and Cantera outputs follow a JiCF-style comparable structure."
+  - step: "Scripted case generation"
+    detail: "Python runners generate and execute passive and reacting counterflow cases programmatically."
+  - step: "Comparison utility"
+    detail: "Automated side-by-side result reporting supports rapid regression checks."
+---
+
+<ImageCarousel
+  images={[
+    {
+      src: "/api/robotech-image/btzcl-reacting-1",
+      alt: "OpenFOAM velocity magnitude field for counterflow validation",
+      caption: "Plumbing/field-validation view in the counterflow domain before full compare-loop closure."
+    },
+    {
+      src: "/api/robotech-image/btzcl-reacting-2",
+      alt: "OpenFOAM temperature field case view 1",
+      caption: "Reacting counterflow temperature field used to assess flame placement trends."
+    },
+    {
+      src: "/api/robotech-image/btzcl-reacting-3",
+      alt: "OpenFOAM temperature field case view 2",
+      caption: "Comparative thermal structure snapshot for consistency checks across setup variants."
+    },
+    {
+      src: "/api/robotech-image/btzcl-reacting-4",
+      alt: "OpenFOAM temperature distribution in stretched counterflow region",
+      caption: "Domain-scale thermal gradient view supporting offset and peak-temperature trend interpretation."
+    }
+  ]}
+/>
+
+## Project center
+
+- This project is centered on your current BTZCL reacting-flow development work.
+- Core goal: keep JiCF canonical comparison behavior while using OpenFOAM's built-in reacting chemistry stack.
+- Outcome target: quantify where OpenFOAM reacting CFD aligns/diverges from the Cantera 1D reference under matched BC intent.
+
+## Workflow map
+
+- **Reference baseline (JiCF-BC-calc-main):**
+  - Cantera 1D counterflow runs tune inlet conditions for target `S` and `J`.
+  - Canonical JSON outputs store BCs and flame-level metrics.
+- **OpenFOAM plumbing checks:**
+  - Diffusion-only check against analytical `erfc` solution.
+  - Passive counterflow case generation and mixing-field validation.
+- **OpenFOAM reacting stage:**
+  - 2D reacting counterflow setup with chemistry/thermo/reaction properties configured in OpenFOAM.
+- **JiCF-style compare loop:**
+  - Preset selection + JSON ingestion from canonical reference when available.
+  - OpenFOAM output written back in a JiCF-like schema.
+  - Automated side-by-side Cantera vs OpenFOAM comparison report.
+
+## Why this matters
+
+- Moves from single-tool dependence to cross-solver comparison without losing data consistency.
+- Preserves canonical case structure so regression and validation remain trackable.
+- Establishes a reusable path for future reacting JiCF studies under the same comparison grammar.
+
+## Public detail boundary
+
+- This page is intentionally concise and recruiter-facing.
+- Full reaction mechanism tuning, solver-control sweeps, and lab-internal test matrix details are reserved for interview/lab discussion.
+
