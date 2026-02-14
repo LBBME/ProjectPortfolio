@@ -60,7 +60,7 @@ export default async function HomePage({
               Dennis Joel Roman Salinas
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-700">
-              CFD and aero simulation project portfolio designed for fast recruiter scanability:
+              CFD and aero simulation project portfolio designed for fast scanability:
               strong outcomes, clean visuals, and selective technical detail.
             </p>
 
@@ -79,7 +79,7 @@ export default async function HomePage({
 
           <div className="space-y-3">
             <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Recruiter Intent</p>
+              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Site Intent</p>
               <p className="mt-2 text-sm leading-7 text-zinc-700">
                 This site is designed to spark interview-level interest, not reveal every internal workflow detail online.
               </p>
