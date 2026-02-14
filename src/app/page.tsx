@@ -56,18 +56,18 @@ export default async function HomePage({
       <section className="panel p-6 md:p-8">
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           <div>
-            <p className="text-xs uppercase tracking-[0.16em] text-zinc-600">Project Portfolio</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-zinc-600">Project portfolio</p>
             <h1 className="mt-2 text-4xl font-semibold leading-tight text-zinc-900 md:text-5xl">
               Dennis Joel Roman Salinas
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-700">
-              CFD and aero simulation project portfolio designed for fast scanability:
-              strong outcomes, clean visuals, and selective technical detail.
+              CFD and aero simulation work—strong outcomes, clear visuals, and enough technical
+              detail to show what I did without drowning you in it.
             </p>
 
             <div className="mt-5 space-y-2 text-sm text-zinc-700">
-              <p><span className="font-semibold text-zinc-900">Focus:</span> CFD, V&V, automation, HPC execution</p>
-              <p><span className="font-semibold text-zinc-900">Domains:</span> external aero, internal flows, and multi-physics workflows</p>
+              <p><span className="font-semibold text-zinc-900">Focus:</span> CFD, V&V, automation, HPC</p>
+              <p><span className="font-semibold text-zinc-900">Domains:</span> external aero, internal flows, multi-physics</p>
               <p><span className="font-semibold text-zinc-900">Tools:</span> Fluent, FENSAP-ICE, STAR-CCM+, OpenFOAM, Python, MATLAB, SLURM</p>
             </div>
 
@@ -96,9 +96,9 @@ export default async function HomePage({
       </section>
 
       <section className="panel p-6">
-        <h2 className="h2">Project Explorer</h2>
+        <h2 className="h2">Projects</h2>
         <p className="mt-2 text-sm text-zinc-600">
-          Direct project browsing from landing. Use search first; optional tag filters are available below.
+          Browse below or use search; tag filters are optional.
         </p>
 
         <form action="/" method="get" className="mt-4">

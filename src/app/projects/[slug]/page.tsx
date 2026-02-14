@@ -22,8 +22,8 @@ export default async function ProjectDetailPage({
         <h1 className="h1 mt-2">{project.title}</h1>
         <p className="mt-3 max-w-3xl text-lg text-zinc-700">{project.summary}</p>
         <p className="mt-3 max-w-3xl text-sm text-zinc-600">
-          Public-facing brief: selected highlights only. Full setup decisions, trade studies, and internal
-          reasoning are reserved for interview discussion.
+          Short, public-facing snapshot—highlights only. Full setup, trade studies, and the rest
+          are for when we talk.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {project.tools.map((tool) => (
