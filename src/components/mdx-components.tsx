@@ -96,5 +96,16 @@ export const mdxComponents = {
   td: ({ children }: { children: ReactNode }) => (
     <td className="px-3 py-2 align-top text-zinc-800 break-words">{children}</td>
   ),
-  ImageCarousel: ImageCarouselBridge
+  ImageCarousel: ImageCarouselBridge,
+  YoutubeEmbed: ({ videoId }: { videoId: string }) => (
+    <div className="my-6 aspect-video w-full overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100">
+      <iframe
+        title="YouTube video"
+        src={`https://www.youtube.com/embed/${videoId}`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="h-full w-full"
+      />
+    </div>
+  )
 };

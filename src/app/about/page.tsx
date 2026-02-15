@@ -19,31 +19,27 @@ const ABOUT_SECTIONS = [
   }
 ];
 
-const AWARDS = [
-  { term: "Fall 2024", honors: ["Dean's List", "Faculty Honors"] },
-  { term: "Spring 2025", honors: ["Dean's List", "Faculty Honors"] },
-  { term: "Summer 2025", honors: ["Dean's List", "Faculty Honors"] },
-  { term: "Fall 2025", honors: ["Dean's List", "Faculty Honors"] }
-];
+const AWARDS_TERMS = "Fall 2024, Spring 2025, Summer 2025, Fall 2025";
+const AWARDS_HONORS = "Dean's List, Faculty Honors";
 
-const COURSEWORK = [
-  "Thermodynamics and Fluids Fundamentals (AE 2010)",
-  "Aerodynamics (AE 3030)",
-  "Jet and Rocket Propulsion (AE 4451)",
-  "Mechanics of Deformable Bodies (COE 3001)",
-  "Statics (COE 2001)",
-  "Dynamics of Rigid Bodies (ME 2202)",
-  "Differential Calculus (MATH 1551)",
-  "Integral Calculus (MATH 1552)",
-  "Multivariable Calculus (MATH 2551)",
-  "Differential Equations (MATH 2552)",
-  "Introduction to Aerospace Vehicle Performance (AE 3330)",
-  "Principles of Physics I (PHYS 2211)",
-  "Principles of Physics II (PHYS 2212)",
-  "Principles of General Chemistry for Engineers (CHEM 1310)",
-  "Introduction to Engineering Graphics and Visualization (ME 1670)",
-  "Principles and Applications of Engineering Materials (MSE 2001)",
-  "Circuits and Electronics (ECE 3710)"
+const COURSEWORK: { label: string; href: string }[] = [
+  { label: "Thermodynamics and Fluids Fundamentals (AE 2010)", href: "https://catalog.gatech.edu/coursesaz/ae/" },
+  { label: "Aerodynamics (AE 3030)", href: "https://catalog.gatech.edu/coursesaz/ae/" },
+  { label: "Jet and Rocket Propulsion (AE 4451)", href: "https://catalog.gatech.edu/coursesaz/ae/" },
+  { label: "Introduction to Aerospace Vehicle Performance (AE 3330)", href: "https://catalog.gatech.edu/coursesaz/ae/" },
+  { label: "Mechanics of Deformable Bodies (COE 3001)", href: "https://catalog.gatech.edu/coursesaz/coe/" },
+  { label: "Statics (COE 2001)", href: "https://catalog.gatech.edu/coursesaz/coe/" },
+  { label: "Dynamics of Rigid Bodies (ME 2202)", href: "https://catalog.gatech.edu/coursesaz/me/" },
+  { label: "Introduction to Engineering Graphics and Visualization (ME 1670)", href: "https://catalog.gatech.edu/coursesaz/me/" },
+  { label: "Differential Calculus (MATH 1551)", href: "https://catalog.gatech.edu/coursesaz/math/" },
+  { label: "Integral Calculus (MATH 1552)", href: "https://catalog.gatech.edu/coursesaz/math/" },
+  { label: "Multivariable Calculus (MATH 2551)", href: "https://catalog.gatech.edu/coursesaz/math/" },
+  { label: "Differential Equations (MATH 2552)", href: "https://catalog.gatech.edu/coursesaz/math/" },
+  { label: "Principles of Physics I (PHYS 2211)", href: "https://catalog.gatech.edu/coursesaz/phys/" },
+  { label: "Principles of Physics II (PHYS 2212)", href: "https://catalog.gatech.edu/coursesaz/phys/" },
+  { label: "Principles of General Chemistry for Engineers (CHEM 1310)", href: "https://catalog.gatech.edu/coursesaz/chem/" },
+  { label: "Principles and Applications of Engineering Materials (MSE 2001)", href: "https://catalog.gatech.edu/coursesaz/mse/" },
+  { label: "Circuits and Electronics (ECE 3710)", href: "https://catalog.gatech.edu/coursesaz/ece/" },
 ];
 
 export default function AboutPage() {
@@ -109,28 +105,27 @@ export default function AboutPage() {
       <section className="surface-card p-5">
         <h2 className="text-2xl font-semibold text-zinc-900">Awards</h2>
         <p className="mt-2 text-zinc-700">
-          Dean’s List and Faculty Honors for every semester so far at Georgia Tech:
+          <span className="font-medium text-zinc-900">{AWARDS_TERMS}:</span>{" "}
+          {AWARDS_HONORS}
         </p>
-        <ul className="mt-3 space-y-1 text-zinc-700">
-          {AWARDS.map(({ term, honors }) => (
-            <li key={term}>
-              <span className="font-medium text-zinc-900">{term}:</span>{" "}
-              {honors.join(", ")}
-            </li>
-          ))}
-        </ul>
       </section>
 
       <section className="surface-card p-5">
         <h2 className="text-2xl font-semibold text-zinc-900">Relevant Coursework</h2>
         <p className="mt-2 text-zinc-700">
-          Classes that feed into my CFD and simulation work (with GT course numbers where it helps):
+          Classes that feed into my CFD and simulation work. Click a course to open the Georgia Tech catalog for that subject:
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {COURSEWORK.map((course) => (
-            <span key={course} className="metric-badge">
-              {course}
-            </span>
+            <a
+              key={course.label}
+              href={course.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="metric-badge inline-block transition-colors hover:border-zinc-500 hover:bg-zinc-100"
+            >
+              {course.label}
+            </a>
           ))}
         </div>
       </section>
