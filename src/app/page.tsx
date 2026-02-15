@@ -61,7 +61,7 @@ export default async function HomePage({
               Dennis Joel Roman Salinas
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-700">
-              CFD and aero simulation work—strong outcomes, clear visuals, and enough technical
+              CFD and aero simulation work: strong outcomes, clear visuals, and enough technical
               detail to show what I did without drowning you in it.
             </p>
 
