@@ -7,7 +7,7 @@ type ProjectCardProps = {
   showImage?: boolean;
 };
 
-const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
+export const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
   "ipw-icing-verification-pipeline": {
     src: "/api/robotech-image/ipw-setup-geometry",
     alt: "IPW setup geometry and domain layout screenshot"

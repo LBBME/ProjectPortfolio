@@ -1,14 +1,50 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getRenderedProject } from "@/lib/projects";
+import { getProjectBySlug, getRenderedProject } from "@/lib/projects";
 import { ResultsGlance } from "@/components/results-glance";
 import { Toc } from "@/components/toc";
 import { mdxComponents } from "@/components/mdx-components";
+import { PROJECT_IMAGE_MAP } from "@/components/project-card";
 
-export default async function ProjectDetailPage({
-  params
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await getProjectBySlug(slug);
+  if (!project) return { title: "Project not found" };
+
+  const image = PROJECT_IMAGE_MAP[slug];
+  const title = `${project.title} | Dennis Román`;
+  const description = project.summary;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      ...(image && {
+        images: [
+          {
+            url: image.src,
+            width: 1200,
+            height: 630,
+            alt: image.alt,
+          },
+        ],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(image && { images: [image.src] }),
+    },
+  };
+}
+
+export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
   const rendered = await getRenderedProject(slug, mdxComponents);
   if (!rendered) notFound();
