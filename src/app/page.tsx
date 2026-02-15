@@ -58,7 +58,7 @@ export default async function HomePage({
           <div>
             <p className="text-xs uppercase tracking-[0.16em] text-zinc-600">Project portfolio</p>
             <h1 className="mt-2 text-4xl font-semibold leading-tight text-zinc-900 md:text-5xl">
-              Dennis Joel Roman Salinas
+              Dennis Joel Román Salinas
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-700">
               CFD and aero simulation work: strong outcomes, clear visuals, and enough technical
@@ -83,7 +83,7 @@ export default async function HomePage({
               <div className="relative h-[320px]">
                 <Image
                   src="/api/robotech-image/about-profile"
-                  alt="Dennis Joel Roman Salinas"
+                  alt="Dennis Joel Román Salinas"
                   fill
                   className="object-cover object-center"
                   sizes="(min-width: 1024px) 33vw, 100vw"
