@@ -31,3 +31,7 @@ Projects are MDX files in `content/projects/` with YAML frontmatter:
 - `reproducibility[]` (step/detail)
 
 Add a new project by creating one `.mdx` file; no UI code changes are required.
+
+## Security and safety
+
+The site sends standard security headers (X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS) so it’s safer for you and visitors. External links use `rel="noopener noreferrer"`. Set `NEXT_PUBLIC_SITE_URL` in production if you use absolute URLs in metadata (see `.env.example`).

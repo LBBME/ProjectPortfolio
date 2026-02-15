@@ -10,7 +10,18 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Dennis Román | Project Portfolio",
   description:
-    "CFD-focused portfolio: verification, validation, reproducibility, and automation."
+    "CFD-focused portfolio: verification, validation, reproducibility, and automation.",
+  referrer: "strict-origin-when-cross-origin",
+  ...(process.env.NEXT_PUBLIC_SITE_URL && {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
+  }),
+  openGraph: {
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
