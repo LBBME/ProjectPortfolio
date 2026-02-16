@@ -58,7 +58,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         <h1 className="h1 mt-2">{project.title}</h1>
         <p className="mt-3 max-w-3xl text-lg text-zinc-700">{project.summary}</p>
         <p className="mt-3 max-w-3xl text-sm text-zinc-600">
-          This page is a high-level summary. Detailed configs and logs are available on request.
+          Concise summary for portfolio; details available on request.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {project.tools.map((tool) => (
