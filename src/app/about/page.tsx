@@ -61,7 +61,6 @@ export default function AboutPage() {
             </p>
               For the full timeline and experience, check out my{" "}
               <a
-              For the full timeline and experience, check out my{" "}
                 href="https://www.linkedin.com/in/dennis-joel-roman-salinas-201325260/"
                 target="_blank"
                 rel="noreferrer noopener"
