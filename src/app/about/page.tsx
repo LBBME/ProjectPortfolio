@@ -54,15 +54,13 @@ export default function AboutPage() {
               CFD · V&V · Aero simulation
             </p>
             <p>
-              I’m Dennis Joel Román Salinas, a Puerto Rican BSMS Aerospace Engineering student at
-              Georgia Tech. I focus on simulation workflows where the answer isn’t just pretty; it holds
-            <p>
+              I'm Dennis Joel Román Salinas, a Puerto Rican BSMS Aerospace Engineering student at Georgia Tech. My work is focused around simulation and its corresponding workflow where the results are held up by checks, trends and numbers. Vehicle and Motorsport aerodynamics along with fluid-thermal systems are where I spend most of my time.
+            </p>
               Between my multiple Georgia Tech Research Labs, HyTech Racing FSAE-EV, and personal projects, I've built a style that's heavy on clear analysis and communication. My core experiences are in CFD, verification/validation, and automation of these processes so we can iterate fast, with real work in airfoil analysis, motorsport aero, and alternative modeling. I'm aiming for CFD and aero simulation roles where reproducibility, speed, and decision quality all matter.
             </p>
             <p>
               I’m aiming for CFD and aero simulation roles where reproducibility, speed, and
-              decision quality all matter. For the full timeline and experience, check my{" "}
-              <a
+              For the full timeline and experience, check out my{" "}
                 href="https://www.linkedin.com/in/dennis-joel-roman-salinas-201325260/"
                 target="_blank"
                 rel="noreferrer noopener"
