@@ -45,27 +45,20 @@ export default function AboutPage() {
               CFD | V&V | Aero Simulation
             </p>
             <p>
-              I am Dennis Joel Román Salinas, a Puerto Rican BSMS Aerospace Engineering student at
-              Georgia Tech focused on high-confidence simulation workflows in aerodynamics and
-              fluid-thermal systems. I like work where the result is not just visually convincing,
-              but technically defensible through checks, trends, and quantified comparisons.
+              I'm Dennis Joel Román Salinas, a Puerto Rican BSMS Aerospace Engineering student at Georgia Tech. My work is focused around simulation and its corresponding workflow where the results are held up by checks, trends and numbers. Vehicle and Motorsport aerodynamics along with fluid-thermal systems are where I spend most of my time.
             </p>
             <p>
-              Across research labs, HyTech Racing, and teaching, I have developed an approach built
-              on disciplined analysis and clear communication. My technical center of gravity is CFD,
-              verification/validation, and automation-enabled iteration, with recurring work in
-              aircraft icing, motorsport aerodynamics, and surrogate modeling.
+              Between my multiple Georgia Tech Research Labs, HyTech Racing FSAE-EV, and personal projects, I've built a style that's heavy on clear analysis and communication. My core experiences are in CFD, verification/validation, and automation of these processes so we can iterate fast, with real work in airfoil analysis, motorsport aero, and alternative modeling. I'm aiming for CFD and aero simulation roles where reproducibility, speed, and decision quality all matter.
             </p>
             <p>
-              I am targeting CFD and aero simulation roles where reproducibility, speed, and
-              decision quality all matter. For the full timeline, you can also view my{" "}
+              For the full timeline and experience, check out my{" "}
               <a
                 href="https://www.linkedin.com/in/dennis-joel-roman-salinas-201325260/"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="font-medium text-sky-700 underline decoration-sky-300/70 underline-offset-4 hover:text-sky-800"
               >
-                LinkedIn profile
+                LinkedIn
               </a>
               .
             </p>
