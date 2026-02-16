@@ -45,7 +45,7 @@ export default function AboutPage() {
               CFD | V&V | Aero Simulation
             </p>
             <p>
-              I am Dennis Joel Roman Salinas, a Puerto Rican BSMS Aerospace Engineering student at
+              I am Dennis Joel Román Salinas, a Puerto Rican BSMS Aerospace Engineering student at
               Georgia Tech focused on high-confidence simulation workflows in aerodynamics and
               fluid-thermal systems. I like work where the result is not just visually convincing,
               but technically defensible through checks, trends, and quantified comparisons.
@@ -74,7 +74,7 @@ export default function AboutPage() {
           <div className="relative mx-auto h-[26rem] w-full max-w-sm overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg">
             <Image
               src="/api/robotech-image/about-profile-alt"
-              alt="Dennis Joel Roman Salinas"
+              alt="Dennis Joel Román Salinas"
               fill
               className="object-cover object-center"
               sizes="(min-width: 768px) 360px, 100vw"

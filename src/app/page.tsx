@@ -47,7 +47,7 @@ export default async function HomePage({
           <div>
             <p className="text-xs uppercase tracking-[0.16em] text-zinc-600">Project Portfolio</p>
             <h1 className="mt-2 text-4xl font-semibold leading-tight text-zinc-900 md:text-5xl">
-              Dennis Joel Roman Salinas
+              Dennis Joel Román Salinas
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-700">
               CFD and aero simulation work with a focus on what matters: believable results,
@@ -67,36 +67,18 @@ export default async function HomePage({
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div>
             <div className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
               <div className="relative h-[320px]">
                 <Image
                   src="/api/robotech-image/about-profile"
-                  alt="Dennis Joel Roman Salinas"
+                  alt="Dennis Joel Román Salinas"
                   fill
                   className="object-cover object-center"
                   sizes="(min-width: 1024px) 33vw, 100vw"
                   priority
                 />
               </div>
-            </div>
-            <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Site Intent</p>
-              <p className="mt-2 text-sm leading-7 text-zinc-700">
-                This site is designed to spark interview-level interest, not reveal every internal workflow detail online.
-              </p>
-            </div>
-            <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Project Tracks</p>
-              <p className="mt-2 text-sm leading-7 text-zinc-700">
-                HyTech Racing Formula SAE-EV, Ben T. Zinn Combustion Lab, and High Powered Electric Propulsion Lab context.
-              </p>
-            </div>
-            <div className="surface-card p-4">
-              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">What To Expect</p>
-              <p className="mt-2 text-sm leading-7 text-zinc-700">
-                Core results, validation markers, and tools/stack visibility. Full technical deep dives available in interview.
-              </p>
             </div>
           </div>
         </div>
