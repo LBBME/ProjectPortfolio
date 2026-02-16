@@ -59,6 +59,7 @@ export default function AboutPage() {
             <p>
               Between my multiple Georgia Tech Research Labs, HyTech Racing FSAE-EV, and personal projects, I've built a style that's heavy on clear analysis and communication. My core experiences are in CFD, verification/validation, and automation of these processes so we can iterate fast, with real work in airfoil analysis, motorsport aero, and alternative modeling. I'm aiming for CFD and aero simulation roles where reproducibility, speed, and decision quality all matter.
             </p>
+            <p>
               For the full timeline and experience, check out my{" "}
               <a
                 href="https://www.linkedin.com/in/dennis-joel-roman-salinas-201325260/"
