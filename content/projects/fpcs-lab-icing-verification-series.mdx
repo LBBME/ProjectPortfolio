@@ -9,6 +9,13 @@ tools:
   - "Python"
   - "SLURM"
   - "MATLAB"
+  - "StarCCM"
+  - "Ensight"
+  - "Paraview"
+  - "ANSYS"
+  - "OpenFOAM"
+  - "Java"
+  - "C++"
 tags:
   - "cfd"
   - "fpcs"
@@ -30,7 +37,7 @@ results:
     value: "Fluent -> DROP3D/ICE3D -> standardized post wrapper"
   - label: "Comparison readiness"
     value: "IPW-style overlays and trend checks packaged for review"
-  - label: "Interview depth"
+  - label: "Setup Choices and Tradeoff Decision making"
     value: "Per-case setup deltas and tradeoffs available on request"
 validation:
   - check: "Convergence and comparison artifacts captured per run group"
@@ -71,22 +78,26 @@ reproducibility:
   ]}
 />
 
+## When
+
+- **FPCS Lab involvement:** Jun 2025–Jan 2026 (icing verification and IPW-style pipeline work).
+  - **Summer Research Intern:** June–July 2025
+  - **Undergraduate Research Assistant:** August 2025–January 2026
+
 ## Why this is one project
 
-- Scan speed improves when related studies are grouped under one clear storyline.
-- This preserves technical credibility while removing repetitive card-level browsing.
-- Concise summary for portfolio; details available on request.
+- This project builds systems progressively: starting with simple 2D cases, advancing to more complex 3D cases, implementing automation on those 3D cases, and ensuring procedures remain consistent on increasingly complex 3D geometries.
 
 ## Context anchor
 
-This work sits inside the broader multi-physics and HPC-focused research environment of the FPCS group at Georgia Tech: [Flow Physics and Computational Science (FPCS) Lab](https://flow.me.gatech.edu/).
+This work sits inside the broader multi-physics and HPC-focused research environment of the [Flow Physics and Computational Science Lab](https://flow.me.gatech.edu/) at Georgia Tech.
 
-## Case index (fast scan)
+## Case index
 
 - **IPW pipeline verification:** End-to-end staged workflow from mesh/flow through DROP3D/ICE3D and post wrapper. Key output: comparison-ready artifact package for IPW-style review workflows.
 - **RG-15 IPW2 reproduction:** Bin sensitivity and grid-family trend behavior under a 2D-intent study strategy. Key output: stable trend interpretation with explicit sensitivity tracking across metrics.
 
-## Case notes (quick-read cards)
+## Case notes
 
 ### IPW pipeline verification case
 - Focused on repeatability across stage handoffs and deterministic run structure.
@@ -101,8 +112,4 @@ This work sits inside the broader multi-physics and HPC-focused research environ
 - Ability to structure complex icing workflows into repeatable, reviewable execution systems.
 - Verification mindset: convergence and comparison quality are treated as first-class outputs.
 - Communication discipline: outputs are organized to support technical decisions, not only visual plots.
-
-## Public detail boundary
-
-- Concise summary for portfolio; details available on request.
 
