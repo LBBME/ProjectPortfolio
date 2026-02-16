@@ -9,6 +9,8 @@ tools:
   - "Racecar Aero Packaging"
   - "Carbon-Fiber Composites"
   - "Post-Processing"
+  - "Journal Automation"
+  - "Matlab"
 tags:
   - "cfd"
   - "fsae"
@@ -30,13 +32,11 @@ results:
   - label: "Case coverage"
     value: "Third-element (rear aero) optimization + side-aero package + composites build support"
   - label: "Decision value"
-    value: "Fast A/B interpretation for aero package direction"
+    value: "Fast interpretation for aero package direction"
   - label: "Timeline clarity"
-    value: "Third element / rear aero (2024-2025) -> Side-aero + composites (2025-2026)"
-  - label: "Interview depth"
-    value: "Geometry rationale, setup deltas, and manufacturing tradeoffs available on request"
+    value: "Third element / rear aero (2024-2025) -> Side-aero (2025-2026) -> Composites (2024-2026)"
 validation:
-  - check: "Matched comparison framing used for key variant reads"
+  - check: "Competition results: 1st in Acceleration, 2nd in Design, 3rd Overall"
     status: "pass"
   - check: "Run-quality checks applied before extracting summary values"
     status: "pass"
@@ -44,7 +44,7 @@ reproducibility:
   - step: "Consistent comparison template"
     detail: "Common reporting structure used across HyTech variants and outputs."
   - step: "Repeatable artifact review"
-    detail: "Flow-field and contour snapshots organized for quick A/B comparison and geometry-direction decisions."
+    detail: "Flow-field and contour snapshots organized for geometry-direction decisions."
   - step: "Build-process traceability"
     detail: "Composites fabrication snapshots and assembly-stage evidence are tracked for aero part handoff context."
   - step: "Scoped public detail"
@@ -88,46 +88,51 @@ reproducibility:
 
 ## Why this is one project
 
-- HyTech aerodynamic range can be scanned quickly without opening multiple similar pages.
-- The page keeps technical credibility while avoiding oversharing competition-specific details.
-- Concise summary for portfolio; details available on request.
+- While I've worked on two aero packages for two different competition cycles, the lessons learned in one cycle are important for the next. This consolidated view captures the progression and technical continuity across cycles.
 
 ## Context anchor
 
-The project context is Georgia Tech's student-run Formula SAE electric program: [HyTech Racing](https://hytechracing.gatech.edu/).
+This project forms part of my involvement in Georgia Tech's student-run Formula SAE electric program being [HyTech Racing](https://hytechracing.gatech.edu/).
 
-## Case index (fast scan)
+## Case index
 
 - **Third-element (rear aero) optimization (2024-2025):** Third-element flow behavior and influence on local aerodynamic performance. Key output: comparative contour evidence used to decide which geometry direction to pursue next.
-- **Side-aero package study (2025-2026):** Baseline vs variant package performance under matched comparison framing. Key output: consistent trend direction across matched A/B comparisons for package iteration.
-- **Composites manufacturing support (2025-2026):** Carbon-fiber aero part fabrication workflow and implementation readiness. Key output: aero hardware build context aligned with design/analysis intent.
+- **Side-aero package study (2025-2026):** Baseline vs variant package performance under matched comparison framing. Key output: consistent trend direction for package iteration.
+- **Composites manufacturing support (2024-2026):** Carbon-fiber aero part fabrication workflow and implementation readiness. Key output: aero hardware build context aligned with design/analysis intent.
 
-## Case notes (quick-read cards)
+## Case notes
 
 ### Side-aero package case
-- Used to evaluate aerodynamic package direction with consistent A/B reporting.
-- Built to support fast engineering decisions between closely related configurations.
+- Evaluated interactions between front wing, side aero, rear wing, and radiator cooling systems.
+- Tested performance across yaw and pitch conditions to assess package behavior under dynamic track conditions.
 
 ### Third-element optimization case
-- Focused on local flow behavior changes near the third element and adjacent features.
-- Used contour-driven comparison to decide which geometry direction to pursue next for follow-on iterations.
+- Tested interactions between the third element and the first and second existing front-wing elements.
+- Focused on local flow behavior changes near the third element and adjacent features to optimize element spacing and geometry.
 
 ### Composites execution case
 - Added manufacturing-side support for carbon-fiber aero hardware, including bagging/fabrication workflow participation.
 - Helped connect analysis intent to physical part execution by supporting build-readiness context.
 
+### CFD methodology and computational approach
+- All CFD systems run on Georgia Tech's HPC cluster with careful attention to computational cost due to credit constraints.
+- Used half-car models with standard FSAE/motorsport CFD assumptions: viscous sublayer resolution, moving ground plane, rotating wheels, and appropriate turbulence modeling for vehicle aerodynamics.
+
+### Aero-to-real-life validation
+- Involved in validation systems using pressure sensors, load sensors, and mathematical representations using physical sensor data to validate CFD results with real-world testing.
+- Personally developed Cp (pressure coefficient), drag, and downforce validation systems.
+- Assisted other sub-teams (Power and Suspension) with their own validation data analysis.
+- Conducted low, mid, and high downforce testing to optimize multiple settings for maximum efficiency across different competition configurations.
+
 ## Timeline context
 
 - **2024-2025:** Third-element optimization work.
-- **2025-2026:** Side-aero package comparison work and composites manufacturing support.
+- **2025-2026:** Side-aero package comparison work.
+- **2024-2026:** Composites manufacturing support.
 
 ## What this demonstrates quickly
 
 - Ability to translate CFD outputs into practical design decisions under team constraints.
 - Strong comparison discipline for motorsport aero iteration loops plus manufacturing awareness.
 - Clear communication of engineering outcome without exposing full internal thought process.
-
-## Public detail boundary
-
-- Concise summary for portfolio; details available on request.
 
