@@ -40,7 +40,7 @@ results:
   - label: "What we measure"
     value: "Flame position, temperature, and key flow numbers vs reference results"
 validation:
-  - check: "Plumbing check against analytical erfc diffusion benchmark"
+  - check: "Plumbing check against analytical complementary error function diffusion benchmark"
     status: "pass"
   - check: "Progressive stage-by-stage case validation before full reacting compare loop"
     status: "pass"
@@ -90,15 +90,15 @@ reproducibility:
 
 ## Context anchor
 
-This project is part of a propulsion and energy research ecosystem centered on combustion science at Georgia Tech: [Ben T. Zinn Combustion Laboratory](https://www.comblab.gatech.edu/).
+This project is part of a propulsion and energy research ecosystem centered on combustion science and dynamics at Georgia Tech's [Ben T. Zinn Combustion Lab](https://www.comblab.gatech.edu/).
 
 ## Workflow map
 
 - **Reference baseline (JiCF-BC-calc-main):**
-  - Cantera 1D counterflow runs tune inlet conditions for target `S` and `J`.
+  - Cantera 1D counterflow runs tune inlet conditions for target density ratio (S) and momentum flux ratio (J).
   - Canonical JSON outputs store BCs and flame-level metrics.
 - **OpenFOAM plumbing checks:**
-  - Diffusion-only check against analytical `erfc` solution.
+  - Diffusion-only check against analytical complementary error function solution.
   - Passive counterflow case generation and mixing-field validation.
 - **OpenFOAM reacting stage:**
   - 2D reacting counterflow setup with chemistry/thermo/reaction properties configured in OpenFOAM.
@@ -112,8 +112,4 @@ This project is part of a propulsion and energy research ecosystem centered on c
 - Moves from single-tool dependence to cross-solver comparison without losing data consistency.
 - Preserves canonical case structure so regression and validation remain trackable.
 - Establishes a reusable path for future reacting JiCF studies under the same comparison grammar.
-
-## Public detail boundary
-
-- Concise summary for portfolio; details available on request.
 
