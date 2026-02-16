@@ -14,7 +14,7 @@ export function Toc({ items }: TocProps) {
   return (
     <aside>
       <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-600">Contents</h2>
-      <ul className="mt-3 max-h-[45vh] space-y-2 overflow-auto pr-1 text-sm">
+      <ul className="mt-3 max-h-[45vh] space-y-2 overflow-auto pr-1 text-sm scroll-smooth overscroll-contain">
         {items.map((item) => (
           <li key={`${item.id}-${item.level}`}>
             <a

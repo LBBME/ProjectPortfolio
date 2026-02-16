@@ -86,7 +86,10 @@ export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
   const image = PROJECT_IMAGE_MAP[project.slug];
 
   return (
-    <article className="panel lift p-5">
+    <Link
+      href={`/projects/${project.slug}`}
+      className="panel lift block p-5 transition-opacity hover:opacity-[0.98] focus:opacity-[0.98] focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2"
+    >
       {showImage ? (
         <div className="relative mb-4 h-44 overflow-hidden rounded-lg border border-zinc-200 bg-zinc-100">
           {image ? (
@@ -129,12 +132,9 @@ export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
         ))}
       </div>
 
-      <Link
-        href={`/projects/${project.slug}`}
-        className="btn-primary mt-5"
-      >
+      <span className="btn-primary mt-5 inline-block">
         View project
-      </Link>
-    </article>
+      </span>
+    </Link>
   );
 }

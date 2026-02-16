@@ -228,13 +228,11 @@ export function filterProjects(
   return scored.map((entry) => entry.project);
 }
 
+/** All unique tags across projects, sorted. Used for filter UI on Home and Projects. */
 export function getAllTags(projects: Project[]): string[] {
-  const counts = new Map<string, number>();
+  const seen = new Set<string>();
   for (const tag of projects.flatMap((p) => p.tags)) {
-    counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    seen.add(tag);
   }
-  return Array.from(counts.entries())
-    .filter(([, count]) => count >= 2)
-    .map(([tag]) => tag)
-    .sort();
+  return Array.from(seen).sort();
 }

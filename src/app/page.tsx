@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/lib/project-types";
 import { ProjectSection } from "@/components/project-section";
+import { ProjectFilters } from "@/components/project-filters";
 import { getAllProjects, getAllTags, filterProjects } from "@/lib/projects";
 
 type SearchParams = {
@@ -12,18 +13,6 @@ type SearchParams = {
 function toArray(value: string | string[] | undefined): string[] {
   if (!value) return [];
   return Array.isArray(value) ? value : [value];
-}
-
-function buildTagHref(tag: string, selectedTags: string[], query: string): string {
-  const nextTags = selectedTags.includes(tag)
-    ? selectedTags.filter((t) => t !== tag)
-    : [...selectedTags, tag];
-
-  const params = new URLSearchParams();
-  if (query.trim()) params.set("q", query.trim());
-  for (const value of nextTags) params.append("tag", value);
-  const queryString = params.toString();
-  return `/${queryString ? `?${queryString}` : ""}`;
 }
 
 function isOtherProject(project: Project): boolean {
@@ -61,8 +50,8 @@ export default async function HomePage({
               Dennis Joel Roman Salinas
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-700">
-              CFD and aero simulation project portfolio designed for fast scanability:
-              strong outcomes, clean visuals, and selective technical detail.
+              CFD and aero simulation work with a focus on what matters: believable results,
+              clean presentation, and transparent execution.
             </p>
 
             <div className="mt-5 space-y-2 text-sm text-zinc-700">
@@ -119,45 +108,13 @@ export default async function HomePage({
           Direct project browsing from landing. Use search first; optional tag filters are available below.
         </p>
 
-        <form action="/" method="get" className="mt-4">
-          {selectedTags.map((tag) => (
-            <input key={tag} type="hidden" name="tag" value={tag} />
-          ))}
-          <label htmlFor="q" className="sr-only">
-            Search projects
-          </label>
-          <input
-            id="q"
-            name="q"
-            defaultValue={q}
-            placeholder="Search: icing, transonic, diffuser, surrogate, OpenFOAM..."
-            className="w-full rounded-md border border-edge bg-white px-3 py-2 text-sm text-zinc-800 placeholder:text-zinc-500 transition-all duration-200 focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-300"
+        <div className="mt-4">
+          <ProjectFilters
+            tags={tags}
+            selectedTags={selectedTags}
+            initialQuery={q}
           />
-        </form>
-
-        <details className="mt-4 rounded-md border border-edge/90 bg-zinc-50 px-3 py-2">
-          <summary className="cursor-pointer text-xs font-semibold uppercase tracking-[0.12em] text-zinc-600">
-            Advanced Tag Filters (Optional)
-          </summary>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {tags.map((tag) => {
-              const active = selectedTags.includes(tag);
-              return (
-                <Link
-                  key={tag}
-                  href={buildTagHref(tag, selectedTags, q)}
-                  className={`rounded-full border px-3 py-1 text-xs transition-all duration-200 ${
-                    active
-                      ? "border-zinc-800 bg-zinc-900 text-white"
-                      : "border-edge bg-white text-zinc-700 hover:border-zinc-400 hover:text-zinc-900"
-                  }`}
-                >
-                  {tag}
-                </Link>
-              );
-            })}
-          </div>
-        </details>
+        </div>
       </section>
 
       <p className="text-sm text-zinc-600">

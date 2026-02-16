@@ -1,7 +1,7 @@
 ---
 title: "BTZCL Reacting Counterflow OpenFOAM Pipeline"
 slug: "btzcl-reacting-counterflow-openfoam-pipeline"
-summary: "Rebuild + validation pipeline for JiCF-style boundary-condition generation, executed with OpenFOAM reacting-flow chemistry while preserving canonical JSON outputs for direct Cantera/OpenFOAM comparison."
+summary: "Rebuild + validation pipeline for boundary-condition generation with OpenFOAM reacting-flow chemistry. Preserves consistent JSON outputs so Cantera and OpenFOAM results can be compared directly."
 domain: "Ben T. Zinn Combustion Lab"
 tools:
   - "OpenFOAM"
@@ -25,21 +25,21 @@ updatedAt: "2026-02-14"
 readingMinutes: 5
 results:
   - label: "Pipeline objective"
-    value: "JiCF-compatible OpenFOAM reacting workflow with canonical JSON parity"
+    value: "OpenFOAM reacting workflow with consistent JSON outputs for direct Cantera comparison"
   - label: "Validation ladder"
-    value: "Diffusion analytic check -> passive counterflow -> reacting counterflow -> JiCF compare loop"
+    value: "Diffusion analytic check -> passive counterflow -> reacting counterflow -> reference compare loop"
   - label: "Current focus"
     value: "OpenFOAM chemistry-backed case generation and side-by-side reference comparison"
   - label: "Primary metric path"
-    value: "Target S/J, flame location/temperature, and achieved-condition deltas vs Cantera reference"
+    value: "Target strain/jet parameters (S/J), flame location/temperature, and achieved-condition deltas vs Cantera reference"
 validation:
   - check: "Plumbing check against analytical erfc diffusion benchmark"
     status: "pass"
   - check: "Progressive stage-by-stage case validation before full reacting compare loop"
     status: "pass"
 reproducibility:
-  - step: "Canonical JSON schema retained"
-    detail: "OpenFOAM and Cantera outputs follow a JiCF-style comparable structure."
+  - step: "Consistent JSON outputs"
+    detail: "OpenFOAM and Cantera results are written in a comparable structure for direct comparison."
   - step: "Scripted case generation"
     detail: "Python runners generate and execute passive and reacting counterflow cases programmatically."
   - step: "Comparison utility"
@@ -74,8 +74,8 @@ reproducibility:
 ## Project center
 
 - This project is centered on your current BTZCL reacting-flow development work.
-- Core goal: keep JiCF canonical comparison behavior while using OpenFOAM's built-in reacting chemistry stack.
-- Outcome target: quantify where OpenFOAM reacting CFD aligns/diverges from the Cantera 1D reference under matched BC intent.
+- Core goal: preserve consistent JSON outputs so Cantera and OpenFOAM results can be compared directly, while using OpenFOAM's built-in reacting chemistry stack.
+- Outcome target: quantify where OpenFOAM reacting CFD aligns/diverges from the Cantera 1D reference under matched boundary-condition intent.
 
 ## Context anchor
 
@@ -83,27 +83,26 @@ This project is part of a propulsion and energy research ecosystem centered on c
 
 ## Workflow map
 
-- **Reference baseline (JiCF-BC-calc-main):**
-  - Cantera 1D counterflow runs tune inlet conditions for target `S` and `J`.
-  - Canonical JSON outputs store BCs and flame-level metrics.
+- **Reference baseline:**
+  - Cantera 1D counterflow runs tune inlet conditions for target strain/jet parameters (S/J).
+  - JSON outputs store boundary conditions and flame-level metrics.
 - **OpenFOAM plumbing checks:**
   - Diffusion-only check against analytical `erfc` solution.
   - Passive counterflow case generation and mixing-field validation.
 - **OpenFOAM reacting stage:**
   - 2D reacting counterflow setup with chemistry/thermo/reaction properties configured in OpenFOAM.
-- **JiCF-style compare loop:**
-  - Preset selection + JSON ingestion from canonical reference when available.
-  - OpenFOAM output written back in a JiCF-like schema.
-  - Automated side-by-side Cantera vs OpenFOAM comparison report.
+- **Reference compare loop:**
+  - Preset selection and JSON ingestion from the reference when available.
+  - OpenFOAM output written in a comparable structure for direct Cantera vs OpenFOAM comparison.
+  - Automated side-by-side result reporting.
 
 ## Why this matters
 
 - Moves from single-tool dependence to cross-solver comparison without losing data consistency.
-- Preserves canonical case structure so regression and validation remain trackable.
-- Establishes a reusable path for future reacting JiCF studies under the same comparison grammar.
+- Preserves consistent JSON outputs so regression and validation remain trackable.
+- Establishes a reusable path for future reacting counterflow studies with the same comparison approach.
 
 ## Public detail boundary
 
-- This page is intentionally concise and public-facing.
-- Full reaction mechanism tuning, solver-control sweeps, and lab-internal test matrix details are reserved for interview/lab discussion.
+- Concise summary for portfolio; details available on request.
 

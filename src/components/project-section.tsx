@@ -22,7 +22,7 @@ export function ProjectSection({ title, projects, emptyMessage }: ProjectSection
       <div className="flex items-end justify-between gap-3">
         <h2 className="h2">{title}</h2>
         <p className="text-xs text-zinc-600">
-          {projects.length} project{projects.length === 1 ? "" : "s"}
+          {projects.length} {projects.length === 1 ? "project" : "projects"}
         </p>
       </div>
 

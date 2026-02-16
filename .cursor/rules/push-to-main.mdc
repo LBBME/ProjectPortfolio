@@ -1,0 +1,15 @@
+---
+description: Always commit and push changes to main after editing
+alwaysApply: true
+---
+
+# Push to main after changes
+
+After making edits to the codebase in this project:
+
+1. **Commit** all changed files with a clear, concise message describing what was done.
+2. **Push** to `main` (e.g. `git push origin main`).
+
+Run these from the project root. If working in a git worktree, push from the branch that tracks `main` or merge to main and push as appropriate for your workflow.
+
+Do not skip the push unless the user explicitly asks not to push or there is no git remote / main branch.
