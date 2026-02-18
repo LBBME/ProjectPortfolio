@@ -78,7 +78,8 @@ const IMAGE_MAP: Record<string, string> = {
   "mx5-aero-2": "Screenshot_2026-02-14_at_5.43.42_PM-5d064bec-7c20-44d8-a5c3-9756cbe68725.png",
   "mx5-aero-3": "Screenshot_2026-02-14_at_5.44.39_PM-be9f6f04-51bb-4b4d-bf3d-81e9202f115d.png",
   "mx5-aero-4": "Screenshot_2026-02-14_at_5.49.30_PM-1c9ccb5f-5a85-4184-a50c-8e21aeaa88e9.png",
-  "mx5-aero-5": "Screenshot_2026-02-14_at_5.49.49_PM-cd6fee5c-9c01-461c-966d-84274fc80f0a.png"
+  "mx5-aero-5": "Screenshot_2026-02-14_at_5.49.49_PM-cd6fee5c-9c01-461c-966d-84274fc80f0a.png",
+  "hytech-cad-wing": "Screenshot_2026-02-18_at_12.04.48_AM-a9bf9885-bfc8-428f-ac98-d32954c7ff46.png"
 };
 
 export async function GET(
