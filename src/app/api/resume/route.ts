@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 const DEPLOY_SAFE_RESUME_PATH = path.join(process.cwd(), "public", "resume", "resume.pdf");
 const LOCAL_DEV_RESUME_PATH =
-  "/Users/dennisroman/Desktop/Resumes/Cover Letters/Resume Spring 2026 V4.pdf";
+  "/Users/dennisroman/Desktop/Resumes/Resume Spring 2026 V5.pdf";
 
 export async function GET() {
   const candidates = [DEPLOY_SAFE_RESUME_PATH, LOCAL_DEV_RESUME_PATH];
