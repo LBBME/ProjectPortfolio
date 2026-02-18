@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 
+import "react-pdf/dist/Page/AnnotationLayer.css";
+
 // Keep worker/API versions in lockstep to avoid runtime mismatch warnings.
 pdfjs.GlobalWorkerOptions.workerSrc =
   `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -34,8 +36,9 @@ export function ResumeDocument({ fileUrl }: ResumeDocumentProps) {
   }, [containerWidth]);
 
   return (
-    <div ref={containerRef} className="rounded-xl border border-zinc-200 bg-white p-3">
-      <Document
+    <div ref={containerRef} className="w-full">
+      <div className="inline-block rounded-xl border border-zinc-200 bg-white p-3">
+        <Document
         file={fileUrl}
         onLoadSuccess={({ numPages: loadedPages }) => setNumPages(loadedPages)}
         loading={<p className="p-6 text-center text-zinc-600">Loading resume...</p>}
@@ -53,7 +56,8 @@ export function ResumeDocument({ fileUrl }: ResumeDocumentProps) {
             />
           ))}
         </div>
-      </Document>
+        </Document>
+      </div>
     </div>
   );
 }
