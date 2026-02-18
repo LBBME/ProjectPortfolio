@@ -48,7 +48,7 @@ export function ResumeDocument({ fileUrl }: ResumeDocumentProps) {
               pageNumber={index + 1}
               width={pageWidth}
               renderTextLayer={false}
-              renderAnnotationLayer={false}
+              renderAnnotationLayer={true}
               className="overflow-hidden rounded-md border border-zinc-300 shadow-md"
             />
           ))}
