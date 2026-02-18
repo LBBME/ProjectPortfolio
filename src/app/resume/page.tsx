@@ -30,7 +30,7 @@ export default function ResumePage() {
       </noscript>
 
       <div className="min-h-[480px]">
-        <ResumeDocumentClient fileUrl="/api/resume" />
+        <ResumeDocumentClient fileUrl="/resume/resume.pdf" />
       </div>
     </section>
   );
