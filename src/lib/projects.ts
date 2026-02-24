@@ -20,6 +20,16 @@ const HIDDEN_PROJECT_SLUGS = new Set([
   "fsae-side-aero-diffuser-radiator-study"
 ]);
 
+// Explicit manual ordering for primary CFD portfolio projects.
+// Slugs not listed here will fall back to updatedAt ordering.
+const FEATURED_PROJECT_ORDER: string[] = [
+  "hytech-aerodynamics-development-series",
+  "fpcs-lab-icing-verification-series",
+  "btzcl-reacting-counterflow-openfoam-pipeline",
+  "cfd-lab-multi-case-benchmark-series",
+  "mx5-amateur-motorsports-aero-development"
+];
+
 function toId(text: string): string {
   return text
     .toLowerCase()
@@ -106,7 +116,22 @@ export async function getAllProjects(): Promise<Project[]> {
 
   return projects
     .filter((project) => !HIDDEN_PROJECT_SLUGS.has(project.slug))
-    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    .sort((a, b) => {
+      const indexA = FEATURED_PROJECT_ORDER.indexOf(a.slug);
+      const indexB = FEATURED_PROJECT_ORDER.indexOf(b.slug);
+
+      const hasA = indexA !== -1;
+      const hasB = indexB !== -1;
+
+      if (hasA && hasB && indexA !== indexB) {
+        return indexA - indexB;
+      }
+      if (hasA && !hasB) return -1;
+      if (!hasA && hasB) return 1;
+
+      // Fallback to updatedAt (newest first) for ties / non-featured.
+      return b.updatedAt.localeCompare(a.updatedAt);
+    });
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
