@@ -1,7 +1,7 @@
 ---
 title: "BTZCL Reacting Counterflow OpenFOAM Pipeline"
 slug: "btzcl-reacting-counterflow-openfoam-pipeline"
-summary: "Rebuild + validation pipeline for JiCF-style boundary-condition generation, executed with OpenFOAM reacting-flow chemistry while preserving canonical JSON outputs for direct Cantera/OpenFOAM comparison."
+summary: "Rebuild + validation pipeline for JiCF-style boundary-condition generation with OpenFOAM reacting-flow chemistry, extended toward 3D reacting jet-in-crossflow LES while preserving canonical JSON outputs for direct Cantera/OpenFOAM comparison."
 domain: "Ben T. Zinn Combustion Lab"
 tools:
   - "OpenFOAM"
@@ -32,29 +32,57 @@ updatedAt: "2026-02-14"
 readingMinutes: 5
 results:
   - label: "Goal"
-    value: "Simulation pipeline for reacting-jet flows that matches a standard benchmark format"
+    value: "Unified reacting-flow CFD pipeline spanning canonical counterflow validation and 3D reacting jet-in-crossflow LES."
   - label: "How we check it"
-    value: "Step-by-step: simple test → non-reacting flow → reacting flow → compare to reference"
+    value: "Step-by-step progression: analytical solution → non-reacting flow → reacting counterflow → 3D reacting jet → experimental comparison."
   - label: "Current focus"
-    value: "Generating cases with chemistry and comparing them to the reference tool"
+    value: "Executing LES-based parameter sweep for reacting jet-in-crossflow at gas-turbine-relevant conditions."
   - label: "What we measure"
-    value: "Flame position, temperature, and key flow numbers vs reference results"
+    value: "Flame position relative to the shear layer, SLV persistence or suppression, temperature and heat-release effects, velocity-field structure, and agreement with experimental datasets."
 validation:
-  - check: "Plumbing check against analytical complementary error function diffusion benchmark"
+  - check: "Plumbing check against analytical complementary error function diffusion benchmark (counterflow branch)"
     status: "pass"
-  - check: "Progressive stage-by-stage case validation before full reacting compare loop"
+  - check: "Progressive stage-by-stage case validation before full reacting compare loop (counterflow branch)"
     status: "pass"
+  - check: "High-resolution LES meshes and structured parameter sweep to avoid numerical suppression artifacts (RJICF branch)"
+    status: "in-progress"
 reproducibility:
-  - step: "Canonical JSON schema retained"
+  - step: "Canonical JSON schema retained (counterflow)"
     detail: "OpenFOAM and Cantera outputs follow a JiCF-style comparable structure."
   - step: "Scripted case generation"
     detail: "Python runners generate and execute passive and reacting counterflow cases programmatically."
-  - step: "Comparison utility"
-    detail: "Automated side-by-side result reporting supports rapid regression checks."
+  - step: "Structured RJICF parameter tracking"
+    detail: "Simulation cases documented across velocity ratios, pressure levels, and flame configurations for reproducible comparison."
+  - step: "Organized HPC execution and storage"
+    detail: "Cluster job runs and cloud-backed storage used for case management and post-processing."
 ---
 
 <ImageCarousel
   images={[
+    {
+      src: "/images/btzcl-jicf-diagram.png",
+      alt: "Jet-in-crossflow vortex system schematic showing shear-layer vortices, wake vortices, horseshoe vortex system, and counter-rotating vortex pair",
+      caption:
+        "Jet-in-crossflow vortex system: windward and leeward shear-layer vortices (SLVs), wake vortices (WV), horseshoe vortex system (HV), and the counter-rotating vortex pair (CVP)."
+    },
+    {
+      src: "/images/btzcl-rql-schematic.png",
+      alt: "Rich-Quench-Lean combustor schematic showing primary, secondary, and lean-burn zones",
+      caption:
+        "Schematic of a Rich-Quench-Lean (RQL) combustor highlighting primary rich-burn, quick-mix, and lean-burn regions."
+    },
+    {
+      src: "/images/btzcl-r1-flame.png",
+      alt: "R1 reacting jet-in-crossflow configuration schematic with flame outside the shear layer and experimental image",
+      caption:
+        "Reacting jet-in-crossflow R1 configuration: flame sits outside the shear layer and shear-layer vortices remain visible; red regions in the experimental image indicate flame location."
+    },
+    {
+      src: "/images/btzcl-r2-flame.png",
+      alt: "R2 reacting jet-in-crossflow configuration schematic with flame inside the shear layer and experimental image",
+      caption:
+        "Reacting jet-in-crossflow R2 configuration: flame lies within the shear layer, suppressing shear-layer vortices; red regions in the experimental image show the reacting zone."
+    },
     {
       src: "/api/robotech-image/btzcl-reacting-1",
       alt: "OpenFOAM velocity magnitude field for counterflow validation",
@@ -78,38 +106,64 @@ reproducibility:
   ]}
 />
 
-## When
-
-- **BTZCL involvement:** Jan 2026–present (reacting counterflow pipeline and validation).
-
 ## Project center
 
 - This project is centered on my current BTZCL reacting-flow development work.
-- Core goal: keep JiCF canonical comparison behavior while using OpenFOAM's built-in reacting chemistry stack.
-- Outcome target: quantify where OpenFOAM reacting CFD aligns/diverges from the Cantera 1D reference under matched BC intent.
+
+### Counterflow branch (current foundation)
+
+- Core goal: keep JiCF-style canonical comparison behavior while using OpenFOAM's built-in reacting chemistry stack.
+- Outcome target: quantify where OpenFOAM reacting CFD aligns/diverges from the Cantera 1D reference under matched boundary-condition intent.
+
+### Jet-in-crossflow branch (Summer 2026 expansion)
+
+- Core goal: extend reacting-flow validation workflows to 3D reacting jet-in-crossflow (RJICF) configurations relevant to gas-turbine combustors.
+- Outcome target: characterize how flame location and heat release modify shear-layer vortices under gas-turbine-relevant pressure and velocity ratios.
 
 ## Context anchor
 
 This project is part of a propulsion and energy research ecosystem centered on combustion science and dynamics at Georgia Tech's [Ben T. Zinn Combustion Lab](https://www.comblab.gatech.edu/).
 
+The RJICF work specifically investigates reacting jets in crossflow, a configuration relevant to Rich-Quench-Lean (RQL) combustors used to reduce NOx emissions in gas turbines. The focus is on how exothermic heat release and flame positioning alter large-scale vortical structures such as shear-layer vortices (SLVs) and the counter-rotating vortex pair (CVP), which govern mixing efficiency and emissions performance.
+
 ## Workflow map
+
+### Counterflow validation backbone (established)
 
 - **Reference baseline (JiCF-BC-calc-main):**
   - Cantera 1D counterflow runs tune inlet conditions for target density ratio (S) and momentum flux ratio (J).
-  - Canonical JSON outputs store BCs and flame-level metrics.
+  - Canonical JSON outputs store boundary conditions and flame-level metrics.
 - **OpenFOAM plumbing checks:**
   - Diffusion-only check against analytical complementary error function solution.
   - Passive counterflow case generation and mixing-field validation.
 - **OpenFOAM reacting stage:**
   - 2D reacting counterflow setup with chemistry/thermo/reaction properties configured in OpenFOAM.
 - **JiCF-style compare loop:**
-  - Preset selection + JSON ingestion from canonical reference when available.
+  - Preset selection and JSON ingestion from canonical reference when available.
   - OpenFOAM output written back in a JiCF-like schema.
   - Automated side-by-side Cantera vs OpenFOAM comparison report.
 
+### Reacting jet-in-crossflow (RJICF) LES expansion (in progress)
+
+- **Problem configuration:**
+  - 3D reacting jet injected into crossflow at gas-turbine-relevant pressures and velocity ratios.
+  - Two canonical flame regimes:
+    - **R1:** Flame outside the shear layer → SLVs present.
+    - **R2:** Flame inside the shear layer → SLVs partially or fully suppressed.
+- **Numerical approach:**
+  - Large-eddy simulation (LES) in OpenFOAM.
+  - Single-step, infinitely fast methane reaction model.
+  - Refined mesh near the jet shear layer to resolve vortex formation and breakdown.
+- **Structured parameter sweep:**
+  - Systematic variation of jet velocity \(v_j\), crossflow velocity \(v_{cf}\), pressure \(P\), and flame position \(\delta\), with other variables held fixed to isolate physical mechanisms.
+- **Validation logic:**
+  - Compare vortex behavior across R1 vs R2.
+  - Assess suppression mechanisms of SLVs and evolution of the CVP.
+  - Evaluate turbulence and reaction-model performance against available experimental datasets.
+
 ## Why this matters
 
-- Moves from single-tool dependence to cross-solver comparison without losing data consistency.
-- Preserves canonical case structure so regression and validation remain trackable.
-- Establishes a reusable path for future reacting JiCF studies under the same comparison grammar.
+- **Counterflow work:** moves from single-tool dependence to cross-solver comparison without losing data consistency, preserves canonical case structure so regression and validation remain trackable, and establishes a reusable comparison grammar between Cantera and OpenFOAM.
+- **RJICF work:** extends that validation discipline into fully 3D reacting, turbulent combustion regimes, clarifies how combustion heat release alters vortex dynamics under engine-relevant conditions, and supports improved understanding of mixing and NOx mitigation in RQL combustors.
+- **Combined pipeline:** creates a solver-verified reacting-flow path that spans 1D canonical validation → 2D reacting counterflow → 3D LES reacting jet systems.
 
