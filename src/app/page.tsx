@@ -50,14 +50,15 @@ export default async function HomePage({
               Dennis Joel Román Salinas
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-700">
-              This is my CFD and aero simulation work. You get strong outcomes, clear visuals,
-              and technical detail to show the work that I have done.
+              A collection of my CFD, aerodynamics simulation projects, and non-simulation projects
+              that demonstrate my outcomes, clear visuals, and technical details.
             </p>
 
             <div className="mt-5 space-y-2 text-sm text-zinc-700">
               <p>
-                <span className="font-semibold text-zinc-900">Focus:</span> CFD, V&V, automation,
-                and HPC-backed simulation workflows
+                <span className="font-semibold text-zinc-900">Focus:</span> Aerodynamics,
+                aerothermodynamics, computational fluid mechanics, high performance computing, and
+                multi-physics simulations
               </p>
               <p>
                 <span className="font-semibold text-zinc-900">Domains:</span> external aero,
