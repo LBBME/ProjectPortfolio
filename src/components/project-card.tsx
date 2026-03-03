@@ -79,6 +79,10 @@ export const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
   "robotech-pipe-builder": {
     src: "/api/robotech-image/robotech-new-1",
     alt: "RoboTech updated prototype thumbnail"
+  },
+  "acrylic-vacuum-chamber-refurbishment": {
+    src: "/images/acrylic-chamber-full-cad.png",
+    alt: "Acrylic vacuum chamber CAD with internal actuator structure"
   }
 };
 
