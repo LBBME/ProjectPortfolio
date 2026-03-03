@@ -88,7 +88,10 @@ export const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
 
 export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
   const image = PROJECT_IMAGE_MAP[project.slug];
-  const isBTZCL = project.slug === "btzcl-reacting-counterflow-openfoam-pipeline";
+  const useContain =
+    project.slug === "btzcl-reacting-counterflow-openfoam-pipeline" ||
+    project.slug === "acrylic-vacuum-chamber-refurbishment" ||
+    project.slug === "mx5-amateur-motorsports-aero-development";
 
   return (
     <article className="panel lift p-5">
@@ -99,7 +102,7 @@ export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
               src={image.src}
               alt={image.alt}
               fill
-              className={isBTZCL ? "object-contain" : "object-cover"}
+              className={useContain ? "object-contain" : "object-cover"}
               sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 100vw"
             />
           ) : (
