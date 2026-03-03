@@ -55,19 +55,9 @@ export default async function HomePage({
             </p>
 
             <div className="mt-5 space-y-2 text-sm text-zinc-700">
-              <p>
-                <span className="font-semibold text-zinc-900">Focus:</span> Aerodynamics,
-                Aerothermodynamics, Computational Fluid Mechanics, High Performance Computing, and
-                Multi-Physics Simulations
-              </p>
-              <p>
-                <span className="font-semibold text-zinc-900">CAD tools:</span> CATIA /
-                3DEXPERIENCE, Onshape, and racecar/wing geometry modeling
-              </p>
-              <p>
-                <span className="font-semibold text-zinc-900">CFD tools:</span> Ansys Fluent,
-                FENSAP-ICE, STAR-CCM+, OpenFOAM
-              </p>
+              <p><span className="font-semibold text-zinc-900">Focus:</span> CFD, V&V, automation, HPC</p>
+              <p><span className="font-semibold text-zinc-900">Domains:</span> external aero, internal flows, multi-physics</p>
+              <p><span className="font-semibold text-zinc-900">Tools:</span> Fluent, FENSAP-ICE, STAR-CCM+, OpenFOAM, Python, MATLAB, SLURM</p>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -114,9 +104,9 @@ export default async function HomePage({
       </p>
 
       <ProjectSection
-        title="CFD Projects"
+        title="Simulation Projects"
         projects={cfdProjects}
-        emptyMessage="No CFD projects match this filter yet."
+        emptyMessage="No simulation projects match this filter yet."
       />
       <ProjectSection
         title="Other Projects"
