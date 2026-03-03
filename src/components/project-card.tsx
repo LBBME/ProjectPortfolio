@@ -61,8 +61,8 @@ export const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
     alt: "HyTech Racing Formula SAE car on endurance track"
   },
   "btzcl-reacting-counterflow-openfoam-pipeline": {
-    src: "/images/btzcl-jicf-diagram.png",
-    alt: "BTZCL reacting jet-in-crossflow vortex system schematic"
+    src: "/api/robotech-image/btzcl-reacting-2",
+    alt: "BTZCL reacting counterflow temperature field"
   },
   "mx5-amateur-motorsports-aero-development": {
     src: "/api/robotech-image/mx5-aero-4",
