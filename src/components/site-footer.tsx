@@ -25,7 +25,7 @@ export function SiteFooter() {
       </div>
 
       <div className="container-shell border-t border-zinc-200 py-3 text-xs text-zinc-500">
-        CFD and aero work—V&V and reproducibility matter here.
+        CFD and aero work - V&V and reproducibility matter here.
       </div>
     </footer>
   );
