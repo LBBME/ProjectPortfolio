@@ -50,14 +50,27 @@ export default async function HomePage({
               Dennis Joel Román Salinas
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-700">
-              A collection of my CFD, aerodynamics simulation projects, and non-simulation projects
-              that demonstrate my outcomes, clear visuals, and technical details.
+              This is my CFD and aero simulation work. You get strong outcomes, clear visuals,
+              and technical detail to show the work that I have done.
             </p>
 
             <div className="mt-5 space-y-2 text-sm text-zinc-700">
-              <p><span className="font-semibold text-zinc-900">Focus:</span> CFD, V&V, automation, HPC</p>
-              <p><span className="font-semibold text-zinc-900">Domains:</span> external aero, internal flows, multi-physics</p>
-              <p><span className="font-semibold text-zinc-900">Tools:</span> Fluent, FENSAP-ICE, STAR-CCM+, OpenFOAM, Python, MATLAB, SLURM</p>
+              <p>
+                <span className="font-semibold text-zinc-900">Focus:</span> CFD, V&V, automation,
+                and HPC-backed simulation workflows
+              </p>
+              <p>
+                <span className="font-semibold text-zinc-900">Domains:</span> external aero,
+                aircraft icing, internal flows, and multi-physics / aeroelastic studies
+              </p>
+              <p>
+                <span className="font-semibold text-zinc-900">CAD tools:</span> CATIA /
+                3DEXPERIENCE, Onshape, and racecar/wing geometry modeling
+              </p>
+              <p>
+                <span className="font-semibold text-zinc-900">CFD tools:</span> Ansys Fluent,
+                FENSAP-ICE, STAR-CCM+, OpenFOAM, Python, MATLAB, SLURM
+              </p>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
