@@ -61,8 +61,8 @@ export const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
     alt: "HyTech Racing Formula SAE car on endurance track"
   },
   "btzcl-reacting-counterflow-openfoam-pipeline": {
-    src: "/api/robotech-image/btzcl-reacting-2",
-    alt: "BTZCL reacting counterflow temperature field"
+    src: "/images/btzcl-jicf-diagram.png",
+    alt: "BTZCL jet-in-crossflow vortex system schematic"
   },
   "mx5-amateur-motorsports-aero-development": {
     src: "/api/robotech-image/mx5-aero-4",
@@ -84,6 +84,7 @@ export const PROJECT_IMAGE_MAP: Record<string, { src: string; alt: string }> = {
 
 export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
   const image = PROJECT_IMAGE_MAP[project.slug];
+  const isBTZCL = project.slug === "btzcl-reacting-counterflow-openfoam-pipeline";
 
   return (
     <article className="panel lift p-5">
@@ -94,7 +95,7 @@ export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
               src={image.src}
               alt={image.alt}
               fill
-              className="object-cover"
+              className={isBTZCL ? "object-contain" : "object-cover"}
               sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 100vw"
             />
           ) : (
