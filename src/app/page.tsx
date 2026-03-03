@@ -61,10 +61,6 @@ export default async function HomePage({
                 multi-physics simulations
               </p>
               <p>
-                <span className="font-semibold text-zinc-900">Domains:</span> external aero,
-                aircraft icing, internal flows, and multi-physics / aeroelastic studies
-              </p>
-              <p>
                 <span className="font-semibold text-zinc-900">CAD tools:</span> CATIA /
                 3DEXPERIENCE, Onshape, and racecar/wing geometry modeling
               </p>
