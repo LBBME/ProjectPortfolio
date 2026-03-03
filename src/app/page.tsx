@@ -69,7 +69,7 @@ export default async function HomePage({
               </p>
               <p>
                 <span className="font-semibold text-zinc-900">CFD tools:</span> Ansys Fluent,
-                FENSAP-ICE, STAR-CCM+, OpenFOAM, Python, MATLAB, SLURM
+                FENSAP-ICE, STAR-CCM+, OpenFOAM
               </p>
             </div>
 
