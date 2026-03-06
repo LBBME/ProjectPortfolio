@@ -2,16 +2,14 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { jsPDF } from "jspdf";
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { getAllProjects } from "@/lib/projects";
 import type { Project } from "@/lib/project-types";
 
 export const runtime = "nodejs";
 
-const MARGIN = 20;
-const PAGE_W = 210;
-const PAGE_H = 297;
-const LINE_HEIGHT = 6;
+const MARGIN = 40; // points
+const LINE_HEIGHT = 14;
 
 const ASSETS_DIR = path.join(process.cwd(), "assets");
 const LOCAL_DEV_ASSETS_DIR =
@@ -29,17 +27,21 @@ const PROJECT_IMAGE_KEYS: Record<string, string> = {
 // Mirror of the subset from /api/robotech-image/[image]/route.ts
 const IMAGE_FILE_MAP: Record<string, string> = {
   "fsae-endurance-1": "endurance-c942a0e2-d528-4689-8d31-d0f75989da81.png",
-  "ipw-setup-geometry": "Screenshot_2026-02-11_at_11.29.01_PM-9abf8a54-f317-437e-a8a0-555a06c0d16c.png",
-  "btzcl-reacting-2": "Screenshot_2026-02-14_at_4.55.00_PM-77b313e0-7fbc-4b6e-b84f-6ce1aa6f33a3.png",
-  "transonic-extra-1": "Screenshot_2026-02-11_at_7.31.34_PM-288f242d-a5f1-4e34-ac83-e9cf6a92ad6e.png",
+  "ipw-setup-geometry":
+    "Screenshot_2026-02-11_at_11.29.01_PM-9abf8a54-f317-437e-a8a0-555a06c0d16c.png",
+  "btzcl-reacting-2":
+    "Screenshot_2026-02-14_at_4.55.00_PM-77b313e0-7fbc-4b6e-b84f-6ce1aa6f33a3.png",
+  "transonic-extra-1":
+    "Screenshot_2026-02-11_at_7.31.34_PM-288f242d-a5f1-4e34-ac83-e9cf6a92ad6e.png",
   "mx5-aero-4": "Screenshot_2026-02-14_at_5.49.30_PM-1c9ccb5f-5a85-4184-a50c-8e21aeaa88e9.png"
 };
 
-function wrapText(doc: jsPDF, text: string, maxWidth: number): string[] {
-  return doc.splitTextToSize(text, maxWidth);
-}
+type LoadedImage = {
+  data: Uint8Array;
+  ext: ".png" | ".jpg" | ".jpeg";
+};
 
-async function loadProjectImageBase64(slug: string): Promise<{ base64: string; format: "PNG" | "JPEG" } | null> {
+async function loadProjectImage(slug: string): Promise<LoadedImage | null> {
   const key = PROJECT_IMAGE_KEYS[slug];
   if (!key) return null;
 
@@ -54,135 +56,282 @@ async function loadProjectImageBase64(slug: string): Promise<{ base64: string; f
   for (const absolutePath of candidates) {
     try {
       const data = await fs.readFile(absolutePath);
-      const ext = path.extname(fileName).toLowerCase();
-      const format: "PNG" | "JPEG" = ext === ".jpg" || ext === ".jpeg" ? "JPEG" : "PNG";
-      return { base64: data.toString("base64"), format };
+      const ext = path.extname(fileName).toLowerCase() as LoadedImage["ext"];
+      if (ext === ".png" || ext === ".jpg" || ext === ".jpeg") {
+        return { data: new Uint8Array(data), ext };
+      }
     } catch {
-      // try next candidate
+      // Try next candidate.
     }
   }
 
   return null;
 }
 
-async function renderPortfolio(doc: jsPDF, projects: Project[]) {
-  const maxW = PAGE_W - 2 * MARGIN;
-  let y = MARGIN;
+function drawWrappedText(options: {
+  page: import("pdf-lib").PDFPage;
+  text: string;
+  x: number;
+  y: number;
+  maxWidth: number;
+  font: import("pdf-lib").PDFFont;
+  size: number;
+  lineHeight: number;
+}) {
+  const { page, text, x, maxWidth, font, size, lineHeight } = options;
+  let { y } = options;
 
-  doc.setFontSize(22);
-  doc.text("Dennis Román - Project Portfolio", PAGE_W / 2, y, { align: "center" });
-  y += 12;
+  const words = text.split(/\s+/);
+  let currentLine = "";
 
-  doc.setFontSize(11);
-  doc.text("CFD, simulation, and experimental infrastructure work", PAGE_W / 2, y, {
-    align: "center"
+  for (const word of words) {
+    const next = currentLine ? `${currentLine} ${word}` : word;
+    const width = font.widthOfTextAtSize(next, size);
+    if (width > maxWidth && currentLine) {
+      page.drawText(currentLine, { x, y, size, font });
+      y -= lineHeight;
+      currentLine = word;
+    } else {
+      currentLine = next;
+    }
+  }
+
+  if (currentLine) {
+    page.drawText(currentLine, { x, y, size, font });
+    y -= lineHeight;
+  }
+
+  return y;
+}
+
+async function renderProjectPage(
+  pdfDoc: PDFDocument,
+  project: Project,
+  sharedImages: Map<string, LoadedImage>
+) {
+  const page = pdfDoc.addPage();
+  const { width, height } = page.getSize();
+  const contentWidth = width - 2 * MARGIN;
+
+  const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+  let y = height - MARGIN;
+
+  // Header
+  page.drawText("Dennis Román - Project Portfolio", {
+    x: MARGIN,
+    y,
+    size: 18,
+    font: fontBold
   });
-  y += 16;
+  y -= 20;
 
-  doc.setDrawColor(200, 200, 200);
-  doc.line(MARGIN, y, PAGE_W - MARGIN, y);
-  y += 10;
+  page.drawText("CFD, simulation, and experimental infrastructure work", {
+    x: MARGIN,
+    y,
+    size: 11,
+    font: fontRegular,
+    color: rgb(0.25, 0.25, 0.25)
+  });
+  y -= 24;
 
-  for (const [index, project] of projects.entries()) {
-    if (index > 0) {
-      doc.addPage();
-      y = MARGIN;
-    }
+  page.drawLine({
+    start: { x: MARGIN, y },
+    end: { x: width - MARGIN, y },
+    thickness: 0.5,
+    color: rgb(0.8, 0.8, 0.8)
+  });
+  y -= 20;
 
-    doc.setFontSize(12);
-    doc.setTextColor(120, 120, 120);
-    doc.text(project.domain, MARGIN, y);
-    doc.text(`Status: ${project.status}`, PAGE_W - MARGIN, y, { align: "right" });
-    y += LINE_HEIGHT + 2;
+  // Domain + status line
+  page.drawText(project.domain, {
+    x: MARGIN,
+    y,
+    size: 11,
+    font: fontBold,
+    color: rgb(0.25, 0.25, 0.25)
+  });
 
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(16);
-    doc.setFont("helvetica", "bold");
-    const titleLines = wrapText(doc, project.title, maxW);
-    doc.text(titleLines, MARGIN, y);
-    y += titleLines.length * LINE_HEIGHT + 4;
+  const statusText = `Status: ${project.status}`;
+  const statusWidth = fontRegular.widthOfTextAtSize(statusText, 11);
+  page.drawText(statusText, {
+    x: width - MARGIN - statusWidth,
+    y,
+    size: 11,
+    font: fontRegular,
+    color: rgb(0.25, 0.25, 0.25)
+  });
+  y -= 18;
 
-    // Optional hero image for visually rich projects.
-    const image = await loadProjectImageBase64(project.slug);
-    if (image) {
-      const imgWidth = maxW;
-      const imgHeight = 55;
-      // Ensure there is enough space; otherwise start a new page.
-      if (y + imgHeight + 6 > PAGE_H - MARGIN) {
-        doc.addPage();
-        y = MARGIN;
+  // Title
+  y = drawWrappedText({
+    page,
+    text: project.title,
+    x: MARGIN,
+    y,
+    maxWidth: contentWidth,
+    font: fontBold,
+    size: 16,
+    lineHeight: LINE_HEIGHT
+  });
+  y -= 4;
+
+  // Optional hero image
+  const imageKey = PROJECT_IMAGE_KEYS[project.slug];
+  if (imageKey) {
+    let loaded = sharedImages.get(imageKey);
+    if (!loaded) {
+      const fromDisk = await loadProjectImage(project.slug);
+      if (fromDisk) {
+        loaded = fromDisk;
+        sharedImages.set(imageKey, fromDisk);
       }
-      doc.addImage(image.base64, image.format, MARGIN, y, imgWidth, imgHeight);
-      y += imgHeight + 6;
     }
 
-    doc.setFontSize(11);
+    if (loaded) {
+      const embedded =
+        loaded.ext === ".png"
+          ? await pdfDoc.embedPng(loaded.data)
+          : await pdfDoc.embedJpg(loaded.data);
 
-    const summaryLines = wrapText(doc, project.summary, maxW);
-    doc.text(summaryLines, MARGIN, y);
-    y += summaryLines.length * LINE_HEIGHT + 8;
-
-    if (project.tools?.length) {
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(10);
-      doc.text("Tools / stack:", MARGIN, y);
-      y += LINE_HEIGHT;
-      doc.setFont("helvetica", "normal");
-      const toolsLines = wrapText(doc, project.tools.join(", "), maxW);
-      doc.text(toolsLines, MARGIN, y);
-      y += toolsLines.length * LINE_HEIGHT + 6;
+      const imgDims = embedded.scaleToFit(contentWidth, 150);
+      page.drawImage(embedded, {
+        x: MARGIN,
+        y: y - imgDims.height,
+        width: imgDims.width,
+        height: imgDims.height
+      });
+      y -= imgDims.height + 16;
     }
+  }
 
-    if (project.results?.length) {
-      doc.setFont("helvetica", "bold");
-      doc.text("Results at a glance", MARGIN, y);
-      y += LINE_HEIGHT;
-      doc.setFont("helvetica", "normal");
-      for (const result of project.results) {
-        const line = `• ${result.label}: ${result.value}`;
-        const lines = wrapText(doc, line, maxW);
-        doc.text(lines, MARGIN, y);
-        y += lines.length * LINE_HEIGHT;
-      }
-      y += 4;
+  // Summary
+  y = drawWrappedText({
+    page,
+    text: project.summary,
+    x: MARGIN,
+    y,
+    maxWidth: contentWidth,
+    font: fontRegular,
+    size: 11,
+    lineHeight: LINE_HEIGHT
+  });
+  y -= 6;
+
+  // Tools
+  if (project.tools?.length) {
+    page.drawText("Tools / stack", {
+      x: MARGIN,
+      y,
+      size: 11,
+      font: fontBold
+    });
+    y -= LINE_HEIGHT;
+
+    y = drawWrappedText({
+      page,
+      text: project.tools.join(", "),
+      x: MARGIN,
+      y,
+      maxWidth: contentWidth,
+      font: fontRegular,
+      size: 10,
+      lineHeight: LINE_HEIGHT
+    });
+    y -= 4;
+  }
+
+  // Results
+  if (project.results?.length) {
+    page.drawText("Results at a glance", {
+      x: MARGIN,
+      y,
+      size: 11,
+      font: fontBold
+    });
+    y -= LINE_HEIGHT;
+
+    for (const result of project.results) {
+      const line = `• ${result.label}: ${result.value}`;
+      y = drawWrappedText({
+        page,
+        text: line,
+        x: MARGIN,
+        y,
+        maxWidth: contentWidth,
+        font: fontRegular,
+        size: 10,
+        lineHeight: LINE_HEIGHT
+      });
     }
+    y -= 4;
+  }
 
-    if (project.validation?.length) {
-      doc.setFont("helvetica", "bold");
-      doc.text("Validation signals", MARGIN, y);
-      y += LINE_HEIGHT;
-      doc.setFont("helvetica", "normal");
-      for (const item of project.validation) {
-        const line = `• [${item.status}] ${item.check}`;
-        const lines = wrapText(doc, line, maxW);
-        doc.text(lines, MARGIN, y);
-        y += lines.length * LINE_HEIGHT;
-      }
-      y += 4;
+  // Validation
+  if (project.validation?.length) {
+    page.drawText("Validation signals", {
+      x: MARGIN,
+      y,
+      size: 11,
+      font: fontBold
+    });
+    y -= LINE_HEIGHT;
+
+    for (const item of project.validation) {
+      const line = `• [${item.status}] ${item.check}`;
+      y = drawWrappedText({
+        page,
+        text: line,
+        x: MARGIN,
+        y,
+        maxWidth: contentWidth,
+        font: fontRegular,
+        size: 10,
+        lineHeight: LINE_HEIGHT
+      });
     }
+    y -= 4;
+  }
 
-    if (project.reproducibility?.length) {
-      doc.setFont("helvetica", "bold");
-      doc.text("Reproducibility signals", MARGIN, y);
-      y += LINE_HEIGHT;
-      doc.setFont("helvetica", "normal");
-      for (const step of project.reproducibility) {
-        const line = `• ${step.step}: ${step.detail}`;
-        const lines = wrapText(doc, line, maxW);
-        doc.text(lines, MARGIN, y);
-        y += lines.length * LINE_HEIGHT;
-      }
+  // Reproducibility
+  if (project.reproducibility?.length) {
+    page.drawText("Reproducibility signals", {
+      x: MARGIN,
+      y,
+      size: 11,
+      font: fontBold
+    });
+    y -= LINE_HEIGHT;
+
+    for (const step of project.reproducibility) {
+      const line = `• ${step.step}: ${step.detail}`;
+      y = drawWrappedText({
+        page,
+        text: line,
+        x: MARGIN,
+        y,
+        maxWidth: contentWidth,
+        font: fontRegular,
+        size: 10,
+        lineHeight: LINE_HEIGHT
+      });
     }
   }
 }
 
 export async function GET(_request: NextRequest) {
   const projects = await getAllProjects();
-  const doc = new jsPDF({ format: "a4", unit: "mm" });
+  const pdfDoc = await PDFDocument.create();
 
-  await renderPortfolio(doc, projects);
+  const sharedImages = new Map<string, LoadedImage>();
 
-  const pdfBuffer = Buffer.from(doc.output("arraybuffer"));
+  for (const project of projects) {
+    await renderProjectPage(pdfDoc, project, sharedImages);
+  }
+
+  const pdfBytes = await pdfDoc.save();
+  const pdfBuffer = Buffer.from(pdfBytes);
 
   return new NextResponse(pdfBuffer, {
     status: 200,
