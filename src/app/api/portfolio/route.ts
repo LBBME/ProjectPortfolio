@@ -41,11 +41,8 @@ type LoadedImage = {
   ext: ".png" | ".jpg" | ".jpeg";
 };
 
-async function loadProjectImage(slug: string): Promise<LoadedImage | null> {
-  const key = PROJECT_IMAGE_KEYS[slug];
-  if (!key) return null;
-
-  const fileName = IMAGE_FILE_MAP[key];
+async function loadProjectImage(imageKey: string): Promise<LoadedImage | null> {
+  const fileName = IMAGE_FILE_MAP[imageKey];
   if (!fileName) return null;
 
   const candidates = [
@@ -182,7 +179,7 @@ async function renderProjectPage(
   if (imageKey) {
     let loaded = sharedImages.get(imageKey);
     if (!loaded) {
-      const fromDisk = await loadProjectImage(project.slug);
+      const fromDisk = await loadProjectImage(imageKey);
       if (fromDisk) {
         loaded = fromDisk;
         sharedImages.set(imageKey, fromDisk);
