@@ -41,7 +41,32 @@ type LoadedImage = {
   ext: ".png" | ".jpg" | ".jpeg";
 };
 
-async function loadProjectImage(imageKey: string): Promise<LoadedImage | null> {
+/** Fetch image from the app's own API (same source as the site). */
+async function loadProjectImageFromApi(
+  imageKey: string,
+  baseUrl: string
+): Promise<LoadedImage | null> {
+  try {
+    const url = `${baseUrl}/api/robotech-image/${imageKey}`;
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const buf = await res.arrayBuffer();
+    const data = new Uint8Array(buf);
+    const contentType = res.headers.get("content-type") ?? "";
+    const ext: LoadedImage["ext"] =
+      contentType.includes("jpeg") || contentType.includes("jpg")
+        ? ".jpg"
+        : ".png";
+    return { data, ext };
+  } catch {
+    return null;
+  }
+}
+
+async function loadProjectImage(
+  imageKey: string,
+  baseUrl?: string
+): Promise<LoadedImage | null> {
   const fileName = IMAGE_FILE_MAP[imageKey];
   if (!fileName) return null;
 
@@ -62,6 +87,9 @@ async function loadProjectImage(imageKey: string): Promise<LoadedImage | null> {
     }
   }
 
+  if (baseUrl) {
+    return loadProjectImageFromApi(imageKey, baseUrl);
+  }
   return null;
 }
 
@@ -104,7 +132,8 @@ function drawWrappedText(options: {
 async function renderProjectPage(
   pdfDoc: PDFDocument,
   project: Project,
-  sharedImages: Map<string, LoadedImage>
+  sharedImages: Map<string, LoadedImage>,
+  baseUrl: string
 ) {
   const page = pdfDoc.addPage();
   const { width, height } = page.getSize();
@@ -179,7 +208,7 @@ async function renderProjectPage(
   if (imageKey) {
     let loaded = sharedImages.get(imageKey);
     if (!loaded) {
-      const fromDisk = await loadProjectImage(imageKey);
+      const fromDisk = await loadProjectImage(imageKey, baseUrl);
       if (fromDisk) {
         loaded = fromDisk;
         sharedImages.set(imageKey, fromDisk);
@@ -321,15 +350,20 @@ async function renderProjectPage(
   }
 }
 
-export async function GET(_request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
+    const baseUrl =
+      process.env.VERCEL_URL != null
+        ? `https://${process.env.VERCEL_URL}`
+        : new URL(request.url).origin;
+
     const projects = await getAllProjects();
     const pdfDoc = await PDFDocument.create();
 
     const sharedImages = new Map<string, LoadedImage>();
 
     for (const project of projects) {
-      await renderProjectPage(pdfDoc, project, sharedImages);
+      await renderProjectPage(pdfDoc, project, sharedImages, baseUrl);
     }
 
     const pdfBytes = await pdfDoc.save();
