@@ -87,7 +87,11 @@ async function loadProjectImage(
       const data = await fs.readFile(absolutePath);
       const ext = path.extname(fileName).toLowerCase() as LoadedImage["ext"];
       if (ext === ".png" || ext === ".jpg" || ext === ".jpeg") {
-        console.log(`[portfolio] Image loaded from disk (${label}): ${imageKey}`);
+        if (data.length === 0) {
+          console.warn(`[portfolio] Empty file (${label}): ${imageKey} → ${absolutePath}`);
+          continue;
+        }
+        console.log(`[portfolio] Image loaded from disk (${label}): ${imageKey} (${data.length} bytes)`);
         return { data: new Uint8Array(data), ext };
       }
     } catch (e) {
@@ -95,12 +99,13 @@ async function loadProjectImage(
     }
   }
 
-  if (baseUrl) {
+  // On Vercel, Deployment Protection returns 401 for same-origin fetch; skip API fallback.
+  if (baseUrl && process.env.VERCEL !== "1") {
     const fromApi = await loadProjectImageFromApi(imageKey, baseUrl);
     if (fromApi) console.log(`[portfolio] Image loaded from API: ${imageKey}`);
     return fromApi;
   }
-  console.warn(`[portfolio] Image not found (no baseUrl for API fallback): ${imageKey}`);
+  if (!baseUrl) console.warn(`[portfolio] Image not found (no baseUrl): ${imageKey}`);
   return null;
 }
 
@@ -241,8 +246,11 @@ async function renderProjectPage(
           height: imgDims.height
         });
         y -= imgDims.height + 16;
-      } catch {
-        // Skip image if embed fails (e.g. corrupt data, unsupported format)
+      } catch (e) {
+        console.warn(
+          `[portfolio] Embed failed for ${imageKey} (${project.slug}):`,
+          e instanceof Error ? e.message : String(e)
+        );
       }
     }
   }
@@ -364,15 +372,23 @@ async function renderProjectPage(
 /** Run image load diagnostics for troubleshooting; returns JSON. */
 async function runImageDiagnostics(
   baseUrl: string
-): Promise<{ baseUrl: string; cwd: string; images: Record<string, unknown>[] }> {
+): Promise<{
+  baseUrl: string;
+  cwd: string;
+  summary: string;
+  howToFix: string[];
+  usage: string;
+  images: Record<string, unknown>[];
+}> {
   const projects = await getAllProjects();
   const cwd = process.cwd();
   const results: Record<string, unknown>[] = [];
+  const howToFix: string[] = [];
 
   for (const project of projects) {
     const imageKey = PROJECT_IMAGE_KEYS[project.slug];
     if (!imageKey) {
-      results.push({ slug: project.slug, imageKey: null, note: "no hero image" });
+      results.push({ slug: project.slug, imageKey: null, source: "none", note: "no hero image" });
       continue;
     }
 
@@ -400,29 +416,51 @@ async function runImageDiagnostics(
     try {
       const res = await fetch(`${baseUrl}/api/robotech-image/${imageKey}`);
       apiStatus = res.status;
-      if (!res.ok) apiError = await res.text().catch(() => res.statusText);
+      if (!res.ok) apiError = (await res.text().catch(() => res.statusText)).slice(0, 200);
     } catch (e) {
       apiError = e instanceof Error ? e.message : String(e);
     }
 
-    const loaded = disk1 || disk2 || (apiStatus != null && apiStatus === 200);
+    const loaded = disk1 || disk2 || (apiStatus === 200);
+    const source = disk1 ? "disk (assets)" : disk2 ? "disk (local-dev)" : apiStatus === 200 ? "api" : "missing";
     results.push({
       slug: project.slug,
       title: project.title,
       imageKey,
       fileName: fileName ?? null,
+      source,
+      loaded,
       diskAssets: disk1,
       diskLocalDev: disk2,
       diskPathAssets: path1,
       diskPathLocalDev: path2,
       apiUrl: `${baseUrl}/api/robotech-image/${imageKey}`,
       apiStatus,
-      apiError: apiError ?? null,
-      loaded
+      apiError: apiError ?? null
     });
   }
 
-  return { baseUrl, cwd, images: results };
+  const withImage = results.filter((r) => r.imageKey != null);
+  const loadedCount = withImage.filter((r) => r.loaded === true).length;
+  const total = withImage.length;
+  const summary = `Portfolio images: ${loadedCount}/${total} load (baseUrl: ${baseUrl}, cwd: ${cwd})`;
+
+  if (loadedCount < total) {
+    howToFix.push("Add missing image files to the repo under an 'assets' folder (same filenames as in IMAGE_FILE_MAP), or ensure /api/robotech-image/<key> returns 200 for each key.");
+    howToFix.push("Check Vercel/server logs for [portfolio] lines: disk miss, API image failed, or Embed failed.");
+  }
+  if (withImage.some((r) => r.apiStatus === 401)) {
+    howToFix.push("apiStatus 401 = Vercel Deployment Protection. PDF generation on Vercel uses disk only (no API fallback) so this does not affect the PDF.");
+  }
+
+  return {
+    baseUrl,
+    cwd,
+    summary,
+    howToFix,
+    usage: "Remove ?debug=1 to get the PDF. In Vercel: Project → Logs to see [portfolio] disk/API/embed messages.",
+    images: results
+  };
 }
 
 export async function GET(request: NextRequest) {
@@ -434,10 +472,11 @@ export async function GET(request: NextRequest) {
 
     const debug = request.nextUrl.searchParams.get("debug");
     if (debug === "1" || debug === "images") {
-      const diag = await runImageDiagnostics(baseUrl);
+      const diagBaseUrl = new URL(request.url).origin;
+      const diag = await runImageDiagnostics(diagBaseUrl);
       return new NextResponse(JSON.stringify(diag, null, 2), {
         status: 200,
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
       });
     }
 
@@ -446,9 +485,13 @@ export async function GET(request: NextRequest) {
 
     const sharedImages = new Map<string, LoadedImage>();
 
+    console.log(`[portfolio] Generating PDF baseUrl=${baseUrl} projects=${projects.length}`);
+
     for (const project of projects) {
       await renderProjectPage(pdfDoc, project, sharedImages, baseUrl);
     }
+
+    console.log(`[portfolio] PDF generated; ${sharedImages.size} hero images embedded. Use ?debug=1 for diagnostics.`);
 
     const pdfBytes = await pdfDoc.save();
     const pdfBuffer = Buffer.from(pdfBytes);
