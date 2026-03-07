@@ -3,6 +3,7 @@ import path from "node:path";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import sharp from "sharp";
 import { getAllProjects } from "@/lib/projects";
 import type { Project } from "@/lib/project-types";
 
@@ -40,6 +41,20 @@ type LoadedImage = {
   data: Uint8Array;
   ext: ".png" | ".jpg" | ".jpeg";
 };
+
+/** Normalize image to JPEG so pdf-lib can embed it (avoids PNG parser issues). */
+async function normalizeImageForPdf(loaded: LoadedImage): Promise<Uint8Array | null> {
+  try {
+    const jpeg = await sharp(loaded.data)
+      .resize(1200, 800, { fit: "inside", withoutEnlargement: true })
+      .jpeg({ quality: 85 })
+      .toBuffer();
+    return new Uint8Array(jpeg);
+  } catch (e) {
+    console.warn("[portfolio] sharp normalize failed:", e instanceof Error ? e.message : String(e));
+    return null;
+  }
+}
 
 /** Fetch image from the app's own API (same source as the site). */
 async function loadProjectImageFromApi(
@@ -233,19 +248,18 @@ async function renderProjectPage(
 
     if (loaded) {
       try {
-        const embedded =
-          loaded.ext === ".png"
-            ? await pdfDoc.embedPng(loaded.data)
-            : await pdfDoc.embedJpg(loaded.data);
-
-        const imgDims = embedded.scaleToFit(contentWidth, 150);
-        page.drawImage(embedded, {
-          x: MARGIN,
-          y: y - imgDims.height,
-          width: imgDims.width,
-          height: imgDims.height
-        });
-        y -= imgDims.height + 16;
+        const jpegData = await normalizeImageForPdf(loaded);
+        if (jpegData) {
+          const embedded = await pdfDoc.embedJpg(jpegData);
+          const imgDims = embedded.scaleToFit(contentWidth, 150);
+          page.drawImage(embedded, {
+            x: MARGIN,
+            y: y - imgDims.height,
+            width: imgDims.width,
+            height: imgDims.height
+          });
+          y -= imgDims.height + 16;
+        }
       } catch (e) {
         console.warn(
           `[portfolio] Embed failed for ${imageKey} (${project.slug}):`,
