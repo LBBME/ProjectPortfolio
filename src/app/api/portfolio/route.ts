@@ -187,19 +187,23 @@ async function renderProjectPage(
     }
 
     if (loaded) {
-      const embedded =
-        loaded.ext === ".png"
-          ? await pdfDoc.embedPng(loaded.data)
-          : await pdfDoc.embedJpg(loaded.data);
+      try {
+        const embedded =
+          loaded.ext === ".png"
+            ? await pdfDoc.embedPng(loaded.data)
+            : await pdfDoc.embedJpg(loaded.data);
 
-      const imgDims = embedded.scaleToFit(contentWidth, 150);
-      page.drawImage(embedded, {
-        x: MARGIN,
-        y: y - imgDims.height,
-        width: imgDims.width,
-        height: imgDims.height
-      });
-      y -= imgDims.height + 16;
+        const imgDims = embedded.scaleToFit(contentWidth, 150);
+        page.drawImage(embedded, {
+          x: MARGIN,
+          y: y - imgDims.height,
+          width: imgDims.width,
+          height: imgDims.height
+        });
+        y -= imgDims.height + 16;
+      } catch {
+        // Skip image if embed fails (e.g. corrupt data, unsupported format)
+      }
     }
   }
 
@@ -318,24 +322,32 @@ async function renderProjectPage(
 }
 
 export async function GET(_request: NextRequest) {
-  const projects = await getAllProjects();
-  const pdfDoc = await PDFDocument.create();
+  try {
+    const projects = await getAllProjects();
+    const pdfDoc = await PDFDocument.create();
 
-  const sharedImages = new Map<string, LoadedImage>();
+    const sharedImages = new Map<string, LoadedImage>();
 
-  for (const project of projects) {
-    await renderProjectPage(pdfDoc, project, sharedImages);
-  }
-
-  const pdfBytes = await pdfDoc.save();
-  const pdfBuffer = Buffer.from(pdfBytes);
-
-  return new NextResponse(pdfBuffer, {
-    status: 200,
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": 'attachment; filename="Dennis_Roman_Project_Portfolio.pdf"',
-      "Cache-Control": "public, max-age=3600"
+    for (const project of projects) {
+      await renderProjectPage(pdfDoc, project, sharedImages);
     }
-  });
+
+    const pdfBytes = await pdfDoc.save();
+    const pdfBuffer = Buffer.from(pdfBytes);
+
+    return new NextResponse(pdfBuffer, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": 'attachment; filename="Dennis_Roman_Project_Portfolio.pdf"',
+        "Cache-Control": "public, max-age=3600"
+      }
+    });
+  } catch (err) {
+    console.error("[portfolio] PDF generation failed:", err);
+    return new NextResponse(
+      JSON.stringify({ error: "Failed to generate portfolio PDF" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
 }
