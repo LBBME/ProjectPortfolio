@@ -46,10 +46,13 @@ async function loadProjectImageFromApi(
   imageKey: string,
   baseUrl: string
 ): Promise<LoadedImage | null> {
+  const url = `${baseUrl}/api/robotech-image/${imageKey}`;
   try {
-    const url = `${baseUrl}/api/robotech-image/${imageKey}`;
     const res = await fetch(url);
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.warn(`[portfolio] API image failed: ${imageKey} ${url} → ${res.status}`);
+      return null;
+    }
     const buf = await res.arrayBuffer();
     const data = new Uint8Array(buf);
     const contentType = res.headers.get("content-type") ?? "";
@@ -58,7 +61,8 @@ async function loadProjectImageFromApi(
         ? ".jpg"
         : ".png";
     return { data, ext };
-  } catch {
+  } catch (e) {
+    console.warn(`[portfolio] API image fetch error: ${imageKey} ${url}`, e);
     return null;
   }
 }
@@ -68,28 +72,35 @@ async function loadProjectImage(
   baseUrl?: string
 ): Promise<LoadedImage | null> {
   const fileName = IMAGE_FILE_MAP[imageKey];
-  if (!fileName) return null;
+  if (!fileName) {
+    console.warn(`[portfolio] No file mapping for imageKey: ${imageKey}`);
+    return null;
+  }
 
-  const candidates = [
-    path.join(ASSETS_DIR, fileName),
-    path.join(LOCAL_DEV_ASSETS_DIR, fileName)
+  const candidates: { path: string; label: string }[] = [
+    { path: path.join(ASSETS_DIR, fileName), label: "assets" },
+    { path: path.join(LOCAL_DEV_ASSETS_DIR, fileName), label: "local-dev" }
   ];
 
-  for (const absolutePath of candidates) {
+  for (const { path: absolutePath, label } of candidates) {
     try {
       const data = await fs.readFile(absolutePath);
       const ext = path.extname(fileName).toLowerCase() as LoadedImage["ext"];
       if (ext === ".png" || ext === ".jpg" || ext === ".jpeg") {
+        console.log(`[portfolio] Image loaded from disk (${label}): ${imageKey}`);
         return { data: new Uint8Array(data), ext };
       }
-    } catch {
-      // Try next candidate.
+    } catch (e) {
+      console.log(`[portfolio] Disk miss (${label}): ${imageKey} → ${absolutePath}`);
     }
   }
 
   if (baseUrl) {
-    return loadProjectImageFromApi(imageKey, baseUrl);
+    const fromApi = await loadProjectImageFromApi(imageKey, baseUrl);
+    if (fromApi) console.log(`[portfolio] Image loaded from API: ${imageKey}`);
+    return fromApi;
   }
+  console.warn(`[portfolio] Image not found (no baseUrl for API fallback): ${imageKey}`);
   return null;
 }
 
@@ -350,12 +361,85 @@ async function renderProjectPage(
   }
 }
 
+/** Run image load diagnostics for troubleshooting; returns JSON. */
+async function runImageDiagnostics(
+  baseUrl: string
+): Promise<{ baseUrl: string; cwd: string; images: Record<string, unknown>[] }> {
+  const projects = await getAllProjects();
+  const cwd = process.cwd();
+  const results: Record<string, unknown>[] = [];
+
+  for (const project of projects) {
+    const imageKey = PROJECT_IMAGE_KEYS[project.slug];
+    if (!imageKey) {
+      results.push({ slug: project.slug, imageKey: null, note: "no hero image" });
+      continue;
+    }
+
+    const fileName = IMAGE_FILE_MAP[imageKey];
+    const path1 = path.join(ASSETS_DIR, fileName ?? "");
+    const path2 = path.join(LOCAL_DEV_ASSETS_DIR, fileName ?? "");
+
+    let disk1 = false;
+    let disk2 = false;
+    try {
+      await fs.access(path1);
+      disk1 = true;
+    } catch {
+      // not found
+    }
+    try {
+      await fs.access(path2);
+      disk2 = true;
+    } catch {
+      // not found
+    }
+
+    let apiStatus: number | null = null;
+    let apiError: string | null = null;
+    try {
+      const res = await fetch(`${baseUrl}/api/robotech-image/${imageKey}`);
+      apiStatus = res.status;
+      if (!res.ok) apiError = await res.text().catch(() => res.statusText);
+    } catch (e) {
+      apiError = e instanceof Error ? e.message : String(e);
+    }
+
+    const loaded = disk1 || disk2 || (apiStatus != null && apiStatus === 200);
+    results.push({
+      slug: project.slug,
+      title: project.title,
+      imageKey,
+      fileName: fileName ?? null,
+      diskAssets: disk1,
+      diskLocalDev: disk2,
+      diskPathAssets: path1,
+      diskPathLocalDev: path2,
+      apiUrl: `${baseUrl}/api/robotech-image/${imageKey}`,
+      apiStatus,
+      apiError: apiError ?? null,
+      loaded
+    });
+  }
+
+  return { baseUrl, cwd, images: results };
+}
+
 export async function GET(request: NextRequest) {
   try {
     const baseUrl =
       process.env.VERCEL_URL != null
         ? `https://${process.env.VERCEL_URL}`
         : new URL(request.url).origin;
+
+    const debug = request.nextUrl.searchParams.get("debug");
+    if (debug === "1" || debug === "images") {
+      const diag = await runImageDiagnostics(baseUrl);
+      return new NextResponse(JSON.stringify(diag, null, 2), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
 
     const projects = await getAllProjects();
     const pdfDoc = await PDFDocument.create();
