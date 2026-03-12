@@ -10,7 +10,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@vercel/analytics": "^1.6.1",
     "gray-matter": "^4.0.3",
     "jspdf": "^2.5.2",
     "next": "^16.1.6",
